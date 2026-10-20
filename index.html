@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Land of Geb — St. Croix, U.S. Virgin Islands</title>
+<meta name="description" content="Land of Geb, LLC — branding, brand strategy, financial education, fundamental analysis, project mapping and talent management from St. Croix. Priced on a regional sliding scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Land of Geb — black and white, with neon accents ──────────────── */
+:root{
+  --ink:#0A0A0A;
+  --paper:#FFFFFF;
+  --grey:#8C8C8C;
+  --line:#E4E4E4;
+  --line-dark:#262626;
+  --yellow:#FFEA00;
+  --orange:#FF7A1A;
+  --pink:#FF2D95;
+  --neon:linear-gradient(90deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
+  --neon-v:linear-gradient(180deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
+  --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --display:'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --gutter:clamp(16px, 4vw, 48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--paper)}
+
+.idx{font-size:11px;letter-spacing:.08em;color:var(--grey)}
+.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:18px;padding:14px 20px;border:1px solid var(--ink);position:relative;
+  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{box-shadow:4px 4px 0 var(--pink), 8px 8px 0 var(--yellow)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.dark .btn.solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.arrow{width:12px;height:12px;flex:none}
+
+/* ── top bar ── */
+.bar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:28px;
+  padding:14px var(--gutter);background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.nav{display:flex;gap:22px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+.nav a{position:relative;padding:4px 0}
+.nav a + a::before{content:'/';position:absolute;left:-14px;color:var(--grey)}
+.nav a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--neon);transition:right .3s}
+.nav a:hover::after{right:0}
+.clock{font-size:10.5px;line-height:1.4;color:var(--grey);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* ── hero ── */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:calc(100vh - 57px);border-bottom:1px solid var(--line);position:relative}
+.hero-side{position:absolute;left:calc(var(--gutter) / 2 - 6px);top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;
+  font-size:10px;letter-spacing:.2em;color:var(--grey);white-space:nowrap}
+.hero-copy{padding:clamp(40px,8vh,96px) var(--gutter);display:flex;flex-direction:column;justify-content:center;gap:22px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(68px,11vw,176px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase}
+.hero h1 span{display:block}
+.hero .tag{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.hero p{max-width:460px;color:#333}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.hero-art{position:relative;border-left:1px solid var(--line);overflow:hidden;min-height:420px}
+#art{position:absolute;inset:0;width:100%;height:100%}
+.coord{position:absolute;right:var(--gutter);bottom:28px;border:1px solid var(--ink);background:var(--paper);padding:10px 14px;font-size:11px;line-height:1.7;box-shadow:4px 4px 0 var(--yellow)}
+.render{position:absolute;left:24px;top:24px;font-size:10.5px;line-height:1.6}
+.scn{position:absolute;right:var(--gutter);top:24px;font-size:10.5px;letter-spacing:.1em}
+
+/* ── marquee ── */
+.ticker{background:var(--ink);color:var(--paper);overflow:hidden}
+.ticker-track{display:flex;width:max-content;animation:slide 48s linear infinite}
+.ticker-item{display:flex;align-items:center;gap:18px;padding:14px 18px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.pill{border:1px solid var(--paper);border-radius:999px;padding:5px 14px;transition:background .3s,color .3s,border-color .3s}
+.pill:hover{background:var(--neon);color:var(--ink);border-color:transparent}
+.chev{font-size:9px;letter-spacing:-2px}
+.ticker-item:nth-child(3n+1) .chev{color:var(--yellow)}
+.ticker-item:nth-child(3n+2) .chev{color:var(--orange)}
+.ticker-item:nth-child(3n) .chev{color:var(--pink)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── sections ── */
+section{position:relative;scroll-margin-top:56px}
+.dark{background:var(--ink);color:var(--paper)}
+.sec-head{display:flex;align-items:baseline;gap:18px;padding:56px var(--gutter) 0;flex-wrap:wrap}
+.dark .idx{color:#777}
+
+/* services: the word split in two, each half sliding its own way */
+.split{position:relative;height:clamp(110px,22vw,330px);margin:28px 0 0;overflow:hidden;user-select:none}
+.split-word{position:absolute;left:0;right:0;top:50%;font-family:var(--display);font-size:clamp(120px,26vw,400px);line-height:1;
+  text-transform:uppercase;text-align:center;white-space:nowrap;transform:translateY(-50%);will-change:transform}
+.split-word.top{clip-path:inset(0 0 50% 0)}
+.split-word.bot{clip-path:inset(50% 0 0 0);background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.split-script{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-6deg);font-family:var(--mono);font-style:italic;
+  font-size:clamp(14px,2vw,22px);letter-spacing:.3em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 16px;white-space:nowrap;
+  border:1px solid var(--pink);box-shadow:0 0 24px rgba(255,45,149,.45)}
+.svc-list{padding:0 var(--gutter) 88px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px}
+.svc{padding:28px 24px 32px;border-top:1px solid var(--line-dark);border-right:1px solid var(--line-dark);display:flex;flex-direction:column;gap:14px;
+  position:relative;overflow:hidden;transition:color .35s}
+.svc:nth-child(3n){border-right:none}
+.svc::before{content:'';position:absolute;inset:0;background:var(--neon);opacity:0;transition:opacity .35s;z-index:0}
+.svc > *{position:relative;z-index:1}
+.svc:hover{color:var(--ink)}
+.svc:hover::before{opacity:1}
+.svc:hover .idx,.svc:hover p{color:var(--ink)}
+.svc h3{font-family:var(--display);font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1;text-transform:uppercase;margin-top:24px}
+.svc p{font-size:12.5px;color:#BDBDBD;max-width:340px}
+.svc-icon{width:34px;height:34px}
+.svc .note{font-size:10.5px;color:#7A7A7A;margin-top:auto;padding-top:6px}
+.svc:hover .note{color:#3A3A3A}
+
+/* pricing — the sliding scale */
+.pricing{padding:0 var(--gutter) 96px}
+.pricing-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding-top:28px}
+.pricing h2{font-family:var(--display);font-weight:400;font-size:clamp(54px,8vw,120px);line-height:.9;text-transform:uppercase}
+.pricing-top p{font-size:14px;color:#222;max-width:520px}
+.pricing-top p + p{margin-top:12px}
+.scale-card{margin-top:56px;border:1px solid var(--ink);padding:clamp(24px,5vw,56px) clamp(18px,5vw,64px) 40px;background:#F7F7F7;position:relative}
+.scale-card::before{content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--neon)}
+.scale-hint{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-bottom:34px}
+.scale{position:relative;height:120px;user-select:none;touch-action:none;margin:0 14px}
+.scale-words{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;font-size:14px}
+.scale-words span:nth-child(2){position:absolute;left:50%;transform:translateX(-50%)}
+.scale-track{position:absolute;left:0;right:0;top:58px;height:1px;background:#D2D2D2}
+.scale-fill{position:absolute;left:0;top:57px;height:3px;background:var(--neon);width:0;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.scale-tick{position:absolute;top:47px;width:1px;height:23px;background:var(--ink);transform:translateX(-.5px)}
+.scale-tick.minor{top:53px;height:11px}
+.scale-tick.off{background:#D2D2D2}
+.scale-num{position:absolute;top:84px;font-size:18px;transform:translateX(-50%);cursor:pointer;padding:0 8px}
+.scale-knob{position:absolute;top:58px;width:58px;height:58px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);
+  cursor:grab;transition:left .35s cubic-bezier(.2,.7,.2,1);display:grid;place-items:center;outline:none}
+.scale-knob::after{content:'';width:11px;height:11px;background:var(--paper)}
+.scale-knob:focus-visible{box-shadow:0 0 0 4px var(--paper),0 0 0 6px var(--pink)}
+.scale.dragging .scale-knob,.scale.dragging .scale-fill{transition:none}
+.scale.dragging .scale-knob{cursor:grabbing}
+.scale-read{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);margin-top:40px;align-items:end}
+.scale-level{font-family:var(--display);font-size:clamp(40px,6vw,72px);line-height:1;text-transform:uppercase}
+.scale-desc{font-size:13.5px;margin-top:10px;max-width:460px;min-height:3.2em}
+.bars{display:flex;align-items:flex-end;gap:10px;height:120px}
+.bars div{flex:1;background:#E2E2E2;transition:background .35s,height .35s}
+.bars div.on{background:var(--neon-v)}
+.bars-cap{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:8px}
+.mission{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ink)}
+.mission div{padding:22px 20px 0 0}
+.mission b{display:block;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05;text-transform:uppercase;margin-bottom:8px}
+.mission span{font-size:12.5px;color:#333}
+
+/* bixxville: stacked word, centre line solid, outer lines outlined */
+.stack{padding:30px 0 0;overflow:hidden;user-select:none}
+.stack-row{display:flex;width:max-content;font-family:var(--display);font-size:clamp(80px,15vw,230px);line-height:.88;text-transform:uppercase;will-change:transform}
+.stack-row span{padding-right:.18em}
+.stack-row.ghost{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.stack-row span:nth-child(3){background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0}
+.bx-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:var(--gutter);padding:56px var(--gutter) 48px;align-items:center}
+.wordmark{width:100%;max-width:520px;color:var(--ink);display:block}
+.wordmark path{fill:currentColor}
+.bx-text{display:flex;flex-direction:column;gap:18px;max-width:520px}
+.bx-text p{font-size:14px;color:#222}
+
+/* infographics — dark panels, neon lines */
+.graphs{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;padding:0 var(--gutter) 96px}
+.panel{background:#111;color:var(--paper);border-radius:18px;padding:28px 28px 22px;position:relative;overflow:hidden;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);background-size:3px 3px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9A9A}
+.panel-chip{border:1px solid #333;border-radius:10px;padding:8px 14px;color:var(--paper);background:#181818;letter-spacing:.08em}
+.tiers{width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
+.tiers text{font-family:var(--mono);fill:#EDEDED}
+.tiers .big{font-weight:300;font-size:44px}
+.tiers .small{font-size:12px;fill:#A8A8A8}
+.tiers .dash{stroke:#3A3A3A;stroke-dasharray:3 4}
+.tiers .glow{filter:drop-shadow(0 0 6px rgba(255,45,149,.65))}
+.panel-foot{font-size:11px;color:#8A8A8A;margin-top:6px}
+.split-graph{display:flex;flex-direction:column;gap:22px;margin-top:22px}
+.donut{width:min(220px,100%);aspect-ratio:1;margin:6px auto 0;position:relative}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.donut-mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.donut-mid b{font-weight:300;font-size:46px;line-height:1}
+.donut-mid > span{font-size:11px;color:#A8A8A8;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.legend{display:grid;gap:10px;font-size:12px}
+.legend > div{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed #333;padding-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;margin-right:8px;vertical-align:0}
+.cycle{display:flex;gap:3px;margin-top:4px}
+.cycle span{flex:1;height:18px;background:#262626;transition:background .25s}
+.cycle span.on{background:var(--neon-v)}
+
+/* shop */
+.shop{padding:0 var(--gutter) 96px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--gutter)}
+.shop-word{font-family:var(--display);font-size:clamp(140px,30vw,460px);line-height:.8;text-transform:uppercase;color:transparent;
+  -webkit-text-stroke:2px var(--paper);background:var(--neon);-webkit-background-clip:text;background-clip:text;
+  background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s cubic-bezier(.2,.7,.2,1)}
+.shop:hover .shop-word{background-size:100% 100%}
+.shop-side{display:flex;flex-direction:column;gap:18px;max-width:320px;padding-bottom:20px}
+.shop-side p{color:#BDBDBD}
+.draft{display:inline-block;border:1px dashed currentColor;padding:2px 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+
+/* footer — the network stamp */
+footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line)}
+.stamp{font-size:11px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere}
+.stamp b{font-weight:600;letter-spacing:.03em}
+.f-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:#444;margin-bottom:6px}
+.f-col a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pink)}
+.fine{grid-column:1 / -1;font-size:10.5px;color:var(--grey);max-width:760px}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.base .live::before{content:'';display:inline-block;width:6px;height:6px;background:var(--pink);margin-right:8px;vertical-align:1px;animation:blink 1.6s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ── phones ── */
+@media (max-width:860px){
+  .bar{grid-template-columns:1fr auto;gap:14px}
+  .nav,.clock{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-side{display:none}
+  .hero-art{border-left:none;border-top:1px solid var(--line);height:72vw;min-height:300px}
+  .svc-list{grid-template-columns:1fr}
+  .svc{border-right:none}
+  .pricing-top,.scale-read,.bx-body,.graphs,.shop{grid-template-columns:1fr}
+  .mission{grid-template-columns:1fr}
+  .scale-knob{width:46px;height:46px}
+  .scale-words{font-size:12px}
+  .tiers .big{font-size:64px}
+  .tiers .small{font-size:24px}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (min-width:861px) and (max-width:1100px){
+  .svc-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc:nth-child(3n){border-right:1px solid var(--line-dark)}
+  .svc:nth-child(2n){border-right:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="mark" href="#top" aria-label="Land of Geb — top"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#bixxville">Bixxville</a>
+    <a href="#shop">Shop</a>
+  </nav>
+  <div class="clock">SYS.TIME<br><b id="clock">--:--:--</b><br>UTC−4 · AYEAYE</div>
+  <a class="btn solid shop-link" href="#shop">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-side">LAND OF GEB, LLC — EST. ST. CROIX</div>
+    <div class="hero-copy">
+      <div class="idx rv">/01</div>
+      <h1 class="rv"><span>Land</span><span>of Geb</span></h1>
+      <div class="tag rv">St. Croix · U.S. Virgin Islands</div>
+      <p class="rv">We build brands, teach the markets, and map projects from start to finish. Our goal is to educate you and help you make money — priced fairly for where you are.</p>
+      <div class="hero-actions rv">
+        <a class="btn solid" href="#services">Our services <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
+        <a class="btn ghost" href="#pricing">Sliding scale <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <canvas id="art"></canvas>
+      <div class="render">&gt; RENDERING<br><span id="pct">0</span>%</div>
+      <div class="scn">//GEB_01</div>
+      <div class="coord">LAT 17.7275N<br>LON 64.747W<br>UTC_OFF −4</div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <!-- ── /02 SERVICES ── -->
+  <section class="dark" id="services">
+    <div class="sec-head"><span class="idx">/02</span><span class="lbl">Services</span></div>
+    <div class="split" aria-label="Services">
+      <div class="split-word top" id="splitTop">Services</div>
+      <div class="split-word bot" id="splitBot">Services</div>
+      <div class="split-script">start to finish</div>
+    </div>
+    <div class="svc-list">
+      <article class="svc rv">
+        <span class="idx">S.01</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="17" cy="17" r="13"/><path d="M17 4v26M4 17h26"/><circle cx="17" cy="17" r="5"/></svg>
+        <h3>Branding</h3>
+        <p>An identity people recognize: the name, the mark, the voice, and the materials that carry them.</p>
+      </article>
+      <article class="svc rv">
+        <span class="idx">S.02</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 28 13 17l6 6 11-15"/><path d="M23 8h7v7"/></svg>
+        <h3>Brand strategy</h3>
+        <p>Where your brand stands, who it's for, and the plan that moves it where it needs to be.</p>
+      </article>
+      <article class="svc rv">
+        <span class="idx">S.03</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M7 6v22M7 10h-2v8h2M15 4v24M15 9h-2v10h2M23 8v20M23 12h-2v6h2M29 3v25M29 7h-2v12h2"/></svg>
+        <h3>Financial education</h3>
+        <p>Forex, futures and options: how the markets move, how a trade is built, and how risk is managed.</p>
+        <span class="note">Education, not financial advice. Trading carries risk of loss.</span>
+      </article>
+      <article class="svc rv">
+        <span class="idx">S.04</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="4" width="20" height="26"/><path d="M9 10h12M9 15h12M9 20h7"/><circle cx="24" cy="23" r="5"/><path d="m28 27 4 4"/></svg>
+        <h3>Fundamental analysis</h3>
+        <p>How to understand a company: read its statements, know its business, and judge what it's worth.</p>
+      </article>
+      <article class="svc rv">
+        <span class="idx">S.05</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="13" width="7" height="7"/><rect x="24" y="4" width="7" height="7"/><rect x="24" y="23" width="7" height="7"/><path d="M10 16.5h7v-9h7M17 16.5v10h7"/></svg>
+        <h3>Project mapping</h3>
+        <p>Your goal decomposed into ordered, priced steps with our decomposition strategy — so you know what it takes before it starts.</p>
+      </article>
+      <article class="svc rv">
+        <span class="idx">S.06</span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="10" cy="11" r="4"/><circle cx="24" cy="11" r="4"/><circle cx="17" cy="24" r="4"/><path d="M13 14l2 7M21 14l-2 7M14 11h6"/></svg>
+        <h3>Talent management</h3>
+        <p>The right people on the right work: who it takes, at what level, and how they grow.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── /03 PRICING ── -->
+  <section class="pricing" id="pricing">
+    <div class="sec-head" style="padding-left:0;padding-right:0"><span class="idx">/03</span><span class="lbl">Pricing</span></div>
+    <div class="pricing-top">
+      <h2 class="rv">A sliding<br><span class="neon-text">scale.</span></h2>
+      <div class="rv">
+        <p><strong>Price follows where you are.</strong> Every region is looked at on its own, by its economic standing, and priced to match. The same work costs less where people have less to spend.</p>
+        <p>We'd rather be fair than uniform. Our goal is to educate you and help you make money — and we trust ourselves to be efficient enough to do it at a price your region can carry.</p>
+      </div>
+    </div>
+
+    <div class="scale-card rv">
+      <div class="scale-hint">Drag the scale — regional economic standing</div>
+      <div class="scale" id="scale">
+        <div class="scale-words"><span>Low</span><span>Medium</span><span>High</span></div>
+        <div class="scale-track"></div>
+        <div class="scale-fill" id="scaleFill"></div>
+        <div id="scaleTicks"></div>
+        <div class="scale-knob" id="knob" role="slider" tabindex="0" aria-label="Regional economic standing" aria-valuemin="1" aria-valuemax="5" aria-valuenow="4"></div>
+      </div>
+      <div class="scale-read">
+        <div>
+          <div class="scale-level" id="scaleLevel">4 · Medium-high</div>
+          <div class="scale-desc" id="scaleDesc"></div>
+        </div>
+        <div>
+          <div class="bars" id="bars"><div></div><div></div><div></div><div></div><div></div></div>
+          <div class="bars-cap"><span>Lower price</span><span>Full rate</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="rv"><b>Educate</b><span>You leave knowing how it works — not just with the work done.</span></div>
+      <div class="rv"><b>Help you earn</b><span>Everything we teach and build is pointed at making you money.</span></div>
+      <div class="rv"><b>Efficient</b><span>Mapped, staffed and verified, so nothing is paid for twice.</span></div>
+    </div>
+  </section>
+
+  <!-- ── /04 BIXXVILLE ── -->
+  <section id="bixxville">
+    <div class="sec-head"><span class="idx">/04</span><span class="lbl">The network</span></div>
+    <div class="stack" aria-hidden="true">
+      <div class="stack-row ghost" data-dir="-1"></div>
+      <div class="stack-row" data-dir="1"></div>
+      <div class="stack-row ghost" data-dir="-1"></div>
+    </div>
+    <div class="bx-body">
+      <div class="rv">
+        <svg class="wordmark" viewBox="245 160 591 219" role="img" aria-label="Bixxville" xmlns="http://www.w3.org/2000/svg">
+<path d="M349.39,245.37c-5.23,3.23-10.45,6.39-15.67,9.49,5.19,2.65,10.39,5.32,15.59,8,1.25.57,2.43.75,3.54.52.84-.24,1.64-.76,2.4-1.57.77-.8,1.23-2.37,1.38-4.7.54,1.92.68,3.81.39,5.66-.29,1.7-.95,3.41-2.01,5.12-1.05,1.71-2.97,3.23-5.75,4.53-.08,17.02-.16,34.05-.24,51.07-.01,3.11,1.01,5.74,3.09,7.9-2.64-.52-5.28-.42-7.91.27-2.64.7-5.18,1.75-7.61,3.14-2.43,1.39-4.73,2.98-6.88,4.76-2.16,1.78-4.03,3.4-5.63,4.86-1.6,1.46-3.37,3.3-5.31,5.51-5.24-3.41-9.86-6.47-13.85-9.17-1.79-1.09-3.48-2.2-5.06-3.32-1.58-1.12-3.06-2.19-4.44-3.19-1.52-1.03-2.96-1.98-4.33-2.84-4.54-3.53-8.94-6.1-13.2-7.75-4.26-1.65-8.04-2.35-11.34-2.12-3.3.23-5.94,1.35-7.93,3.35-1.99,2.01-2.98,4.95-2.98,8.86,0,4.47.68,8.13,2.05,11,1.37,2.87,2.94,5.25,4.72,7.12,1.91,2.05,4.17,3.7,6.77,4.94-2.33-.6-4.45-1.76-6.36-3.45-1.92-1.7-3.62-3.66-5.13-5.87-1.51-2.21-2.67-4.57-3.49-7.08-.82-2.51-1.23-4.8-1.23-6.89,0-3.9.65-7.67,1.95-11.35,1.3-3.68,3.43-6.72,6.38-9.14,2.95-2.42,6.87-3.96,11.76-4.63,4.88-.66,10.91.04,18.08,2.15.03-8.57.05-17.13.08-25.7.01-3.66-1.57-6.29-4.74-7.88-.97-.49-1.93-.99-2.9-1.48.97-.23,1.94-.47,2.9-.7,3.18-.75,4.78-2.96,4.79-6.63.05-17.87.1-35.73.16-53.6,0-3.08-1.1-5.69-3.31-7.84-2.98-2.84-5.95-5.65-8.93-8.43-.97-.9-2.01-1.33-3.12-1.3-1.11.03-2.08.39-2.92,1.07-.49.48-.97.96-1.46,1.44-1.11,1.1-2.22,2.23-3.33,3.38-1.11,1.16-2.22,2.34-3.33,3.56-1.95,2.31-3.95,5.01-6.03,8.1-.42.68-.83,1.42-1.25,2.23-.42.81-.83,1.62-1.25,2.43-.28.68-.55,1.43-.83,2.24-.28.82-.55,1.71-.83,2.66-.28.81-.49,1.63-.62,2.46-.14.82-.28,1.72-.42,2.68,0,.21,0,.42,0,.63,0,.07,0,.14,0,.21,0,.14,0,.28,0,.42,0,.21,0,.42,0,.63,0,.21,0,.42,0,.63,0,.14,0,.28,0,.42.07.08.14.15.21.23,0,.28,0,.56,0,.84,0,.56.07.98.21,1.27.21.86.41,1.71.62,2.57.28.59.41.95.41,1.09.14.22.28.45.41.67,0,.14.03.25.1.33.07.08.1.19.1.32.83,1.48,1.93,2.79,3.31,3.92,1.38,1.27,2.83,2.06,4.35,2.37,1.38.57,2.97.82,4.77.72,1.52.02,2.94-.19,4.25-.63,1.31-.44,2.52-1.03,3.63-1.78,2.08-1.52,3.67-3.24,4.78-5.17.28-.55.49-1.04.63-1.46.14-.42.35-.91.63-1.47.42-.83.63-1.69.63-2.56.28-.7.42-1.38.42-2.03,0-.65.07-1.19.21-1.61,0-.36,0-.73,0-1.09,0-.15,0-.29,0-.44,0,.15,0,.29,0,.44,0,.36,0,.73,0,1.09,0,.44-.04.98-.11,1.62-.07.65-.18,1.33-.32,2.04-.28,1.14-.49,2.06-.63,2.77-.28.41-.49.86-.63,1.36-.14.5-.35.95-.63,1.36-.56,1.11-1.22,2.13-1.98,3.07-.76.94-1.7,1.78-2.81,2.54-2.08,1.52-4.78,2.46-8.09,2.81-1.66.11-3.25-.14-4.77-.73-1.8-.48-3.39-1.29-4.76-2.42-.69-.63-1.38-1.31-2.07-2.01-.69-.7-1.24-1.49-1.66-2.38-.14-.15-.21-.26-.21-.33,0-.07-.07-.18-.21-.34-.07-.15-.14-.29-.21-.44-.21-.44-.41-.88-.62-1.32-.14-.57-.28-1.07-.41-1.5-.14-.43-.28-.86-.41-1.29,0-.69-.07-1.19-.21-1.48v-1.04c-.07-.08-.14-.15-.21-.23v-2.92c0-.97.07-1.87.21-2.69.14-.82.34-1.71.62-2.66.28-.95.55-1.84.83-2.65.28-.81.55-1.63.83-2.45.42-.94.83-1.79,1.25-2.53.42-.74.83-1.52,1.25-2.33.97-1.48,1.94-2.93,2.91-4.35.97-1.42,2.01-2.81,3.12-4.17,1.11-1.35,2.19-2.65,3.23-3.88,1.04-1.23,2.12-2.39,3.23-3.49,1.11-1.1,2.19-2.16,3.23-3.2,1.04-1.04,2.12-1.97,3.23-2.8,3.89-3.62,7.31-6.52,10.23-8.65,1.39-1.14,2.37-1.93,2.92-2.36.28-.14.55-.35.84-.65.07-.07.14-.14.21-.22.28.44.55.89.83,1.33,5.2,5.21,10.39,10.5,15.58,15.89,2.51-2.16,4.5-4.24,5.96-6.23,1.47-1.99,2.58-3.78,3.36-5.34.77-1.57,1.44-3.33,2-5.28.83,1.37,2,2.44,3.53,3.22,9.23,4,18.45,8.11,27.68,12.29,2.36.68,4.51.81,6.46.38,1.53-.28,2.99-1.03,4.39-2.25,1.39-1.23,2.1-3.26,2.11-6.09.41,2.21.26,4.33-.45,6.36-.71,1.72-1.97,3.61-3.78,5.68-1.82,2.07-4.75,3.9-8.78,5.48-.06,13.37-.13,26.74-.19,40.11ZM330.59,209.44c-6.72-3.09-13.45-6.15-20.17-9.15-.08,20.28-.15,40.55-.23,60.83,1.67-1.63,3.16-3.29,4.49-4.97,1.32-1.68,2.47-3.24,3.45-4.66,1.12-1.56,2.02-3.15,2.72-4.76.83,1.43,2,2.59,3.52,3.47,2.01,1,4.02,2,6.02,3.01.06-14.59.13-29.18.19-43.77ZM330.3,275.67c-6.71-3.6-13.42-7.18-20.13-10.73-.07,18.78-.14,37.56-.21,56.34,6.69,3.89,13.39,7.78,20.09,11.68.08-19.1.17-38.2.25-57.29Z"/>
+<path d="M402.18,338.11c0,.81-.78,2.02-2.32,3.64-1.54,1.62-3.33,3.44-5.36,5.46-2.03,2.03-3.96,4.16-5.78,6.43-1.82,2.26-3.02,4.55-3.59,6.87-4.09-5.01-8.17-10.01-12.25-14.98.08-17.67.17-35.34.25-53.01,0-1.74-.47-3.41-1.44-5-.97-1.59-2.21-2.61-3.74-3.06,0-.08,0-.16,0-.24,3.48-.79,5.23-3.19,5.25-7.15.06-11.81.11-23.61.17-35.42-.97-.21-1.95-.66-2.91-1.35-.83-.52-1.66-1.12-2.49-1.79-.83-.67-1.52-1.58-2.07-2.71,3.71-6.11,7.43-12.28,11.14-18.51,3.59,4.42,6.67,7.58,9.24,9.43,2.56,1.86,4.68,2.99,6.35,3.38,1.94.56,3.62.47,5.01-.29-.42.95-.91,1.74-1.47,2.36-.42.63-.98,1.29-1.68,1.98-.7.69-1.4,1.27-2.1,1.72-.07,14.21-.13,28.42-.2,42.63,0,1.77.43,3.4,1.33,4.92.9,1.51,2.11,2.57,3.64,3.17-1.54.37-2.76,1.29-3.67,2.74-.91,1.46-1.37,3.07-1.38,4.83-.07,14.45-.13,28.9-.2,43.36.28.35.55.7.83,1.06,1.11,1.25,2.4,1.99,3.86,2.23,1.46.24,2.75-.15,3.87-1.16.56-.51,1.12-1.02,1.68-1.52ZM394.27,194.46c-3.74-4.4-7.47-8.78-11.2-13.12-3.78,4.27-7.55,8.51-11.33,12.71,3.73,4.35,7.47,8.72,11.2,13.13,3.78-4.21,7.55-8.45,11.33-12.73Z"/>
+<path d="M479.5,343.74c0,.84-.78,2.14-2.32,3.9-1.55,1.77-3.3,3.76-5.26,5.99-1.97,2.23-3.86,4.58-5.69,7.05-1.83,2.47-3.03,4.93-3.59,7.38-4.19-4.92-8.37-9.85-12.55-14.78.05-15.05.1-30.11.15-45.16-6.76-3.42-13.52-6.86-20.27-10.3-.06,14.43-.11,28.87-.17,43.3.35.36.7.71,1.04,1.07,1.11,1.24,2.37,1.96,3.76,2.15,1.39.19,2.65-.24,3.78-1.31.56-.53,1.12-1.07,1.68-1.6,0,.83-.78,2.09-2.32,3.78-1.55,1.7-3.3,3.61-5.26,5.75-1.97,2.14-3.86,4.39-5.68,6.76-1.83,2.37-3.02,4.75-3.59,7.15-4.17-4.99-8.34-9.97-12.5-14.94.07-15.19.13-30.37.2-45.56,3.35-.07,6.28-1.08,8.8-3.03,2.52-1.95,4.76-3.77,6.72-5.45-3.76-1.95-7.52-3.91-11.27-5.86-.56-.2-1.11-.4-1.67-.6-1.25-.57-2.3-.8-3.13-.7-.84.11-1.71.49-2.62,1.16-.91.67-1.58,2.04-2,4.11-.13-1.95.09-3.72.65-5.3.42-1.27,1.16-2.51,2.21-3.74,1.05-1.23,2.62-2.02,4.71-2.38.05-12.77.11-25.53.16-38.3-.97-.37-1.95-.89-2.92-1.58-.83-.52-1.67-1.12-2.5-1.81-.83-.68-1.53-1.6-2.08-2.76,3.72-6.33,7.43-12.7,11.15-19.12,3.6,4.5,6.65,7.74,9.15,9.69,2.5,1.96,4.65,3.13,6.46,3.51,1.95.55,3.69.35,5.23-.59-.42.98-.91,1.79-1.47,2.43-.42.65-.98,1.33-1.68,2.05-.7.72-1.4,1.31-2.1,1.78,0,.08,0,.16,0,.25-.12,12.23-.23,24.46-.35,36.69,6.75,3.45,13.5,6.9,20.26,10.34.04-13.16.09-26.33.13-39.49-.98-.36-1.95-.88-2.92-1.57-.83-.52-1.67-1.12-2.5-1.81-.83-.68-1.53-1.61-2.08-2.79,3.72-6.5,7.43-13.03,11.14-19.59,3.61,4.54,6.66,7.8,9.17,9.76,2.5,1.96,4.66,3.13,6.47,3.49,1.95.54,3.69.32,5.23-.66-.42.99-.91,1.82-1.47,2.48-.42.66-.98,1.36-1.68,2.1-.7.74-1.4,1.35-2.1,1.83-.1,12.58-.21,25.16-.31,37.73-1.67.12-3.25.56-4.71,1.35-1.47.78-2.83,1.69-4.09,2.73-1.26,1.04-2.45,2.11-3.57,3.23-1.12,1.12-2.17,2.07-3.15,2.86,3.76,1.9,7.53,3.79,11.29,5.68.56.27,1.12.54,1.67.81,1.12.54,2.16.75,3.14.61.84-.13,1.68-.57,2.52-1.29.84-.72,1.54-2.16,2.11-4.31.13,1.84-.08,3.59-.64,5.23-.42,1.32-1.16,2.67-2.21,4.05-1.05,1.38-2.63,2.2-4.72,2.45-.04,14.57-.08,29.14-.12,43.71.28.35.56.7.84,1.04,1.11,1.22,2.41,1.92,3.88,2.07,1.47.16,2.76-.32,3.89-1.44.56-.56,1.12-1.12,1.68-1.68Z"/>
+<path d="M557,344.97c0,.84-.77,2.2-2.31,4.06-1.54,1.87-3.29,3.99-5.25,6.36-1.96,2.37-3.85,4.86-5.67,7.47-1.82,2.61-3.02,5.18-3.57,7.7-4.21-4.71-8.41-9.44-12.61-14.19,0-15.31.02-30.61.02-45.92-6.78-3.16-13.56-6.36-20.33-9.59-.02,14.77-.04,29.54-.06,44.32.35.34.7.69,1.05,1.03,1.12,1.2,2.38,1.86,3.78,1.97,1.4.12,2.66-.41,3.78-1.56.56-.58,1.12-1.16,1.68-1.74,0,.84-.77,2.17-2.31,3.99-1.55,1.82-3.3,3.89-5.26,6.19-1.97,2.31-3.86,4.73-5.68,7.28-1.83,2.55-3.02,5.07-3.58,7.56-4.2-4.83-8.39-9.68-12.58-14.53.03-15.64.06-31.29.1-46.93,3.35-.23,6.29-1.41,8.81-3.53,2.52-2.11,4.76-4.08,6.72-5.89-3.77-1.84-7.54-3.68-11.31-5.53-.56-.18-1.12-.36-1.67-.54-1.26-.53-2.3-.73-3.14-.59-.84.15-1.71.58-2.62,1.31-.91.73-1.58,2.17-2,4.33-.14-2.01.08-3.84.64-5.5.42-1.32,1.16-2.64,2.21-3.95,1.05-1.31,2.62-2.19,4.72-2.64.03-13.14.05-26.28.08-39.42-.98-.35-1.95-.87-2.93-1.55-.84-.52-1.67-1.11-2.51-1.8-.84-.68-1.53-1.61-2.09-2.79,3.71-6.62,7.42-13.27,11.12-19.93,3.61,4.56,6.68,7.82,9.18,9.77,2.51,1.95,4.66,3.11,6.48,3.46,1.95.52,3.69.28,5.23-.72-.42,1.01-.91,1.84-1.47,2.51-.42.67-.98,1.38-1.68,2.13-.7.75-1.4,1.37-2.09,1.87,0,.08,0,.17,0,.25-.08,12.51-.17,25.02-.26,37.53,6.77,3.28,13.54,6.54,20.32,9.77,0-13.37.01-26.74.02-40.12-.98-.34-1.95-.85-2.93-1.52-.84-.51-1.67-1.1-2.51-1.78-.84-.67-1.54-1.6-2.09-2.78,3.7-6.71,7.4-13.42,11.09-20.15,3.62,4.55,6.69,7.79,9.2,9.72,2.51,1.93,4.67,3.07,6.48,3.4,1.95.5,3.69.24,5.23-.77-.42,1.01-.91,1.86-1.46,2.53-.42.68-.98,1.39-1.67,2.15-.7.76-1.4,1.39-2.09,1.9-.07,12.7-.13,25.4-.2,38.1-1.68.18-3.25.69-4.71,1.53-1.47.85-2.83,1.81-4.09,2.91-1.26,1.1-2.45,2.23-3.56,3.4-1.12,1.18-2.17,2.18-3.14,3.02,3.77,1.78,7.55,3.55,11.32,5.3.56.25,1.12.5,1.68.75,1.12.5,2.17.67,3.15.49.84-.17,1.68-.64,2.52-1.4.84-.76,1.54-2.24,2.09-4.43.14,1.85-.07,3.62-.63,5.3-.42,1.35-1.15,2.74-2.2,4.18-1.05,1.44-2.62,2.33-4.72,2.67,0,14.72,0,29.44.01,44.16.28.34.56.67.84,1.01,1.12,1.17,2.42,1.79,3.89,1.86,1.47.07,2.76-.49,3.89-1.68.56-.59,1.12-1.19,1.68-1.79Z"/>
+<path d="M627.66,287.37c.91,1.45,2.14,2.39,3.67,2.81.07.08.14.16.21.24-1.54.41-2.79,1.41-3.76,3.03-.97,1.62-1.46,3.34-1.45,5.16.05,15.07.1,30.15.15,45.22-5.31,1-9.71,2.96-13.2,5.9-3.49,2.94-6.25,6.04-8.27,9.32-2.02,3.27-3.8,7.45-5.33,12.54-.49-.31-.98-.62-1.47-.93-9.49-14.24-18.97-28.69-28.43-43.28-.56-.16-1.12-.31-1.68-.47-1.26-.48-2.31-.63-3.15-.45-.84.18-1.71.66-2.62,1.43-.91.77-1.57,2.25-1.99,4.44-.14-2.02.07-3.87.63-5.56.42-1.35,1.15-2.7,2.2-4.06,1.05-1.36,2.62-2.31,4.72-2.85,0-6.47-.01-12.93-.02-19.4,0-4.2-1.76-6.86-5.25-7.99.07-.08.14-.17.21-.25,1.54-.52,2.76-1.55,3.67-3.07.9-1.52,1.36-3.21,1.36-5.06-.01-12.43-.03-24.86-.04-37.29-.98-.33-1.96-.82-2.93-1.49-.84-.5-1.67-1.08-2.51-1.75-.84-.66-1.54-1.58-2.1-2.76,3.69-6.75,7.38-13.49,11.06-20.23,3.63,4.51,6.7,7.71,9.21,9.61,2.51,1.9,4.67,3.01,6.49,3.32,1.95.48,3.69.2,5.23-.82-.42,1.01-.9,1.86-1.46,2.53-.56.68-1.18,1.4-1.88,2.16-.7.76-1.39,1.4-2.09,1.91.04,23.7.09,47.39.13,71.09,6.81,13.29,13.62,26.49,20.44,39.56-.09-34.58-.18-69.16-.27-103.75-.98-.31-1.96-.79-2.93-1.44-.84-.48-1.68-1.05-2.51-1.7-.84-.65-1.54-1.55-2.1-2.72,3.68-6.75,7.36-13.48,11.03-20.2,3.63,4.44,6.71,7.58,9.22,9.44,2.51,1.86,4.68,2.93,6.49,3.21,1.95.45,3.69.16,5.22-.87-.41,1-.9,1.84-1.45,2.52-.56.68-1.18,1.39-1.88,2.16-.7.76-1.39,1.4-2.08,1.92.05,14.66.09,29.32.14,43.98,0,1.82.46,3.46,1.38,4.91Z"/>
+<path d="M671.92,338.69c0,.81-.76,2.18-2.28,4.12-1.53,1.94-3.3,4.14-5.31,6.62-2.01,2.48-3.93,5.06-5.73,7.77-1.81,2.7-2.98,5.31-3.53,7.82-4.14-4.18-8.28-8.42-12.42-12.69-.07-18.35-.14-36.7-.2-55.05,0-1.81-.5-3.47-1.48-4.98-.98-1.51-2.24-2.39-3.78-2.65,0-.08,0-.16,0-.25,3.48-1.33,5.22-4.05,5.2-8.17-.05-12.26-.09-24.52-.14-36.78-.98-.13-1.95-.51-2.93-1.14-.84-.47-1.68-1.02-2.51-1.65-.84-.63-1.54-1.52-2.1-2.66,3.67-6.71,7.34-13.39,11-20.05,3.64,4.35,6.75,7.38,9.33,9.1,2.58,1.73,4.71,2.72,6.38,2.99,1.95.43,3.62.21,5.01-.66-.41.99-.9,1.82-1.45,2.49-.42.67-.97,1.38-1.66,2.13-.69.76-1.39,1.39-2.08,1.91.06,14.43.12,28.86.18,43.3,0,1.8.47,3.4,1.38,4.81.91,1.41,2.13,2.31,3.67,2.7-1.53.59-2.75,1.68-3.65,3.29-.9,1.61-1.35,3.31-1.34,5.1.06,14.68.12,29.35.18,44.03.28.3.56.6.84.9,1.12,1.04,2.41,1.53,3.88,1.47,1.46-.05,2.75-.71,3.86-1.95.56-.62,1.11-1.24,1.67-1.87ZM662.74,194.82c-3.77-4.35-7.55-8.72-11.32-13.12-3.74,4.45-7.48,8.92-11.22,13.41,3.77,4.4,7.55,8.78,11.32,13.14,3.74-4.5,7.48-8.97,11.22-13.42Z"/>
+<path d="M711.81,334.23c0,.79-.76,2.15-2.27,4.08-1.52,1.94-3.29,4.15-5.29,6.63-2.01,2.48-3.91,5.07-5.71,7.78-1.8,2.7-2.97,5.29-3.51,7.76-4.13-3.94-8.26-7.94-12.39-11.99-.08-17.97-.16-35.93-.24-53.9,0-1.77-.51-3.38-1.49-4.85-.98-1.46-2.24-2.3-3.77-2.51,0-.08,0-.16,0-.24,3.48-1.38,5.21-4.08,5.19-8.11-.02-5.32-.05-10.64-.07-15.95-.1-23.12-.21-46.25-.31-69.37-.98-.31-1.95-.78-2.93-1.41-.84-.47-1.67-1.02-2.51-1.66-.84-.63-1.54-1.52-2.1-2.64,3.66-6.52,7.31-12.99,10.97-19.42,3.63,4.34,6.74,7.41,9.33,9.23,2.58,1.82,4.71,2.88,6.38,3.18,1.95.46,3.62.2,5-.76-.41.95-.9,1.75-1.45,2.39-.41.64-.97,1.32-1.66,2.04-.69.72-1.39,1.33-2.08,1.81.14,30.39.29,60.78.43,91.17,0,1.75.47,3.31,1.38,4.66.91,1.36,2.13,2.21,3.67,2.55-1.53.61-2.74,1.7-3.64,3.29-.9,1.59-1.34,3.26-1.33,5.01.07,14.32.14,28.64.2,42.96.28.29.56.57.84.85,1.12.98,2.41,1.42,3.87,1.31,1.46-.1,2.74-.78,3.85-2.03.55-.62,1.11-1.25,1.66-1.87Z"/>
+<path d="M751.56,328.59c0,.77-.76,2.1-2.27,4.03-1.52,1.93-3.27,4.12-5.27,6.59-2,2.48-3.9,5.05-5.69,7.74-1.79,2.68-2.96,5.24-3.5,7.66-4.11-3.66-8.22-7.4-12.34-11.19-.08-17.46-.17-34.92-.25-52.38,0-1.72-.51-3.28-1.48-4.67-.98-1.39-2.23-2.18-3.76-2.36,0-.08,0-.16,0-.24,3.46-1.42,5.19-4.09,5.17-8-.02-5.17-.05-10.33-.07-15.5-.11-22.47-.21-44.94-.32-67.41-.98-.29-1.95-.74-2.93-1.35-.84-.46-1.67-.99-2.51-1.61-.84-.61-1.54-1.47-2.1-2.56,3.65-6.36,7.31-12.66,10.97-18.9,3.63,4.22,6.74,7.19,9.32,8.94,2.58,1.76,4.7,2.78,6.37,3.07,1.95.44,3.61.19,5-.75-.41.92-.9,1.7-1.45,2.32-.41.62-.97,1.28-1.66,1.98-.7.7-1.39,1.29-2.08,1.76.13,29.42.27,58.84.4,88.26,0,1.7.46,3.19,1.37,4.48.91,1.29,2.12,2.09,3.65,2.38-1.53.62-2.74,1.71-3.63,3.27-.9,1.56-1.34,3.19-1.33,4.88.06,13.86.13,27.72.19,41.59.28.27.56.53.83.8,1.11.91,2.4,1.29,3.85,1.14,1.45-.15,2.73-.85,3.84-2.09.55-.62,1.1-1.24,1.65-1.86Z"/>
+<path d="M797.71,307.47c4.27-.75,7.5-2.32,9.7-4.64,2.2-2.33,4.15-4.81,5.87-7.45,1.72-2.64,3.47-5.1,5.26-7.37,1.78-2.27,4.4-3.69,7.84-4.27-2.89,1.19-4.68,3.13-5.36,5.85-.69,2.72-1.03,6.12-1.02,10.19,0,2.25,0,4.5,0,6.75,0,2.88,0,5.76,0,8.65-5.22,1.65-9.54,3.98-12.97,7.05-3.43,3.06-6.14,6.18-8.13,9.34-1.99,3.16-3.73,7.09-5.24,11.79-.48-.19-.96-.37-1.45-.56-9.3-1.8-18.62-3.84-27.96-6.09-.55-.05-1.11-.11-1.66-.16-1.25-.23-2.28-.2-3.11.09-.83.3-1.69.86-2.59,1.7-.9.84-1.55,2.28-1.96,4.33-.15-1.8.05-3.51.6-5.12.41-1.28,1.13-2.62,2.16-4.01,1.03-1.39,2.59-2.48,4.66-3.28-.06-14.41-.12-28.82-.18-43.23-.02-3.77-1.76-5.97-5.22-6.65.07-.08.14-.17.21-.25,1.52-.63,2.73-1.67,3.62-3.13.89-1.46,1.34-3.02,1.33-4.68-.04-11.09-.09-22.18-.14-33.27,5.27-.99,9.63-2.86,13.09-5.57,3.46-2.71,6.19-5.52,8.19-8.46,2-2.93,3.75-6.64,5.27-11.12.49.27.97.53,1.46.8,9.37,3.28,18.73,6.39,28.08,9.33.55.1,1.11.2,1.66.29,1.24.32,2.28.42,3.11.28.83-.14,1.69-.59,2.59-1.36.9-.77,1.55-2.07,1.97-3.91.14,1.66-.07,3.21-.62,4.64-.41,1.15-1.14,2.36-2.18,3.63-1.04,1.28-2.59,2.15-4.67,2.61,0,2.39,0,4.78,0,7.17,0,2.39,1.17,3.96,3.53,4.69-4.56.48-8.49,2.4-11.81,5.81-3.31,3.42-6.49,7.24-9.52,11.49-3.03,4.25-6.17,8.29-9.4,12.13-3.24,3.84-7.13,6.37-11.7,7.55.04,13.3.09,26.6.13,39.9,6.7,1.57,13.39,3.02,20.07,4.35,0-1.8,0-3.6-.01-5.41,0-1.87,0-3.75-.01-5.62,0-.14,0-.29,0-.43,0-2.59-1.18-4.04-3.52-4.35ZM780.9,232.93c.05,14.48.1,28.97.14,43.45,2.21-.86,4.48-2.41,6.83-4.61,2.34-2.19,4.51-4.65,6.51-7.36,2-2.71,3.62-5.51,4.85-8.39,1.24-2.88,1.85-5.62,1.85-8.21,0-2.74-.01-5.48-.02-8.22-6.72-2.13-13.44-4.35-20.17-6.65Z"/>
+</svg>
+      </div>
+      <div class="bx-text rv">
+        <p><strong>Bixxville is the network Land of Geb runs on.</strong> Every project is decomposed into steps. Each step is granted to a member at a tier, worked, proven with evidence, and verified before it pays.</p>
+        <p>Value is counted in LOGs and settled on 28-day cycles. Every record carries the network's stamp.</p>
+        <div><a class="btn solid" href="https://ii00270.github.io/Bixxvillenode/terminal.html" target="_blank" rel="noopener">Enter Bixxville <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
+      </div>
+    </div>
+
+    <div class="graphs">
+      <div class="panel rv" id="tierPanel">
+        <div class="panel-head"><span class="panel-chip">Tier rates</span><span>Per LOG · USD</span></div>
+        <svg class="tiers" id="tiers" viewBox="0 0 760 380" role="img" aria-label="Bixxville tier rates per LOG: Apprentice 39 dollars, Wrangler 65, Architect 85, Operator 100"></svg>
+        <div class="panel-foot">The four Bixxville tiers and what each earns for one LOG of work.</div>
+      </div>
+      <div class="panel rv" id="splitPanel">
+        <div class="panel-head"><span class="panel-chip">Every price</span><span>How it splits</span></div>
+        <div class="split-graph">
+          <div class="donut">
+            <svg viewBox="0 0 120 120">
+              <defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#262626" stroke-width="14"/>
+              <circle id="donutArc" cx="60" cy="60" r="48" fill="none" stroke="url(#ng)" stroke-width="14" stroke-dasharray="0 302" stroke-linecap="butt"/>
+            </svg>
+            <div class="donut-mid"><b><i id="donutNum" style="font-style:normal">0</i>%</b><span>to the work</span></div>
+          </div>
+          <div class="legend">
+            <div><span><i style="background:var(--neon)"></i>Labor — paid to members</span><span>75%</span></div>
+            <div><span><i style="background:#262626;border:1px solid #444"></i>Network reserve</span><span>25%</span></div>
+            <div style="flex-direction:column"><span>A 28-day cycle · settles at the end</span><div class="cycle" id="cycle"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── /05 SHOP ── -->
+  <section class="dark" id="shop">
+    <div class="sec-head"><span class="idx">/05</span><span class="lbl">Shop</span></div>
+    <div class="shop">
+      <div class="shop-word">Shop</div>
+      <div class="shop-side rv">
+        <p>The Land of Geb store.</p>
+        <a class="btn solid shop-link" href="#shop">Visit the store <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+        <span class="draft" id="shop-pending">Draft — store link not set</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="stamp">
+    <b>Bixxville Network Operational Briefing</b><br>
+    VALIDATOR 1: Benjo Bixx ID: BIX_00271<br>
+    REGION: LOC_REG=AyeAye | LAT=17.7275N | LON=64.747W | UTC_OFF=−4 |<br>
+    System Date: <span id="sysdate">—</span>  Operational Standard: ISO 8601 / USC
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#shop" class="shop-link">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Network</h4>
+    <a href="#bixxville">About Bixxville</a>
+    <a href="https://ii00270.github.io/Bixxvillenode/terminal.html" target="_blank" rel="noopener">Enter Bixxville</a>
+  </div>
+  <p class="fine">Financial education is for learning only and is not investment advice. Trading forex, futures and options carries a substantial risk of loss and isn't suitable for everyone.</p>
+</footer>
+<div class="base">
+  <span class="live">Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script>
+// ── The store. Paste the Shopify address here and every Shop button uses it.
+const SHOP_URL = '';
+
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+
+  // Shop links
+  if (SHOP_URL) {
+    document.querySelectorAll('.shop-link').forEach(a => { a.href = SHOP_URL; a.target = '_blank'; a.rel = 'noopener'; });
+    $('shop-pending')?.remove();
+  }
+
+  // AyeAye time — Atlantic Standard Time, −04:00 all year
+  const ast = () => new Date(Date.now() - 4 * 3600e3);
+  const tick = () => {
+    const iso = ast().toISOString();
+    $('clock').textContent = iso.slice(11, 19);
+    $('sysdate').textContent = iso.slice(0, 19) + '-04:00';
+  };
+  tick(); setInterval(tick, 1000);
+  $('yr').textContent = ast().getUTCFullYear();
+
+  // Ticker
+  const words = ['Branding', 'Brand strategy', 'Forex', 'Futures', 'Options', 'Fundamentals', 'Project mapping', 'Talent'];
+  $('ticker').innerHTML = words.map(w => `<span class="ticker-item"><span class="pill">${w}</span><span class="chev">▶▶</span></span>`).join('').repeat(3);
+
+  // Stacked word rows
+  document.querySelectorAll('.stack-row').forEach(r => { r.innerHTML = '<span>Bixxville</span>'.repeat(6); });
+
+  // ── The sliding scale ──
+  const LEVELS = [
+    null,
+    { name: 'Low',          desc: 'Regions with the least to spend. Our lowest prices — the work and the teaching are the same.' },
+    { name: 'Low-medium',   desc: 'Developing local economies. Priced well below our full rate.' },
+    { name: 'Medium',       desc: 'Middle-income regions. A price in the middle of the scale.' },
+    { name: 'Medium-high',  desc: 'Stronger regional economies. Close to our full rate.' },
+    { name: 'High',         desc: 'The highest-income regions pay our full rate.' },
+  ];
+  const scale = $('scale'), knob = $('knob'), fill = $('scaleFill'), ticks = $('scaleTicks'), bars = [...$('bars').children];
+  const pos = v => ((v - 1) / 4) * 100;
+  ticks.innerHTML = [1, 2, 3, 4, 5].map(v =>
+    `<div class="scale-tick ${v % 2 ? '' : 'minor'}" data-v="${v}" style="left:${pos(v)}%"></div><div class="scale-num" data-v="${v}" style="left:${pos(v)}%">${v}</div>`).join('');
+  let level = 0;
+  const readout = l => {
+    $('scaleLevel').innerHTML = `${l} · <span class="neon-text">${LEVELS[l].name}</span>`;
+    $('scaleDesc').textContent = LEVELS[l].desc;
+    ticks.querySelectorAll('.scale-tick').forEach(t => t.classList.toggle('off', +t.dataset.v > l));
+    bars.forEach((b, i) => b.classList.toggle('on', i < l));
+    knob.setAttribute('aria-valuenow', l);
+    knob.setAttribute('aria-valuetext', `${l}, ${LEVELS[l].name}`);
+  };
+  const setLevel = v => {
+    level = Math.max(1, Math.min(5, Math.round(v)));
+    knob.style.left = pos(level) + '%';
+    fill.style.width = pos(level) + '%';
+    readout(level);
+  };
+  bars.forEach((b, i) => { b.style.height = (28 + i * 18) + '%'; });
+  const frac = (x, r) => Math.max(0, Math.min(1, (x - r.left) / r.width));
+  scale.addEventListener('pointerdown', e => {
+    const r = scale.getBoundingClientRect();
+    scale.setPointerCapture(e.pointerId);
+    scale.classList.add('dragging');
+    // While dragging the knob follows the finger; the readout follows the nearest level.
+    const live = x => {
+      const f = frac(x, r);
+      knob.style.left = f * 100 + '%'; fill.style.width = f * 100 + '%';
+      const l = Math.round(1 + f * 4);
+      if (l !== level) { level = l; readout(l); }
+    };
+    const move = ev => live(ev.clientX);
+    const up = ev => {
+      scale.classList.remove('dragging');
+      setLevel(1 + frac(ev.clientX, r) * 4);
+      scale.removeEventListener('pointermove', move);
+      scale.removeEventListener('pointerup', up);
+    };
+    live(e.clientX);
+    scale.addEventListener('pointermove', move);
+    scale.addEventListener('pointerup', up);
+    knob.focus({ preventScroll: true });
+  });
+  knob.addEventListener('keydown', e => {
+    const k = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1 }[e.key];
+    if (k) { e.preventDefault(); setLevel(level + k); }
+    if (e.key === 'Home') { e.preventDefault(); setLevel(1); }
+    if (e.key === 'End') { e.preventDefault(); setLevel(5); }
+  });
+  setLevel(4);
+
+  // ── Tier-rate graph: a stepped neon line rising through the four tiers ──
+  const TIERS = [['Apprentice', 39], ['Wrangler', 65], ['Architect', 85], ['Operator', 100]];
+  (() => {
+    const svg = $('tiers'), W = 760, base = 360, top = 130, colW = W / 4, flat = colW * .62;
+    const y = v => base - (v / 100) * (base - top);
+    let d = '';
+    TIERS.forEach(([, v], i) => {
+      const x0 = i * colW, x1 = x0 + flat, nx = (i + 1) * colW, nv = TIERS[i + 1]?.[1];
+      d += `${i ? 'L' : 'M'}${x0},${y(v)} L${x1},${y(v)} `;
+      if (nv != null) d += `L${nx},${y(nv)} `;
+    });
+    d = d.trim();
+    const area = `${d} L${W - colW + flat},${base} L0,${base} Z`;
+    const dots = ['#FFEA00', '#FFB31A', '#FF7A1A', '#FF2D95'];
+    const labels = TIERS.map(([name, v], i) => {
+      const x = i * colW + 4, ly = y(v) - 70;
+      return `<g class="lbl-g" style="opacity:0;transition:opacity .6s ${0.4 + i * .25}s">
+        <circle cx="${x}" cy="${y(v) - 18}" r="3.5" fill="${dots[i]}"/>
+        <line class="dash" x1="${x}" y1="${y(v) - 14}" x2="${x}" y2="${base}"/>
+        <line class="dash" x1="${i * colW + flat}" y1="${y(v)}" x2="${i * colW + flat}" y2="${base}"/>
+        <text class="big" x="${x}" y="${ly}">$<tspan data-n="${v}">0</tspan></text>
+        <text class="small" x="${x}" y="${ly}" dy="1.85em">${name}</text>
+      </g>`;
+    }).join('');
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="tl" x1="0" x2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient>
+        <linearGradient id="ta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A1A" stop-opacity=".28"/><stop offset="1" stop-color="#FF2D95" stop-opacity="0"/></linearGradient>
+      </defs>
+      <path id="tArea" d="${area}" fill="url(#ta)" style="opacity:0;transition:opacity 1.2s .5s"/>
+      ${labels}
+      <path id="tLine" class="glow" d="${d}" fill="none" stroke="url(#tl)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const line = $('tLine'), len = line.getTotalLength();
+    line.style.strokeDasharray = len;
+    line.style.strokeDashoffset = len;
+  })();
+
+  const countUp = (el, to, ms = 1200) => {
+    if (reduce) { el.textContent = to; return; }
+    const t0 = performance.now();
+    const step = now => { const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  const playTiers = () => {
+    const line = $('tLine');
+    line.style.transition = reduce ? 'none' : 'stroke-dashoffset 1.8s cubic-bezier(.4,.1,.2,1)';
+    line.style.strokeDashoffset = 0;
+    $('tArea').style.opacity = 1;
+    document.querySelectorAll('#tiers .lbl-g').forEach(g => { g.style.opacity = 1; });
+    document.querySelectorAll('#tiers tspan[data-n]').forEach((t, i) => setTimeout(() => countUp(t, +t.dataset.n), 400 + i * 250));
+  };
+
+  // 75 / 25 donut, and a 28-day cycle filling in
+  const cyc = $('cycle');
+  cyc.innerHTML = '<span></span>'.repeat(28);
+  const playSplit = () => {
+    const C = 2 * Math.PI * 48, arc = $('donutArc');
+    arc.style.transition = reduce ? 'none' : 'stroke-dasharray 1.6s cubic-bezier(.4,.1,.2,1)';
+    arc.setAttribute('stroke-dasharray', `${C * .75} ${C}`);
+    countUp($('donutNum'), 75, 1600);
+    [...cyc.children].forEach((s, i) => setTimeout(() => s.classList.add('on'), reduce ? 0 : 900 + i * 45));
+  };
+
+  // Reveal on scroll; the graphs play once when they arrive
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    if (e.target.id === 'tierPanel') playTiers();
+    if (e.target.id === 'splitPanel') playSplit();
+    io.unobserve(e.target);
+  }), { threshold: .2 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Scroll-driven motion
+  const topW = $('splitTop'), botW = $('splitBot'), bar = $('bar');
+  const rows = [...document.querySelectorAll('.stack-row')];
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    const vh = innerHeight, doc = document.documentElement;
+    bar.style.setProperty('--progress', (scrollY / Math.max(1, doc.scrollHeight - vh) * 100) + '%');
+    if (reduce) return;
+    const s = topW.parentElement.getBoundingClientRect();
+    const p = Math.max(-1, Math.min(1, (vh / 2 - (s.top + s.height / 2)) / vh));
+    topW.style.transform = `translate(${p * -6}%, -50%)`;
+    botW.style.transform = `translate(${p * 6}%, -50%)`;
+    const b = rows[0].parentElement.getBoundingClientRect();
+    const q = (vh - b.top) / (vh + b.height);
+    rows.forEach(r => { r.style.transform = `translateX(${(r.dataset.dir === '1' ? -30 : -10) + q * 20 * r.dataset.dir}%)`; });
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  // ── Hero art — a block form in black and grey with a few neon cells ──
+  const cv = $('art'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, mx = 0, my = 0;
+  const t0 = performance.now();
+  const size = () => {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  addEventListener('resize', size); size();
+  cv.parentElement.addEventListener('pointermove', e => {
+    const r = cv.getBoundingClientRect();
+    mx = (e.clientX - r.left) / r.width - .5; my = (e.clientY - r.top) / r.height - .5;
+  });
+  const NEON = ['#FFEA00', '#FF7A1A', '#FF2D95'];
+  const vox = [];
+  const N = 9;
+  for (let x = 0; x < N; x++) for (let y = 0; y < N; y++) for (let z = 0; z < N; z++) {
+    const cx = x - (N - 1) / 2, cy = y - (N - 1) / 2, cz = z - (N - 1) / 2;
+    const r = Math.max(Math.abs(cx), Math.abs(cy), Math.abs(cz));
+    const n = Math.sin(x * 1.7 + y * .9) * Math.cos(z * 1.3 - y * .7);
+    if (r < 4.2 && (r < 2.5 || n > -0.15)) {
+      const h = (x * 7 + y * 13 + z * 3) % 23;
+      vox.push([cx, cy, cz, (x * 7 + y * 13 + z * 3) % 5, h < 2 ? NEON[(x + y + z) % 3] : null]);
+    }
+  }
+  const pctEl = $('pct');
+  const draw = now => {
+    const t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = '#EDEDED'; ctx.lineWidth = 1;
+    const g = 28;
+    for (let x = (W / 2) % g; x < W; x += g) { ctx.beginPath(); ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, H); ctx.stroke(); }
+    for (let y = (H / 2) % g; y < H; y += g) { ctx.beginPath(); ctx.moveTo(0, y + .5); ctx.lineTo(W, y + .5); ctx.stroke(); }
+    ctx.strokeStyle = '#0A0A0A';
+    [[.18, .22], [.82, .7], [.26, .8], [.74, .18]].forEach(([u, v]) => {
+      const x = Math.round(u * W) + .5, y = Math.round(v * H) + .5;
+      ctx.beginPath(); ctx.moveTo(x - 5, y); ctx.lineTo(x + 5, y); ctx.moveTo(x, y - 5); ctx.lineTo(x, y + 5); ctx.stroke();
+    });
+    const a = (reduce ? .6 : t * .18) + mx * .8, b = .55 + Math.sin(t * .23) * .12 + my * .5;
+    const ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b);
+    const s = Math.min(W, H) / 20;
+    vox.map(([x, y, z, k, neon]) => {
+      const x1 = x * ca - z * sa, z1 = x * sa + z * ca;
+      const y1 = y * cb - z1 * sb, z2 = y * sb + z1 * cb;
+      const persp = 1 / (1 + z2 * .03);
+      return { x: W / 2 + x1 * s * persp, y: H / 2 + y1 * s * persp, z: z2, k, p: persp, neon };
+    }).sort((p, q) => q.z - p.z).forEach(p => {
+      const sz = s * p.p * .84;
+      const shade = Math.max(0, Math.min(1, (p.z + 5) / 10));
+      const tone = p.k === 0 ? 10 : Math.round(40 + shade * 170 + p.k * 6);
+      ctx.fillStyle = p.neon || `rgb(${tone},${tone},${tone})`;
+      ctx.fillRect(p.x - sz / 2, p.y - sz / 2, sz, sz);
+      if (p.k === 1 || p.k === 3) { ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = .6; ctx.strokeRect(p.x - sz / 2 + .5, p.y - sz / 2 + .5, sz - 1, sz - 1); }
+    });
+    for (let i = 0; i < 14; i++) {
+      const ang = i * 2.39 + t * .05, rad = s * (5.2 + (i % 4) * .9);
+      const x = W / 2 + Math.cos(ang) * rad, y = H / 2 + Math.sin(ang * 1.3) * rad * .7;
+      ctx.fillStyle = i % 4 === 0 ? NEON[i % 3] : i % 3 ? '#0A0A0A' : '#BDBDBD';
+      const q = s * (.25 + (i % 3) * .15);
+      ctx.fillRect(x, y, q, q);
+    }
+    pctEl.textContent = Math.min(100, Math.floor(t * 34));
+    if (!reduce) requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
