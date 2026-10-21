@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Land of Geb</title>
+<meta name="description" content="Land of Geb services: branding, brand strategy, financial education, fundamental analysis, project mapping and talent management. Turn the dial to explore each one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A;
+  --body:#1C1C1C;
+  --soft:#5A5A5A;
+  --faint:#A3A3A0;
+  --bg:#F2F2F0;
+  --card:#FAFAF8;
+  --line:#DCDCD8;
+  --yellow:#FFEA00;
+  --orange:#FF7A1A;
+  --pink:#FF2D95;
+  --neon:linear-gradient(90deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
+  --neon-v:linear-gradient(180deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
+  --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --display:'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --gutter:clamp(16px, 4vw, 48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:#fff}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s,background .25s,color .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:#fff}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.arrow{width:12px;height:12px;flex:none}
+
+/* ── top bar (same as the home page) ── */
+.bar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:28px;
+  padding:14px var(--gutter);background:rgba(242,242,240,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.nav{display:flex;gap:22px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.nav a{position:relative;padding:4px 0;color:var(--ink)}
+.nav a + a::before{content:'/';position:absolute;left:-14px;color:var(--faint)}
+.nav a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--neon);transition:right .3s}
+.nav a:hover::after,.nav a[aria-current]::after{right:0}
+.clock{font-size:11px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* ── intro ── */
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding:64px var(--gutter) 24px}
+.intro h1{font-family:var(--display);font-weight:400;font-size:clamp(72px,12vw,190px);line-height:.85;text-transform:uppercase;color:var(--ink)}
+.intro .idx{margin-bottom:14px}
+.intro p{font-size:16px;max-width:480px;color:var(--body)}
+.intro .how{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--soft);letter-spacing:.06em}
+.intro .how span::before{content:'';display:inline-block;width:6px;height:6px;margin-right:8px;background:var(--pink);vertical-align:2px}
+
+/* ── the dial stage ── */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:680px}
+.dial{position:relative;overflow:hidden;cursor:grab;touch-action:none;user-select:none;outline:none;border-right:1px solid var(--line)}
+.dial.dragging{cursor:grabbing}
+.dial:focus-visible{box-shadow:inset 0 0 0 2px var(--pink)}
+.dial svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dial-num{position:absolute;font-family:var(--mono);font-weight:600;font-size:40px;line-height:1;color:#C9C9C5;transform-origin:0 50%;
+  white-space:nowrap;cursor:pointer;transition:color .2s}
+.dial-num:hover{color:var(--soft)}
+.dial-active{position:absolute;display:flex;align-items:center;gap:22px;pointer-events:none}
+.dial-active b{font-family:var(--mono);font-weight:600;font-size:clamp(84px,9vw,128px);line-height:.9;color:var(--ink);letter-spacing:-.02em}
+.dial-active span{display:block;font-size:15px;line-height:1.45;max-width:210px}
+.dial-active strong{display:block;font-weight:600;color:var(--ink);font-size:16px}
+.dial-active em{font-style:normal;color:var(--soft)}
+.dial-ctrls{position:absolute;left:24px;bottom:22px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--soft)}
+.dial-ctrls button{appearance:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--mono);font-size:16px;cursor:pointer;transition:border-color .2s}
+.dial-ctrls button:hover{border-color:var(--ink)}
+.dial-hint{position:absolute;right:24px;top:22px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+
+.detail{padding:44px clamp(20px,4vw,56px) 48px;display:flex;flex-direction:column;gap:22px;min-width:0}
+.d-topic{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.d-title{font-family:var(--display);font-weight:400;font-size:clamp(44px,5.4vw,78px);line-height:.92;text-transform:uppercase;color:var(--ink)}
+.d-lead{font-size:16px;max-width:620px}
+.d-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}
+.d-facts > div{padding:14px 16px 4px 0}
+.d-facts h4{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.d-facts ul{list-style:none;font-size:14px}
+.d-facts li{padding:3px 0 3px 16px;position:relative}
+.d-facts li::before{content:'';position:absolute;left:0;top:.75em;width:7px;height:2px;background:var(--orange)}
+.d-facts p{font-size:14px}
+.swap{animation:swap .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ── the live example card ── */
+.viz{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 18px;position:relative;overflow:hidden}
+.viz::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--neon)}
+.viz-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:14px}
+.viz-head b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.viz-head span{font-size:11px;color:var(--soft)}
+.viz-note{font-size:11.5px;color:var(--soft);margin-top:12px}
+.viz-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center}
+.read{font-family:var(--mono)}
+.read b{display:block;font-weight:300;font-size:40px;line-height:1.05;color:var(--ink)}
+.read span{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.reads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+.reads .read b{font-size:26px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-family:var(--mono);font-size:12.5px;cursor:pointer;color:var(--ink);transition:all .2s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.caption{font-size:14px;min-height:3.4em;margin-top:12px}
+.caption strong{color:var(--ink)}
+
+/* range input: thin track, neon fill, black knob with a white square */
+.range{display:block;margin:14px 0 4px}
+.range label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--soft);margin-bottom:8px}
+.range label output{color:var(--ink);font-weight:600}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;--p:50%}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:linear-gradient(90deg,var(--yellow),var(--orange) calc(var(--p)*.5),var(--pink) var(--p),#D6D6D2 var(--p))}
+input[type=range]::-moz-range-track{height:3px;background:#D6D6D2}
+input[type=range]::-moz-range-progress{height:3px;background:var(--neon)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-11.5px;border-radius:50%;background:var(--ink);
+  background-image:linear-gradient(#fff,#fff);background-size:7px 7px;background-position:center;background-repeat:no-repeat;border:none}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--ink);border:none}
+input[type=range]:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+
+/* SVG text in the examples */
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz svg text{font-family:var(--mono);fill:var(--body)}
+
+/* ── process ── */
+.process{padding:72px var(--gutter) 24px}
+.process h2,.cta h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;text-transform:uppercase;color:var(--ink);margin:14px 0 26px}
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--ink)}
+.step{padding:18px 16px 26px 0;position:relative}
+.step b{display:block;font-family:var(--mono);font-weight:600;font-size:28px;color:#C9C9C5;transition:color .3s}
+.step strong{display:block;font-size:15px;color:var(--ink);margin:4px 0 6px}
+.step p{font-size:13.5px;color:var(--body)}
+.step:hover b{color:var(--ink)}
+.step::after{content:'';position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--neon);transition:width .5s}
+.step:hover::after,.step.in::after{width:calc(100% - 16px)}
+
+.cta{padding:72px var(--gutter) 96px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);align-items:end}
+.cta p{font-size:16px;max-width:520px;margin-bottom:22px}
+.cta .row{display:flex;gap:14px;flex-wrap:wrap}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:#fff}
+.stamp{font-size:11.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere}
+.stamp b{font-weight:600}
+.f-col h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:#333;margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.fine{grid-column:1 / -1;font-size:11.5px;color:var(--soft);max-width:780px}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:#fff}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:960px){
+  .bar{grid-template-columns:1fr auto;gap:14px}
+  .nav,.clock{display:none}
+  .intro{grid-template-columns:1fr;padding-top:40px}
+  .stage{grid-template-columns:1fr;min-height:0}
+  .dial{height:430px;border-right:none;border-bottom:1px solid var(--line)}
+  .dial-num{font-size:30px}
+  .detail{padding:28px var(--gutter) 40px}
+  .d-facts{grid-template-columns:1fr}
+  .viz-row{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cta{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .swap{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="services.html" aria-current="page">Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#bixxville">Bixxville</a>
+  </nav>
+  <div class="clock">SYS.TIME<br><b id="clock">--:--:--</b><br>UTC−4 · AYEAYE</div>
+  <a class="btn solid shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="rv">
+      <div class="idx">/02 — Land of Geb</div>
+      <h1>Ser&shy;vices</h1>
+    </div>
+    <div class="rv">
+      <p>Six ways we work with you. Turn the dial to pick one — each comes with a live example you can move.</p>
+      <div class="how"><span>Drag the dial</span><span>Scroll over it</span><span>Use ← → keys</span><span>Tap a number</span></div>
+    </div>
+  </section>
+
+  <section class="stage" aria-label="Services dial">
+    <div class="dial" id="dial" tabindex="0" role="slider" aria-label="Choose a service" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+      <div class="dial-hint">Turn to choose</div>
+      <svg id="dialSvg" aria-hidden="true"></svg>
+      <div id="dialNums"></div>
+      <div class="dial-active" id="dialActive"><b id="activeNum">01</b><span><strong id="activeName">Branding</strong><em id="activeLine"></em></span></div>
+      <div class="dial-ctrls">
+        <button id="prev" aria-label="Previous service">←</button>
+        <button id="next" aria-label="Next service">→</button>
+        <span id="dialCount">1 of 6</span>
+      </div>
+    </div>
+
+    <div class="detail" id="detail" aria-live="polite">
+      <div class="d-topic" id="dTopic">Service 01</div>
+      <h2 class="d-title" id="dTitle">Branding</h2>
+      <p class="d-lead" id="dLead"></p>
+      <div class="d-facts">
+        <div><h4>What it covers</h4><ul id="dCovers"></ul></div>
+        <div><h4>Good for</h4><p id="dFor"></p></div>
+      </div>
+      <div class="viz" id="viz"></div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="idx">/03 — How it runs</div>
+    <h2>Every engagement,<br><span class="neon-text">the same six steps.</span></h2>
+    <div class="steps" id="steps">
+      <div class="step"><b>01</b><strong>Decompose</strong><p>The goal is broken into ordered steps, each with a clear "done when."</p></div>
+      <div class="step"><b>02</b><strong>Staff</strong><p>Each step goes to someone at the right tier for it.</p></div>
+      <div class="step"><b>03</b><strong>Execute</strong><p>The work gets done, step by step, in order.</p></div>
+      <div class="step"><b>04</b><strong>Prove</strong><p>Every step is backed by evidence — time, files, photos, forms.</p></div>
+      <div class="step"><b>05</b><strong>Verify</strong><p>Nothing counts as done until it's checked.</p></div>
+      <div class="step"><b>06</b><strong>Settle</strong><p>Payment closes on a 28-day cycle.</p></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="rv">
+      <div class="idx">/04 — Price</div>
+      <h2>Priced for<br><span class="neon-text">where you are.</span></h2>
+    </div>
+    <div class="rv">
+      <p>Every service is priced on our regional sliding scale — each region is looked at on its own, by its economic standing.</p>
+      <div class="row">
+        <a class="btn solid" href="index.html#pricing">See the sliding scale <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+        <a class="btn shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Visit the store <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="stamp">
+    <b>Bixxville Network Operational Briefing</b><br>
+    VALIDATOR 1: Benjo Bixx ID: BIX_00271<br>
+    REGION: LOC_REG=AyeAye | LAT=17.7275N | LON=64.747W | UTC_OFF=−4 |<br>
+    System Date: <span id="sysdate">—</span>  Operational Standard: ISO 8601 / USC
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Network</h4>
+    <a href="index.html#bixxville">About Bixxville</a>
+    <a href="https://ii00270.github.io/Bixxvillenode/terminal.html" target="_blank" rel="noopener">Enter Bixxville</a>
+  </div>
+  <p class="fine">Financial education is for learning only and is not investment advice. Trading forex, futures and options carries a substantial risk of loss and isn't suitable for everyone. The examples on this page are illustrations.</p>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // AyeAye time (−04:00, no daylight saving)
+  const ast = () => new Date(Date.now() - 4 * 3600e3);
+  const tick = () => { const iso = ast().toISOString(); $('clock').textContent = iso.slice(11, 19); $('sysdate').textContent = iso.slice(0, 19) + '-04:00'; };
+  tick(); setInterval(tick, 1000);
+  $('yr').textContent = ast().getUTCFullYear();
+
+  // ── The six services ─────────────────────────────────────────────────
+  const SERVICES = [
+    { name: 'Branding', line: 'the name, the mark, the voice.',
+      lead: 'An identity people recognize and remember — built in layers, from the name up to every piece that carries it.',
+      covers: ['Name and mark', 'Voice and messaging', 'Visual system: type, color, layout', 'The materials that carry it'],
+      good: 'New businesses finding their look, and existing ones that have outgrown theirs.',
+      viz: 'brandStack' },
+    { name: 'Brand strategy', line: 'where you stand, where you go.',
+      lead: 'Where your brand stands today, who it is for, and the plan that moves it where it needs to be.',
+      covers: ['Where you stand now', 'Who it is for', 'What sets you apart', 'The plan to get there'],
+      good: 'Brands that are known but unclear, or clear but unknown.',
+      viz: 'positionMap' },
+    { name: 'Financial education', line: 'forex, futures, options.',
+      lead: 'How the markets move, how a trade is built, and — first — how risk is managed. Education, not advice.',
+      covers: ['Forex, futures and options basics', 'How a trade is structured', 'Position size and risk per trade', 'Reading price and volume'],
+      good: 'Anyone who wants to understand the markets before putting money in them.',
+      viz: 'riskCurve' },
+    { name: 'Fundamental analysis', line: 'what a company is worth.',
+      lead: 'How to understand a company: read its statements, know its business, and judge what it is actually worth.',
+      covers: ['The income statement', 'The balance sheet', 'The cash-flow statement', 'Judging value from the three'],
+      good: 'Investors, students, and owners who want to read a business the way a lender does.',
+      viz: 'balanceSheet' },
+    { name: 'Project mapping', line: 'the goal, decomposed.',
+      lead: 'Your goal decomposed into ordered, priced steps with our decomposition strategy — so you know what it takes before it starts.',
+      covers: ['Goal broken into checkpoints and steps', 'A tier and LOG count for every step', 'The critical path', 'A priced Decomposition Report'],
+      good: 'Projects that are big, new, or have stalled — anywhere the next step isn\'t obvious.',
+      viz: 'pricer' },
+    { name: 'Talent management', line: 'the right people, rising.',
+      lead: 'The right people on the right work: who it takes, at what level, and how they grow from one tier to the next.',
+      covers: ['Matching people to work', 'Tiers and what each carries', 'Growth through logged, verified work', 'Team plans for each contract'],
+      good: 'Teams that are growing, and people who want a clear path up.',
+      viz: 'tierLadder' },
+  ];
+  const N = SERVICES.length;
+  const pad = i => String(i + 1).padStart(2, '0');
+
+  // ── The dial ─────────────────────────────────────────────────────────
+  // A circle whose centre sits off the left edge; the number at its
+  // right-most point is the one chosen.
+  const dial = $('dial'), svg = $('dialSvg'), numsEl = $('dialNums');
+  const STEP = 30;                     // degrees between services
+  let pos = 0, target = 0, anim = null;
+  let G = {};                          // geometry for the current size
+  numsEl.innerHTML = SERVICES.map((s, i) => `<div class="dial-num" data-i="${i}">${pad(i)}</div>`).join('');
+  const numEls = [...numsEl.children];
+
+  const layout = () => {
+    const r = dial.getBoundingClientRect();
+    const small = r.width < 520;
+    const R = small ? Math.min(r.height * .42, 190) : Math.min(r.height * .44, 300);
+    G = { W: r.width, H: r.height, R, cx: small ? -R * .45 : -R * .42, cy: r.height / 2 };
+    const ticks = [];
+    for (let a = -180; a < 180; a += 3) ticks.push(a);
+    svg.innerHTML = `
+      <defs><linearGradient id="arcG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
+      <circle cx="${G.cx}" cy="${G.cy}" r="${R}" fill="none" stroke="#CFCFCB" stroke-width="1.2"/>
+      <circle cx="${G.cx}" cy="${G.cy}" r="${R - 26}" fill="none" stroke="#E2E2DE" stroke-width="1"/>
+      <g id="tickG">${ticks.map(a => `<line x1="${G.cx + (R - 26) * Math.cos(a * Math.PI / 180)}" y1="${G.cy + (R - 26) * Math.sin(a * Math.PI / 180)}" x2="${G.cx + (R - (a % 15 ? 20 : 14)) * Math.cos(a * Math.PI / 180)}" y2="${G.cy + (R - (a % 15 ? 20 : 14)) * Math.sin(a * Math.PI / 180)}" stroke="#D2D2CE" stroke-width="1"/>`).join('')}</g>
+      <path d="M ${G.cx + R * Math.cos(-.26)} ${G.cy + R * Math.sin(-.26)} A ${R} ${R} 0 0 1 ${G.cx + R * Math.cos(.26)} ${G.cy + R * Math.sin(.26)}" fill="none" stroke="url(#arcG)" stroke-width="3"/>
+      <g id="dotG">${SERVICES.map(() => '<circle r="4"/>').join('')}</g>`;
+    render();
+  };
+
+  const render = () => {
+    const { R, cx, cy } = G;
+    const ticksG = svg.querySelector('#tickG');
+    if (ticksG) ticksG.setAttribute('transform', `rotate(${-pos * STEP} ${cx} ${cy})`);
+    const dots = svg.querySelectorAll('#dotG circle');
+    const near = Math.round(((pos % N) + N) % N) % N;
+    SERVICES.forEach((s, i) => {
+      // nearest angular distance, so the dial wraps around
+      let d = i - pos; d = ((d % N) + N + N / 2) % N - N / 2;
+      const a = d * STEP * Math.PI / 180;
+      const vis = Math.max(0, 1 - Math.abs(d) / 3.2);
+      const x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
+      const dot = dots[i];
+      if (dot) {
+        dot.setAttribute('cx', x); dot.setAttribute('cy', y);
+        dot.setAttribute('fill', i === near ? '#0A0A0A' : '#BDBDB9');
+        dot.setAttribute('r', i === near ? 6 : 4);
+        dot.style.opacity = vis;
+      }
+      const el = numEls[i];
+      const lr = R + 34;
+      el.style.left = (cx + lr * Math.cos(a)) + 'px';
+      el.style.top = (cy + lr * Math.sin(a)) + 'px';
+      el.style.transform = `translateY(-50%) rotate(${d * STEP}deg)`;
+      el.style.opacity = i === near ? 0 : vis;
+      el.style.pointerEvents = vis > .2 && i !== near ? 'auto' : 'none';
+    });
+    const act = $('dialActive');
+    act.style.left = (cx + R + 30) + 'px';
+    act.style.top = (cy - act.offsetHeight / 2) + 'px';
+  };
+
+  let shown = -1;
+  const choose = i => {
+    if (i === shown) return;
+    shown = i;
+    const s = SERVICES[i];
+    $('activeNum').textContent = pad(i);
+    $('activeName').textContent = s.name;
+    $('activeLine').textContent = s.line;
+    $('dialCount').textContent = `${i + 1} of ${N}`;
+    dial.setAttribute('aria-valuenow', i + 1);
+    dial.setAttribute('aria-valuetext', `${pad(i)}, ${s.name}`);
+    const det = $('detail');
+    $('dTopic').textContent = `Service ${pad(i)} of ${pad(N - 1)}`;
+    $('dTitle').textContent = s.name;
+    $('dLead').textContent = s.lead;
+    $('dCovers').innerHTML = s.covers.map(c => `<li>${esc(c)}</li>`).join('');
+    $('dFor').textContent = s.good;
+    VIZ[s.viz]($('viz'));
+    det.classList.remove('swap'); void det.offsetWidth; det.classList.add('swap');
+  };
+
+  const settle = () => {
+    const near = Math.round(pos);
+    choose(((near % N) + N) % N);
+  };
+  const goTo = t => {
+    target = t;
+    cancelAnimationFrame(anim);
+    if (reduce) { pos = target; render(); settle(); return; }
+    const from = pos, t0 = performance.now(), dur = 520;
+    const stepF = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      pos = from + (target - from) * e; render();
+      if (k < 1) anim = requestAnimationFrame(stepF); else settle();
+    };
+    anim = requestAnimationFrame(stepF);
+    choose(((Math.round(t) % N) + N) % N);
+  };
+  const nudge = d => goTo(Math.round(target) + d);
+
+  // Drag: follow the pointer's angle around the centre
+  const angleAt = (x, y) => { const r = dial.getBoundingClientRect(); return Math.atan2(y - r.top - G.cy, x - r.left - G.cx) * 180 / Math.PI; };
+  let drag = null;
+  dial.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    const num = e.target.closest('.dial-num');
+    if (num) { const i = +num.dataset.i; let d = i - pos; d = ((d % N) + N + N / 2) % N - N / 2; goTo(Math.round(pos + d)); return; }
+    cancelAnimationFrame(anim);
+    drag = { a: angleAt(e.clientX, e.clientY), p: pos };
+    dial.setPointerCapture(e.pointerId); dial.classList.add('dragging');
+  });
+  dial.addEventListener('pointermove', e => {
+    if (!drag) return;
+    let da = angleAt(e.clientX, e.clientY) - drag.a;
+    if (da > 180) da -= 360; if (da < -180) da += 360;
+    pos = drag.p - da / STEP; target = pos; render();
+    choose(((Math.round(pos) % N) + N) % N);
+  });
+  const endDrag = () => { if (!drag) return; drag = null; dial.classList.remove('dragging'); goTo(Math.round(pos)); };
+  dial.addEventListener('pointerup', endDrag);
+  dial.addEventListener('pointercancel', endDrag);
+
+  // Wheel over the dial turns it one service at a time
+  let wheelLock = 0;
+  dial.addEventListener('wheel', e => {
+    e.preventDefault();
+    const now = performance.now();
+    if (now - wheelLock < 260) return;
+    wheelLock = now;
+    nudge(e.deltaY > 0 || e.deltaX > 0 ? 1 : -1);
+  }, { passive: false });
+  dial.addEventListener('keydown', e => {
+    const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (k) { e.preventDefault(); nudge(k); }
+    if (e.key === 'Home') { e.preventDefault(); goTo(Math.round(target) - (((Math.round(target) % N) + N) % N)); }
+  });
+  $('prev').addEventListener('click', () => nudge(-1));
+  $('next').addEventListener('click', () => nudge(1));
+  addEventListener('resize', layout);
+
+  // ── Live examples — real formulas and Bixxville's real figures only ──
+  const setFill = r => r.style.setProperty('--p', ((r.value - r.min) / (r.max - r.min) * 100) + '%');
+  const money = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const VIZ = {
+    // 01 — the layers of a brand, stacked like the blocks in the reference
+    brandStack(el) {
+      const L = [
+        ['Materials', 'Everything the brand shows up on — signs, packaging, pages, posts. Built last, on top of what\'s below.'],
+        ['Visual system', 'Type, color and layout rules, so every piece looks like it came from the same place.'],
+        ['Voice', 'How the brand talks: the words it uses, the ones it never uses, and its tone.'],
+        ['Name & mark', 'The foundation. The name people say and the mark they recognize.'],
+      ];
+      el.innerHTML = `<div class="viz-head"><b>Live example · How a brand stacks</b><span>Tap a layer</span></div>
+        <div class="viz-row"><svg viewBox="0 0 300 250" id="stackSvg"></svg><div class="caption" id="stackCap"></div></div>`;
+      const sv = el.querySelector('#stackSvg');
+      const draw = on => {
+        sv.innerHTML = `<defs><linearGradient id="sf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset="1" stop-color="#FF7A1A"/></linearGradient>
+          <linearGradient id="ss" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>` +
+          L.map(([n], k) => {
+            const i = L.length - 1 - k;          // draw the foundation first, at the bottom
+            const y = 195 - i * 50, h = 38 - i * 4, lift = on === k ? -10 : 0;
+            const active = on === k;
+            return `<g data-k="${k}" style="cursor:pointer;transition:transform .3s" transform="translate(0 ${lift})">
+              <polygon points="20,${y} 150,${y} 180,${y - 18} 50,${y - 18}" fill="${active ? '#FFEA00' : '#E6E6E2'}"/>
+              <rect x="20" y="${y}" width="130" height="${h}" fill="${active ? 'url(#sf)' : '#D4D4D0'}"/>
+              <polygon points="150,${y} 180,${y - 18} 180,${y - 18 + h} 150,${y + h}" fill="${active ? 'url(#ss)' : '#BDBDB9'}"/>
+              <text x="190" y="${y + h / 2}" font-size="12" ${active ? 'font-weight="600" fill="#0A0A0A"' : 'fill="#5A5A5A"'}>${n}</text>
+            </g>`;
+          }).join('');
+        el.querySelector('#stackCap').innerHTML = `<strong>${L[on][0]}.</strong> ${L[on][1]}`;
+        sv.querySelectorAll('g[data-k]').forEach(g => g.addEventListener('click', () => draw(+g.dataset.k)));
+      };
+      draw(3);
+    },
+
+    // 02 — a positioning map: drag the dot, read the move
+    positionMap(el) {
+      const Q = [
+        ['Unknown and unclear', 'Start with the message. Get it clear before spending to be seen.'],
+        ['Clear but unknown', 'The story works — now get it in front of the right people.'],
+        ['Known but unclear', 'People know the name but not why it matters. Tighten the story.'],
+        ['Known and clear', 'Hold the position. Grow from it without blurring it.'],
+      ];
+      el.innerHTML = `<div class="viz-head"><b>Live example · Where you stand</b><span>Drag the dot</span></div>
+        <div class="viz-row"><svg viewBox="0 0 260 230" id="pm" style="touch-action:none"></svg><div class="caption" id="pmCap"></div></div>`;
+      const sv = el.querySelector('#pm');
+      let px = 70, py = 160;
+      const draw = () => {
+        // x = how clear the message is, y = how known the brand is
+        const idx = (py < 115 ? (px > 140 ? 3 : 2) : (px > 140 ? 1 : 0));
+        sv.innerHTML = `
+          <rect x="30" y="10" width="220" height="190" fill="#fff" stroke="#DCDCD8"/>
+          <line x1="140" y1="10" x2="140" y2="200" stroke="#E2E2DE"/><line x1="30" y1="105" x2="250" y2="105" stroke="#E2E2DE"/>
+          <rect x="${idx % 2 ? 140 : 30}" y="${idx >= 2 ? 10 : 105}" width="110" height="95" fill="#FFEA00" opacity=".22"/>
+          <text x="140" y="222" font-size="10.5" text-anchor="middle" fill="#5A5A5A">message: unclear → clear</text>
+          <text x="14" y="105" font-size="10.5" text-anchor="middle" fill="#5A5A5A" transform="rotate(-90 14 105)">known by few → many</text>
+          <line x1="${px}" y1="${py}" x2="232" y2="28" stroke="#FF2D95" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="232" cy="28" r="6" fill="none" stroke="#FF2D95" stroke-width="1.5"/><text x="226" y="48" font-size="10" text-anchor="end" fill="#5A5A5A">goal</text>
+          <circle id="pmDot" cx="${px}" cy="${py}" r="11" fill="#0A0A0A" style="cursor:grab"/><rect x="${px - 3}" y="${py - 3}" width="6" height="6" fill="#fff" pointer-events="none"/>`;
+        el.querySelector('#pmCap').innerHTML = `<strong>${Q[idx][0]}.</strong> ${Q[idx][1]}`;
+      };
+      const move = e => {
+        const r = sv.getBoundingClientRect(), k = 260 / r.width;
+        px = Math.max(36, Math.min(244, (e.clientX - r.left) * k));
+        py = Math.max(16, Math.min(194, (e.clientY - r.top) * k));
+        draw();
+      };
+      sv.addEventListener('pointerdown', e => { sv.setPointerCapture(e.pointerId); move(e); sv.onpointermove = move; });
+      sv.addEventListener('pointerup', () => { sv.onpointermove = null; });
+      draw();
+    },
+
+    // 03 — risk per trade and a losing streak: remaining = (1 − r)^n
+    riskCurve(el) {
+      el.innerHTML = `<div class="viz-head"><b>Live example · Risk per trade</b><span>Illustration — not advice</span></div>
+        <div class="range"><label for="rk">Risk on each trade <output id="rkO"></output></label><input type="range" id="rk" min="0.5" max="10" step="0.5" value="2"></div>
+        <div class="range"><label for="st">Losing trades in a row <output id="stO"></output></label><input type="range" id="st" min="1" max="20" step="1" value="10"></div>
+        <div class="viz-row" style="margin-top:8px"><svg viewBox="0 0 300 150" id="rc"></svg>
+          <div><div class="read"><b id="rcLeft"></b><span>of the account left</span></div><div class="caption" id="rcCap"></div></div></div>
+        <div class="viz-note">Each loss takes the same share of what's left: remaining = (1 − risk)<sup>losses</sup>.</div>`;
+      const rk = el.querySelector('#rk'), st = el.querySelector('#st');
+      const draw = () => {
+        [rk, st].forEach(setFill);
+        const r = +rk.value / 100, n = +st.value;
+        el.querySelector('#rkO').textContent = rk.value + '%';
+        el.querySelector('#stO').textContent = n;
+        const left = Math.pow(1 - r, n) * 100;
+        el.querySelector('#rcLeft').textContent = left.toFixed(1) + '%';
+        el.querySelector('#rcCap').innerHTML = `At <strong>${rk.value}%</strong> a trade, ${n} losses in a row leave <strong>${left.toFixed(1)}%</strong>. You'd need a <strong>${(100 / left * 100 - 100).toFixed(0)}%</strong> gain just to get back to even.`;
+        const pts = [];
+        for (let k = 0; k <= 20; k++) pts.push([20 + k * 13, 130 - Math.pow(1 - r, k) * 115]);
+        const d = 'M' + pts.map(p => p.join(',')).join(' L');
+        const [mx, my] = pts[n];
+        el.querySelector('#rc').innerHTML = `
+          <defs><linearGradient id="rcl" x1="0" x2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient>
+          <linearGradient id="rca" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FF7A1A" stop-opacity=".25"/><stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/></linearGradient></defs>
+          <line x1="20" y1="130" x2="280" y2="130" stroke="#CFCFCB"/><line x1="20" y1="15" x2="280" y2="15" stroke="#E2E2DE" stroke-dasharray="3 4"/>
+          <text x="20" y="10" font-size="9.5" fill="#5A5A5A">100%</text><text x="280" y="145" font-size="9.5" text-anchor="end" fill="#5A5A5A">20 losses</text>
+          <path d="${d} L280,130 L20,130 Z" fill="url(#rca)"/><path d="${d}" fill="none" stroke="url(#rcl)" stroke-width="3"/>
+          <line x1="${mx}" y1="${my}" x2="${mx}" y2="130" stroke="#0A0A0A" stroke-dasharray="2 3"/><circle cx="${mx}" cy="${my}" r="5" fill="#0A0A0A"/>`;
+      };
+      [rk, st].forEach(i => i.addEventListener('input', draw));
+      draw();
+    },
+
+    // 04 — the balance sheet always balances: assets = liabilities + equity
+    balanceSheet(el) {
+      const S = [
+        ['Income statement', 'Money in and money out over a period. Ends with what the company earned — or lost.'],
+        ['Balance sheet', 'What it owns and what it owes, on one day. Always balances: assets = liabilities + equity.'],
+        ['Cash-flow statement', 'Where the actual cash came from and went. Profit on paper isn\'t cash in the bank.'],
+      ];
+      el.innerHTML = `<div class="viz-head"><b>Live example · Read the balance sheet</b><span>Move the slider</span></div>
+        <div class="chips" id="bsTabs">${S.map((s, i) => `<button class="chip ${i === 1 ? 'on' : ''}" data-i="${i}">${s[0]}</button>`).join('')}</div>
+        <div class="caption" id="bsCap"></div>
+        <div class="range"><label for="lb">Share of assets paid for with debt <output id="lbO"></output></label><input type="range" id="lb" min="0" max="95" step="5" value="40"></div>
+        <svg viewBox="0 0 300 70" id="bsBar"></svg>
+        <div class="reads"><div class="read"><b>100</b><span>Assets</span></div><div class="read"><b id="lbL"></b><span>Liabilities</span></div><div class="read"><b id="lbE"></b><span>Equity</span></div></div>
+        <div class="viz-note" id="bsDe"></div>`;
+      const lb = el.querySelector('#lb');
+      const tab = i => {
+        el.querySelectorAll('#bsTabs .chip').forEach(c => c.classList.toggle('on', +c.dataset.i === i));
+        el.querySelector('#bsCap').innerHTML = `<strong>${S[i][0]}.</strong> ${S[i][1]}`;
+      };
+      el.querySelectorAll('#bsTabs .chip').forEach(c => c.addEventListener('click', () => tab(+c.dataset.i)));
+      const draw = () => {
+        setFill(lb);
+        const L = +lb.value, E = 100 - L;
+        el.querySelector('#lbO').textContent = L + '%';
+        el.querySelector('#lbL').textContent = L;
+        el.querySelector('#lbE').textContent = E;
+        const w = 280 * L / 100;
+        el.querySelector('#bsBar').innerHTML = `
+          <defs><linearGradient id="bsg" x1="0" x2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
+          <text x="10" y="13" font-size="7.5" fill="#5A5A5A">Assets</text><rect x="10" y="17" width="280" height="14" fill="#0A0A0A"/>
+          <text x="10" y="49" font-size="7.5" fill="#5A5A5A">Liabilities + Equity</text>
+          <rect x="10" y="53" width="${w}" height="14" fill="url(#bsg)"/><rect x="${10 + w}" y="53" width="${280 - w}" height="14" fill="#C9C9C5"/>`;
+        el.querySelector('#bsDe').textContent = E === 0 ? 'No equity left: everything the company owns is owed to someone.'
+          : `Debt-to-equity: ${(L / E).toFixed(2)} — for every $1 the owners put in, $${(L / E).toFixed(2)} is borrowed.`;
+      };
+      lb.addEventListener('input', draw);
+      tab(1); draw();
+    },
+
+    // 05 — price a step the way a Decomposition Report does: price = labor ÷ 0.75
+    pricer(el) {
+      const T = [['Apprentice', 39], ['Wrangler', 65], ['Architect', 85], ['Operator', 100]];
+      el.innerHTML = `<div class="viz-head"><b>Live example · Price one step</b><span>Bixxville tier rates</span></div>
+        <div class="chips" id="prT">${T.map((t, i) => `<button class="chip ${i === 1 ? 'on' : ''}" data-i="${i}">${t[0]} · $${t[1]}</button>`).join('')}</div>
+        <div class="range"><label for="pl">Size of the step <output id="plO"></output></label><input type="range" id="pl" min="1" max="40" step="1" value="8"></div>
+        <svg viewBox="0 0 300 46" id="prBar"></svg>
+        <div class="reads"><div class="read"><b id="prL"></b><span>Labor</span></div><div class="read"><b id="prR"></b><span>Reserve</span></div><div class="read"><b id="prP" style="text-decoration:underline;text-decoration-color:#FF2D95;text-decoration-thickness:3px;text-underline-offset:6px"></b><span>Price</span></div></div>
+        <div class="viz-note">Labor = LOGs × the tier's rate per LOG. Price = labor ÷ 0.75, rounded up to the cent — so labor is 75% and the network reserve 25%. Before the regional sliding scale.</div>`;
+      let ti = 1;
+      const pl = el.querySelector('#pl');
+      const draw = () => {
+        setFill(pl);
+        const logs = +pl.value, laborC = logs * T[ti][1] * 100, priceC = Math.ceil(laborC / 0.75), resC = priceC - laborC;
+        el.querySelector('#plO').textContent = `${logs} LOG${logs === 1 ? '' : 's'}`;
+        el.querySelector('#prL').textContent = money(laborC / 100);
+        el.querySelector('#prR').textContent = money(resC / 100);
+        el.querySelector('#prP').textContent = money(priceC / 100);
+        const lw = 280 * laborC / priceC;
+        el.querySelector('#prBar').innerHTML = `<defs><linearGradient id="prg" x1="0" x2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
+          <rect x="10" y="8" width="${lw}" height="18" fill="url(#prg)"/><rect x="${10 + lw}" y="8" width="${280 - lw}" height="18" fill="#0A0A0A"/>
+          <text x="10" y="40" font-size="7.5" fill="#5A5A5A">labor 75%</text><text x="290" y="40" font-size="7.5" text-anchor="end" fill="#5A5A5A">reserve 25%</text>`;
+      };
+      el.querySelectorAll('#prT .chip').forEach(c => c.addEventListener('click', () => {
+        ti = +c.dataset.i; el.querySelectorAll('#prT .chip').forEach(x => x.classList.toggle('on', x === c)); draw();
+      }));
+      pl.addEventListener('input', draw);
+      draw();
+    },
+
+    // 06 — the tier ladder: verified LOGs move you up (100 / 400 / 1,000)
+    tierLadder(el) {
+      const T = [['Apprentice', 0, 39], ['Wrangler', 100, 65], ['Architect', 400, 85], ['Operator', 1000, 100]];
+      el.innerHTML = `<div class="viz-head"><b>Live example · The tier ladder</b><span>Bixxville tiers</span></div>
+        <div class="range"><label for="tl">Verified LOGs logged <output id="tlO"></output></label><input type="range" id="tl" min="0" max="1400" step="10" value="250"></div>
+        <div class="viz-row"><svg viewBox="0 0 220 220" id="tg"></svg>
+          <div><div class="read"><b id="tlT"></b><span id="tlR"></span></div><div class="caption" id="tlC"></div></div></div>`;
+      const tl = el.querySelector('#tl');
+      const draw = () => {
+        setFill(tl);
+        const n = +tl.value;
+        el.querySelector('#tlO').textContent = n.toLocaleString();
+        let k = 0; T.forEach((t, i) => { if (n >= t[1]) k = i; });
+        const next = T[k + 1];
+        el.querySelector('#tlT').textContent = T[k][0];
+        el.querySelector('#tlR').textContent = `$${T[k][2]} per LOG`;
+        el.querySelector('#tlC').innerHTML = next
+          ? `<strong>${(next[1] - n).toLocaleString()}</strong> more verified LOGs to reach <strong>${next[0]}</strong> ($${next[2]} per LOG).`
+          : 'The top tier. Operators carry the most demanding steps.';
+        // a gauge: the needle sweeps 0 → 1,400 across 240°
+        const cx = 110, cy = 120, R = 82, a0 = 150, span = 240;
+        const ang = v => (a0 + span * Math.min(v, 1400) / 1400) * Math.PI / 180;
+        const P = (v, r) => [cx + r * Math.cos(ang(v)), cy + r * Math.sin(ang(v))];
+        const arc = (v1, v2, r) => { const [x1, y1] = P(v1, r), [x2, y2] = P(v2, r); const large = (v2 - v1) / 1400 * span > 180 ? 1 : 0; return `M${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2}`; };
+        const [nx, ny] = P(n, R - 18);
+        el.querySelector('#tg').innerHTML = `
+          <defs><linearGradient id="tgg" x1="0" x2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
+          <path d="${arc(0, 1400, R)}" fill="none" stroke="#DCDCD8" stroke-width="12"/>
+          <path d="${arc(0, Math.max(n, 1), R)}" fill="none" stroke="url(#tgg)" stroke-width="12"/>
+          ${T.map(t => { const [x, y] = P(t[1], R + 16), [a, b] = P(t[1], R - 8), [c, d] = P(t[1], R + 8); return `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#0A0A0A" stroke-width="1.5"/><text x="${x}" y="${y + 3}" font-size="9" text-anchor="middle" fill="#5A5A5A">${t[1]}</text>`; }).join('')}
+          <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="${cx}" cy="${cy}" r="11" fill="#0A0A0A"/><rect x="${cx - 3}" y="${cy - 3}" width="6" height="6" fill="#fff"/>
+          <text x="${cx}" y="${cy + 46}" font-size="11" text-anchor="middle" fill="#0A0A0A" font-weight="600">${T[k][0].toUpperCase()}</text>`;
+      };
+      tl.addEventListener('input', draw);
+      draw();
+    },
+  };
+
+  layout();
+  choose(0);
+
+  // reveal + process highlight + scroll progress
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(x => io.observe(x));
+  const steps = [...document.querySelectorAll('.step')];
+  const so = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    steps.forEach((s, i) => setTimeout(() => s.classList.add('in'), reduce ? 0 : i * 160));
+    so.disconnect();
+  }), { threshold: .3 });
+  so.observe($('steps'));
+  const bar = $('bar');
+  addEventListener('scroll', () => {
+    const d = document.documentElement;
+    bar.style.setProperty('--progress', (scrollY / Math.max(1, d.scrollHeight - innerHeight) * 100) + '%');
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
