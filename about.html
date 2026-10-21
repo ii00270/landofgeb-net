@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Land of Geb</title>
+<meta name="description" content="Land of Geb, LLC — a St. Croix company. How we work, who founded it, and where we're going: electronics, robotics and the continuous pursuit of mathematics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:#0A0A0A; --body:#1C1C1C; --soft:#5A5A5A; --faint:#A3A3A0; --bg:#F2F2F0; --card:#FAFAF8; --line:#DCDCD8;
+  --yellow:#FFEA00; --orange:#FF7A1A; --pink:#FF2D95;
+  --neon:linear-gradient(90deg,var(--yellow) 0%,var(--orange) 50%,var(--pink) 100%);
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:#fff}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:#fff}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.arrow{width:12px;height:12px;flex:none}
+
+.bar{position:sticky;top:0;z-index:20;display:grid;align-items:center;gap:28px;padding:14px var(--gutter);
+  background:rgba(242,242,240,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.clock{font-size:11px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding:64px var(--gutter) 56px;border-bottom:1px solid var(--line)}
+.intro .idx{margin-bottom:14px}
+.intro h1{font-family:var(--display);font-weight:400;font-size:clamp(72px,12vw,190px);line-height:.85;text-transform:uppercase;color:var(--ink)}
+.intro p{font-size:16px;max-width:520px}
+.intro p + p{margin-top:12px}
+
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0 var(--gutter)}
+.pillars div{padding:26px 22px 34px 0;border-right:1px solid var(--line)}
+.pillars div:last-child{border-right:none;padding-left:22px}
+.pillars div:nth-child(2){padding-left:22px}
+.pillars b{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1.05;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.pillars span{font-size:14px}
+
+/* ── work stages: a dashed spine, stages alternating either side ── */
+.stages{background:#0A0A0A;color:#fff;padding:80px var(--gutter) 90px;position:relative}
+.stages .tag{display:inline-flex;gap:0;margin-bottom:26px}
+.stages .tag span{border:1px solid #fff;border-radius:999px;padding:6px 14px;font-size:12px}
+.stages .tag span:first-child{border-radius:50%;width:34px;height:34px;padding:0;display:grid;place-items:center;margin-right:-1px}
+.stages h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;text-transform:uppercase;margin-bottom:56px}
+.spine{position:relative;max-width:900px;margin:0 auto}
+.spine::before{content:'';position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #555}
+.spine-fill{position:absolute;left:50%;top:0;width:2px;margin-left:-1px;height:0;background:linear-gradient(180deg,var(--yellow),var(--orange),var(--pink))}
+.stage{position:relative;width:50%;padding:0 46px 54px;}
+.stage:nth-child(odd){text-align:right}
+.stage:nth-child(even){margin-left:50%}
+.stage .dot{position:absolute;top:6px;width:20px;height:20px;border-radius:50%;border:2px solid #fff;background:#0A0A0A;display:grid;place-items:center;z-index:1;transition:background .3s,box-shadow .3s}
+.stage .dot::after{content:'';width:8px;height:8px;border-radius:50%;background:#fff}
+.stage:nth-child(odd) .dot{right:-10px}
+.stage:nth-child(even) .dot{left:-10px}
+.stage.lit .dot{box-shadow:0 0 0 6px rgba(255,45,149,.18)}
+.stage .n{font-size:22px;font-weight:500}
+.stage h3{font-size:19px;font-weight:600;margin:2px 0 6px}
+.stage p{font-size:14px;color:#CFCFCF;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:0}
+.stage:nth-child(odd) .chips{justify-content:flex-end}
+.chip{border:1px solid #9A9A9A;border-radius:12px;padding:7px 14px;font-size:13px;margin:0 -1px -1px 0;background:#0A0A0A;transition:border-color .2s,color .2s,background .2s}
+.chip:hover{border-color:#fff;background:#fff;color:#0A0A0A}
+.stage{opacity:.35;transition:opacity .6s}
+.stage.lit{opacity:1}
+
+/* ── founder ── */
+.founder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:var(--gutter);padding:88px var(--gutter);border-bottom:1px solid var(--line)}
+.founder h2{font-family:var(--display);font-weight:400;font-size:clamp(56px,8vw,120px);line-height:.88;text-transform:uppercase;color:var(--ink);margin:14px 0 18px}
+.founder .role{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:22px}
+.founder p{font-size:15.5px;max-width:480px}
+.founder p + p{margin-top:14px}
+.bg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
+.bg-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.bg-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--neon);opacity:0;transition:opacity .3s}
+.bg-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.bg-card:hover::before{opacity:1}
+.bg-card svg{width:30px;height:30px;color:var(--ink);margin-bottom:12px}
+.bg-card b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
+.bg-card span{font-size:13.5px}
+.bg-card.wide{grid-column:1 / -1;background:#0A0A0A;color:#fff;border-color:#0A0A0A}
+.bg-card.wide b{color:#fff}
+.bg-card.wide span{color:#CFCFCF}
+
+/* ── roadmap: a glowing line, milestones either side ── */
+.roadmap{background:#06060A;color:#fff;padding:90px var(--gutter) 100px;position:relative;overflow:hidden}
+#wave{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.roadmap > *:not(canvas){position:relative}
+.rm-head{text-align:center;margin-bottom:70px}
+.rm-head small{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#888}
+.rm-head h2{font-family:var(--display);font-weight:400;font-size:clamp(48px,7vw,104px);line-height:.92;text-transform:uppercase;margin:14px 0 18px}
+.rm-head p{font-size:15.5px;color:#CFCFCF;max-width:600px;margin:0 auto}
+.rm{position:relative;max-width:980px;margin:0 auto}
+.rm::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:linear-gradient(180deg,#FFEA00,#FF7A1A 45%,#FF2D95 75%,rgba(255,45,149,.15));
+  box-shadow:0 0 14px rgba(255,45,149,.6)}
+.ms{position:relative;display:grid;grid-template-columns:1fr 1fr;margin-bottom:34px}
+.ms-card{grid-column:1;text-align:right;padding-right:58px;cursor:pointer;outline:none}
+.ms:nth-child(even) .ms-card{grid-column:2;text-align:left;padding-right:0;padding-left:58px}
+.ms-node{position:absolute;left:50%;top:6px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:#06060A;border:2px solid #FF7A1A;box-shadow:0 0 12px rgba(255,122,26,.7);transition:transform .3s}
+.ms.future .ms-node{border-style:dashed;border-color:#FF2D95;box-shadow:0 0 14px rgba(255,45,149,.8)}
+.ms-card::after{content:'';position:absolute;top:13px;height:1px;width:46px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6))}
+.ms:nth-child(odd) .ms-card::after{left:calc(50% - 50px);transform:scaleX(-1)}
+.ms:nth-child(even) .ms-card::after{left:calc(50% + 6px)}
+.ms-when{font-size:16px;font-weight:600}
+.ms-what{font-size:13.5px;color:#BDBDBD;margin-top:2px}
+.ms-more{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.2,1),margin .3s;font-size:14px;color:#E6E6E6;line-height:1.6}
+.ms-box{display:inline-block;text-align:left;max-width:380px;border-radius:10px;padding:0}
+.ms:nth-child(odd) .ms-box{text-align:right}
+.ms.open .ms-box{background:linear-gradient(135deg,rgba(255,234,0,.12),rgba(255,45,149,.16));border:1px solid rgba(255,255,255,.18);padding:14px 16px}
+.ms.open .ms-more{max-height:220px;margin-top:8px}
+.ms.open .ms-node{transform:scale(1.35)}
+.ms-card:focus-visible .ms-box{outline:2px solid #FF2D95;outline-offset:4px}
+.ms.future .ms-when{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:var(--display);font-weight:400;font-size:34px;letter-spacing:.01em;text-transform:uppercase;line-height:1}
+.ms-hint{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#888;margin-top:20px}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:#fff}
+.stamp{font-size:11.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere}
+.stamp b{font-weight:600}
+.f-col h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:#333;margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:#fff}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .intro,.founder{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .pillars div,.pillars div:nth-child(2),.pillars div:last-child{border-right:none;border-bottom:1px solid var(--line);padding:20px 0}
+  .spine::before,.spine-fill{left:10px}
+  .stage,.stage:nth-child(even){width:100%;margin-left:0;padding:0 0 44px 44px;text-align:left}
+  .stage:nth-child(odd) .dot,.stage:nth-child(even) .dot{left:0;right:auto}
+  .stage:nth-child(odd) .chips{justify-content:flex-start}
+  .stage:nth-child(odd){text-align:left}
+  .bg-grid{grid-template-columns:1fr}
+  .rm::before{left:8px}
+  .ms{grid-template-columns:1fr}
+  .ms-node{left:8px}
+  .ms-card,.ms:nth-child(even) .ms-card{grid-column:1;text-align:left;padding:0 0 0 40px}
+  .ms-card::after{display:none}
+  .ms:nth-child(odd) .ms-box{text-align:left}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .stage{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav"></nav>
+  <div class="clock">SYS.TIME<br><b id="clock">--:--:--</b><br>UTC−4 · AYEAYE</div>
+  <a class="btn solid" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="rv">
+      <div class="idx">/03 — Land of Geb</div>
+      <h1>About</h1>
+    </div>
+    <div class="rv">
+      <p><strong>Land of Geb, LLC is a St. Croix company.</strong> We build brands, teach the markets, and map projects from the first step to the last — and we run the work on Bixxville, the network we built to do it.</p>
+      <p>Our goal is to educate you and help you make money, at a price that's fair for where you are.</p>
+    </div>
+  </section>
+
+  <div class="pillars">
+    <div class="rv"><b>Educate</b><span>You leave knowing how it works, not just with the work done.</span></div>
+    <div class="rv"><b>Help you earn</b><span>Everything we teach and build is pointed at making you money.</span></div>
+    <div class="rv"><b>Efficient</b><span>Mapped, staffed and verified, so nothing is paid for twice.</span></div>
+  </div>
+
+  <!-- ── How we work ── -->
+  <section class="stages" id="stages">
+    <div class="tag"><span>01</span><span>Work stages</span></div>
+    <h2>How we <span class="neon-text">work.</span></h2>
+    <div class="spine" id="spine">
+      <div class="spine-fill" id="spineFill"></div>
+      <div class="stage"><i class="dot"></i><div class="n" style="color:#FFEA00">01</div><h3>Define</h3>
+        <p>What you want, stated plainly, with what "done" looks like.</p>
+        <div class="chips"><span class="chip">Goal</span><span class="chip">Outcome</span><span class="chip">Done when</span><span class="chip">Region</span></div></div>
+      <div class="stage"><i class="dot"></i><div class="n" style="color:#FFB31A">02</div><h3>Decompose</h3>
+        <p>The goal broken into checkpoints and ordered steps — each one priced.</p>
+        <div class="chips"><span class="chip">Checkpoints</span><span class="chip">Steps</span><span class="chip">Tiers</span><span class="chip">LOGs</span><span class="chip">Critical path</span></div></div>
+      <div class="stage"><i class="dot"></i><div class="n" style="color:#FF7A1A">03</div><h3>Staff</h3>
+        <p>The smallest team that can carry it, each step granted to the right person.</p>
+        <div class="chips"><span class="chip">Team plan</span><span class="chip">Seats</span><span class="chip">Grants</span></div></div>
+      <div class="stage"><i class="dot"></i><div class="n" style="color:#FF5560">04</div><h3>Execute &amp; prove</h3>
+        <p>The work, walked through step by step, with evidence for every one.</p>
+        <div class="chips"><span class="chip">Guided prompts</span><span class="chip">Time logged</span><span class="chip">Files</span><span class="chip">Photos</span><span class="chip">Forms</span></div></div>
+      <div class="stage"><i class="dot"></i><div class="n" style="color:#FF2D95">05</div><h3>Verify &amp; settle</h3>
+        <p>Checked before it counts; paid out on a 28-day cycle.</p>
+        <div class="chips"><span class="chip">Review</span><span class="chip">Statement</span><span class="chip">28-day cycle</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── Founder ── -->
+  <section class="founder" id="founder">
+    <div class="rv">
+      <div class="idx">02 — Founder</div>
+      <h2>Benjo<br><span class="neon-text">Bixx</span></h2>
+      <div class="role">Founder · Land of Geb &amp; Bixxville · St. Croix</div>
+      <p>Every field he has worked in is a system — markets, people, plant piping, a grappling exchange — and every system can be broken down into the moves that make it work.</p>
+      <p>That is where our decomposition method comes from: take anything complicated, find its parts and their order, and turn it into steps people can actually do, prove and get paid for.</p>
+    </div>
+    <div class="bg-grid">
+      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 24 11 14l5 5 11-13"/><path d="M20 6h7v7"/></svg>
+        <b>Markets</b><span>Day trading options, futures and forex, and long-term investing.</span></div>
+      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="15" cy="15" r="11"/><circle cx="15" cy="15" r="6"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/></svg>
+        <b>Marketing &amp; data</b><span>Segmentation and behavioral psychology — how what people see shapes what they decide.</span></div>
+      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="10" r="3.5"/><circle cx="21" cy="10" r="3.5"/><path d="M3 24c0-4 3-6 6-6s6 2 6 6M15 24c0-4 3-6 6-6s6 2 6 6"/></svg>
+        <b>Teams</b><span>Managed teams in census and local-government operations.</span></div>
+      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 22c5-1 7-6 10-6s5 5 10 6"/><path d="M8 9c3 0 4 3 7 3s4-3 7-3"/><circle cx="15" cy="5" r="2"/></svg>
+        <b>Jiu-jitsu</b><span>Brazilian jiu-jitsu — where breaking a system down became a method.</span></div>
+      <div class="bg-card wide rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3" style="color:#fff"><path d="M3 15h7l3-5 4 10 3-5h7"/><rect x="2" y="6" width="26" height="18" rx="1"/></svg>
+        <b>Industrial trades</b><span>Boilermaker and pipefitter with refinery experience; reads P&amp;IDs — the diagrams that show how a whole plant fits together.</span></div>
+    </div>
+  </section>
+
+  <!-- ── Roadmap ── -->
+  <section class="roadmap" id="roadmap">
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <div class="rm-head rv">
+      <small>Achievements &amp; goals</small>
+      <h2>Where we're <span class="neon-text">going.</span></h2>
+      <p>Next: electronics and robotics — and, always, the continuous pursuit of mathematics.</p>
+    </div>
+    <div class="rm" id="rm">
+      <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Feb 27, 2025</div><div class="ms-what">Cycle 1 begins</div>
+        <div class="ms-more">Bixxville's first 28-day cycle. Every cycle since is counted from this day, and every payout settles at the end of one.</div></div></div></div>
+      <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Cycle 18 · Summer 2026</div><div class="ms-what">First contract settled</div>
+        <div class="ms-more">The first contract worked, verified and settled through the network, from start to statement.</div></div></div></div>
+      <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">2026</div><div class="ms-what">Bixxville OS</div>
+        <div class="ms-more">The operating system the network runs on: decomposed contracts, guided work, verified proof, member IDs and the network stamp.</div></div></div></div>
+      <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Oct 2026</div><div class="ms-what">landofgeb.net</div>
+        <div class="ms-more">This site goes live — services, the sliding scale, the shop, and a door into Bixxville.</div></div></div></div>
+      <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Electronics</div><div class="ms-what">Next</div>
+        <div class="ms-more">Getting into the hardware: circuits, components, and the systems they make.</div></div></div></div>
+      <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Robotics</div><div class="ms-what">Next</div>
+        <div class="ms-more">Where electronics, code and mechanics meet — machines that do real work.</div></div></div></div>
+      <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Mathematics</div><div class="ms-what">Always</div>
+        <div class="ms-more">The continuous pursuit. The language under everything we build — from a price to a circuit to a machine.</div></div></div></div>
+    </div>
+    <div class="ms-hint">Tap a milestone</div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="contact" id="contact">
+    <div>
+      <div class="c-idx">/ Contact</div>
+      <h2>Let's be in <span>contact.</span></h2>
+    </div>
+    <div>
+      <p>Questions, projects, classes, or anything on this page — send an email and we'll be in touch.</p>
+      <a class="c-mail" href="mailto:bixxvill@proton.me">bixxvill@proton.me</a>
+      <div class="c-row">
+        <a class="c-btn solid" href="mailto:bixxvill@proton.me?subject=Land%20of%20Geb%20%E2%80%94%20hello">Send an email <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+        <button class="c-btn" type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('bixxvill@proton.me').then(()=>{this.firstChild.textContent='Copied '})">Copy address </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="stamp">
+    <b>Bixxville Network Operational Briefing</b><br>
+    VALIDATOR 1: Benjo Bixx ID: BIX_00271<br>
+    REGION: LOC_REG=AyeAye | LAT=17.7275N | LON=64.747W | UTC_OFF=−4 |<br>
+    System Date: <span id="sysdate">—</span>  Operational Standard: ISO 8601 / USC
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact</h4>
+    <a href="mailto:bixxvill@proton.me">bixxvill@proton.me</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script src="site.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ast = () => new Date(Date.now() - 4 * 3600e3);
+  const tick = () => { const iso = ast().toISOString(); $('clock').textContent = iso.slice(11, 19); $('sysdate').textContent = iso.slice(0, 19) + '-04:00'; };
+  tick(); setInterval(tick, 1000);
+  $('yr').textContent = ast().getUTCFullYear();
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(x => io.observe(x));
+
+  // Work stages: the spine fills as you scroll; each stage lights as the fill reaches it
+  const spine = $('spine'), fill = $('spineFill'), stages = [...spine.querySelectorAll('.stage')];
+  const bar = $('bar');
+  const onScroll = () => {
+    const d = document.documentElement, vh = innerHeight;
+    bar.style.setProperty('--progress', (scrollY / Math.max(1, d.scrollHeight - vh) * 100) + '%');
+    const r = spine.getBoundingClientRect();
+    const reach = reduce ? r.height : Math.max(0, Math.min(r.height, vh * .62 - r.top));
+    fill.style.height = reach + 'px';
+    stages.forEach(s => s.classList.toggle('lit', reduce || s.offsetTop <= reach + 4));
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  // Roadmap: tap or press Enter on a milestone to open it; one open at a time
+  const ms = [...document.querySelectorAll('.ms')];
+  const openMs = m => ms.forEach(x => x.classList.toggle('open', x === m && !m.classList.contains('open')));
+  ms.forEach(m => {
+    const c = m.querySelector('.ms-card');
+    c.addEventListener('click', () => openMs(m));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMs(m); } });
+  });
+  ms[0].classList.add('open');
+
+  // A field of dots moving on two sine waves behind the roadmap — the mathematics, quietly
+  const cv = $('wave'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, visible = false;
+  const size = () => { const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  addEventListener('resize', size); size();
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !reduce) requestAnimationFrame(draw); }).observe(cv);
+  const t0 = performance.now();
+  function draw(now) {
+    const t = reduce ? 4 : (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    const cols = Math.ceil(W / 14), rows = 22;
+    for (let j = 0; j < rows; j++) {
+      for (let i = 0; i < cols; i++) {
+        const x = i * 14;
+        const base = H * .5 + Math.sin(i * .045 + t * .6 + j * .22) * H * .12 + Math.cos(i * .02 - t * .35) * H * .08;
+        const y = base + (j - rows / 2) * 7 * (1 + Math.sin(i * .03 + t * .4) * .35);
+        const k = i / cols;
+        const a = .15 + .55 * Math.max(0, Math.sin(i * .03 + j * .3 + t * .5));
+        ctx.fillStyle = k < .5 ? `rgba(255,${Math.round(234 - k * 2 * 112)},${Math.round(k * 2 * 26)},${a})` : `rgba(255,${Math.round(122 - (k - .5) * 2 * 77)},${Math.round(26 + (k - .5) * 2 * 123)},${a})`;
+        ctx.fillRect(x, y, 1.6, 1.6);
+      }
+    }
+    if (visible && !reduce) requestAnimationFrame(draw);
+  }
+  if (reduce) draw(0);
+})();
+</script>
+</body>
+</html>
