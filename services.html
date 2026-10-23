@@ -70,6 +70,12 @@ a{color:inherit;text-decoration:none}
 .dial.dragging{cursor:grabbing}
 .dial:focus-visible{box-shadow:inset 0 0 0 2px var(--pink)}
 .dial svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+/* the dial's colours come straight from the theme, so they change the moment the theme does */
+.dial-ring{fill:none;stroke:var(--t-line-strong);stroke-width:1.2}
+.dial-ring2{fill:none;stroke:var(--t-line);stroke-width:1}
+.dial-tick{stroke:var(--t-line-strong);stroke-width:1}
+.dial-dot{fill:var(--t-faint)}
+.dial-dot.on{fill:var(--t-ink)}
 .dial-num{position:absolute;font-family:var(--mono);font-weight:600;font-size:40px;line-height:1;color:var(--soft);transform-origin:0 50%;
   white-space:nowrap;cursor:pointer;transition:color .2s}
 .dial-num:hover{color:var(--ink)}
@@ -436,24 +442,21 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   let G = {};                          // geometry for the current size
   numsEl.innerHTML = SERVICES.map((s, i) => `<div class="dial-num" data-i="${i}">${pad(i)}</div>`).join('');
   const numEls = [...numsEl.children];
-  // colours come from the theme, so the dial redraws when the theme changes
-  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
   const layout = () => {
     const r = dial.getBoundingClientRect();
     const small = r.width < 520;
     const R = small ? Math.min(r.height * .42, 190) : Math.min(r.height * .44, 300);
     G = { W: r.width, H: r.height, R, cx: small ? -R * .45 : -R * .42, cy: r.height / 2 };
-    const ring = css('--t-line-strong'), tick2 = css('--t-line');
     const ticks = [];
     for (let a = -180; a < 180; a += 3) ticks.push(a);
     svg.innerHTML = `
       <defs><linearGradient id="arcG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEA00"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF2D95"/></linearGradient></defs>
-      <circle cx="${G.cx}" cy="${G.cy}" r="${R}" fill="none" stroke="${ring}" stroke-width="1.2"/>
-      <circle cx="${G.cx}" cy="${G.cy}" r="${R - 26}" fill="none" stroke="${tick2}" stroke-width="1"/>
-      <g id="tickG">${ticks.map(a => `<line x1="${G.cx + (R - 26) * Math.cos(a * Math.PI / 180)}" y1="${G.cy + (R - 26) * Math.sin(a * Math.PI / 180)}" x2="${G.cx + (R - (a % 15 ? 20 : 14)) * Math.cos(a * Math.PI / 180)}" y2="${G.cy + (R - (a % 15 ? 20 : 14)) * Math.sin(a * Math.PI / 180)}" stroke="${ring}" stroke-width="1"/>`).join('')}</g>
+      <circle class="dial-ring" cx="${G.cx}" cy="${G.cy}" r="${R}"/>
+      <circle class="dial-ring2" cx="${G.cx}" cy="${G.cy}" r="${R - 26}"/>
+      <g id="tickG">${ticks.map(a => `<line x1="${G.cx + (R - 26) * Math.cos(a * Math.PI / 180)}" y1="${G.cy + (R - 26) * Math.sin(a * Math.PI / 180)}" x2="${G.cx + (R - (a % 15 ? 20 : 14)) * Math.cos(a * Math.PI / 180)}" y2="${G.cy + (R - (a % 15 ? 20 : 14)) * Math.sin(a * Math.PI / 180)}" class="dial-tick"/>`).join('')}</g>
       <path d="M ${G.cx + R * Math.cos(-.26)} ${G.cy + R * Math.sin(-.26)} A ${R} ${R} 0 0 1 ${G.cx + R * Math.cos(.26)} ${G.cy + R * Math.sin(.26)}" fill="none" stroke="url(#arcG)" stroke-width="3"/>
-      <g id="dotG">${SERVICES.map(() => '<circle r="4"/>').join('')}</g>`;
+      <g id="dotG">${SERVICES.map(() => '<circle class="dial-dot" r="4"/>').join('')}</g>`;
     render();
   };
 
@@ -463,7 +466,6 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     if (ticksG) ticksG.setAttribute('transform', `rotate(${-pos * STEP} ${cx} ${cy})`);
     const dots = svg.querySelectorAll('#dotG circle');
     const near = Math.round(((pos % N) + N) % N) % N;
-    const on = css('--t-ink'), off = css('--t-faint');
     SERVICES.forEach((s, i) => {
       let d = i - pos; d = ((d % N) + N + N / 2) % N - N / 2;        // nearest way round, so the dial wraps
       const a = d * STEP * Math.PI / 180;
@@ -472,7 +474,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       const dot = dots[i];
       if (dot) {
         dot.setAttribute('cx', x); dot.setAttribute('cy', y);
-        dot.setAttribute('fill', i === near ? on : off);
+        dot.classList.toggle('on', i === near);
         dot.setAttribute('r', i === near ? 6 : 4);
         dot.style.opacity = vis;
       }
