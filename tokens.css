@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Land of Geb · Bixxville — shared design tokens  (v1, proposed 23 Oct 2026)
+   One set for landofgeb.net, bixxville.xyz and the Bixxville OS.
+
+   Where the values come from (nothing new except where marked NEW):
+     light  = the current landofgeb.net theme (services and about pages)
+     dark   = the current bixxville.xyz dark theme (bixx.css)
+     brand  = the landofgeb.net neon trio, and the bixxville.xyz green / orange / gold
+
+   How a page picks its theme:
+     1. <html data-theme="light|dark"> if the visitor chose one (saved as "bx-theme")
+     2. otherwise the system setting (prefers-color-scheme)
+     3. otherwise light
+   ========================================================================== */
+
+:root{
+  /* ── neutrals · light ── */
+  --t-bg:#F2F2F0;            /* page */
+  --t-surface:#FAFAF8;       /* cards, fields */
+  --t-surface-strong:#FFFFFF;/* footer, raised panels */
+  --t-ink:#0A0A0A;           /* headings, strong text, solid buttons, borders that carry meaning   17.7:1 on page */
+  --t-text:#1C1C1C;          /* body text                                                          15.2:1 */
+  --t-muted:#5A5A5A;         /* secondary text, labels                                              6.2:1 */
+  --t-faint:#A3A3A0;         /* decoration only (separators, ticks). Never text: 2.3:1 */
+  --t-line:#DCDCD8;          /* dividers */
+  --t-line-strong:#C9C9C5;   /* tracks, inactive marks */
+  --t-bar:rgba(242,242,240,.92);  /* sticky top bar, over the page */
+  --t-shadow:0 10px 30px rgba(0,0,0,.06);
+
+  /* ── the black bands (contact, menu, ticker, dark sections): black in both themes ── */
+  --t-band:#0A0A0A;
+  --t-band-ink:#FFFFFF;      /* 19.8:1 */
+  --t-band-text:#CFCFCF;     /* 12.7:1 */
+  --t-band-muted:#9A9A9A;    /* 7.0:1. Replaces #777 and #888 on bands, which were below 4.5:1 or close to it */
+  --t-band-line:#262626;
+
+  /* ── brand · Land of Geb (same in both themes) ── */
+  --t-yellow:#FFEA00;
+  --t-orange:#FF7A1A;
+  --t-pink:#FF2D95;
+  --t-neon:linear-gradient(90deg,var(--t-yellow) 0%,var(--t-orange) 50%,var(--t-pink) 100%);
+  --t-neon-v:linear-gradient(180deg,var(--t-yellow) 0%,var(--t-orange) 50%,var(--t-pink) 100%);
+  --t-on-neon:#0A0A0A;       /* text on any neon fill: 5.7:1 on pink, 7.6:1 on orange, 16:1 on yellow */
+  /* The neon colours are for fills, rules, underlines and display type on black.
+     On the light page they are below 4.5:1, so they are never used for small text there. */
+
+  /* ── brand · Bixxville (light values) ── */
+  --t-green:#2A7314;         /* "verified", status, signal               5.3:1 on page */
+  --t-bx-orange:#C0411A;     /* NEW: bixx light orange #C4431A darkened 2% so it passes 4.5:1 on the page (was 4.497) */
+  --t-gold:#7D6428;          /*                                           5.0:1 on page */
+  --t-on-green:#FFFFFF;
+
+  /* ── type ── */
+  --t-font-display:'Anton','Impact','Arial Narrow',sans-serif;   /* landofgeb.net, OS */
+  --t-font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;   /* landofgeb.net, OS  (the brand kit lists Plex as retired: decision D2) */
+  --t-font-sans:'Poppins',system-ui,sans-serif;                  /* bixxville.xyz */
+  --t-font-serif:'Lora',Georgia,serif;                           /* bixxville.xyz taglines */
+  --t-size-label:12px;       /* the smallest text anywhere (the brand kit allows 9px; too small to read in a hurry) */
+  --t-size-small:13.5px;
+  --t-size-body:15px;
+  --t-size-lead:16px;
+  --t-size-h3:clamp(24px,3vw,34px);
+  --t-size-h2:clamp(44px,6vw,92px);
+  --t-size-display:clamp(68px,11vw,176px);
+  --t-line-height:1.6;
+
+  /* ── space and shape ── */
+  --t-gutter:clamp(16px,4vw,48px);
+  --t-space-1:4px; --t-space-2:8px; --t-space-3:12px; --t-space-4:16px;
+  --t-space-5:24px; --t-space-6:32px; --t-space-7:48px; --t-space-8:72px; --t-space-9:96px;
+  --t-radius-card:16px;
+  --t-radius-pill:999px;
+  --t-target:44px;           /* the smallest tap target */
+
+  color-scheme:light;
+}
+
+/* ── dark: the system asks for it and the visitor has not chosen light ── */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --t-bg:#0A0B0C; --t-surface:#111316; --t-surface-strong:#0D0F11;
+    --t-ink:#F4F5F7;  --t-text:#CDCFD3;  --t-muted:#A6ADB4;  --t-faint:#5C6166;
+    --t-line:rgba(244,245,247,.12); --t-line-strong:rgba(244,245,247,.24);
+    --t-bar:rgba(10,11,12,.90); --t-shadow:0 10px 30px rgba(0,0,0,.45);
+    --t-band:#111316; --t-band-line:#2A2D31;
+    --t-green:#8CF060; --t-bx-orange:#F45E26; --t-gold:#AA8C4E; --t-on-green:#08110C;
+    color-scheme:dark;
+  }
+}
+/* ── dark: the visitor chose it ── */
+:root[data-theme="dark"]{
+  --t-bg:#0A0B0C; --t-surface:#111316; --t-surface-strong:#0D0F11;
+  --t-ink:#F4F5F7;  --t-text:#CDCFD3;  --t-muted:#A6ADB4;  --t-faint:#5C6166;
+  --t-line:rgba(244,245,247,.12); --t-line-strong:rgba(244,245,247,.24);
+  --t-bar:rgba(10,11,12,.90); --t-shadow:0 10px 30px rgba(0,0,0,.45);
+  --t-band:#111316; --t-band-line:#2A2D31;
+  --t-green:#8CF060; --t-bx-orange:#F45E26; --t-gold:#AA8C4E; --t-on-green:#08110C;
+  color-scheme:dark;
+}
+/* Dark contrast (on #0A0B0C): ink 18.1:1, text 12.6:1, muted 8.7:1, green 13.8:1, orange 6.1:1, gold 6.2:1.
+   Body and secondary text are both above 7:1, which is what holds up best on a phone in bright sun.
+   NEW: --t-faint (dark) #5C6166 and --t-band-line (dark) #2A2D31 are decoration-only greys chosen for this set. */
+
+/* ── the theme button (same on every site: top right of the bar) ── */
+.t-theme{appearance:none;-webkit-appearance:none;display:inline-grid;place-items:center;width:var(--t-target);height:var(--t-target);
+  border:1px solid var(--t-line-strong);border-radius:var(--t-radius-pill);background:transparent;color:var(--t-ink);cursor:pointer;
+  transition:border-color .2s,background .2s}
+.t-theme:hover{border-color:var(--t-ink)}
+.t-theme:focus-visible{outline:2px solid var(--t-pink);outline-offset:2px}
+.t-theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.t-theme .t-sun{display:none}
+.t-theme .t-moon{display:block}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .t-theme .t-sun{display:block} :root:not([data-theme="light"]) .t-theme .t-moon{display:none} }
+:root[data-theme="dark"] .t-theme .t-sun{display:block}
+:root[data-theme="dark"] .t-theme .t-moon{display:none}
+
+/* ── print: always on white, whatever the theme ── */
+@media print{
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
+    --t-bg:#FFFFFF; --t-surface:#FFFFFF; --t-surface-strong:#FFFFFF;
+    --t-ink:#000000; --t-text:#000000; --t-muted:#333333; --t-line:#BBBBBB; --t-line-strong:#999999;
+    --t-band:#FFFFFF; --t-band-ink:#000000; --t-band-text:#000000; --t-band-muted:#333333; --t-band-line:#BBBBBB;
+    --t-green:#1E5A0E; --t-bx-orange:#9A3412; --t-gold:#5C4A1E;
+    color-scheme:light;
+  }
+  html,body{background:#FFFFFF !important;color:#000000 !important}
+  .t-theme,.t-no-print{display:none !important}
+  *,*::before,*::after{box-shadow:none !important;text-shadow:none !important;animation:none !important;transition:none !important}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}
+  h1,h2,h3{break-after:avoid}
+  article,section,.t-keep{break-inside:avoid}
+}

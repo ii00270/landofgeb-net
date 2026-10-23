@@ -3,38 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Land of Geb — St. Croix, U.S. Virgin Islands</title>
-<meta name="description" content="Land of Geb, LLC — branding, brand strategy, financial education, fundamental analysis, project mapping and talent management from St. Croix. Priced on a regional sliding scale.">
+<title>Land of Geb — Christiansted, St. Croix, U.S. Virgin Islands</title>
+<meta name="description" content="Land of Geb keeps critical operations running when demand surges and the network fails. Readiness, planning, staffing and communications for rescue and disaster recovery, ports and logistics, and refinery contractors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <link rel="stylesheet" href="site.css">
 <style>
 /* ── Land of Geb — black and white, with neon accents ──────────────── */
 :root{
-  --ink:#0A0A0A;
-  --paper:#FFFFFF;
-  --grey:#8C8C8C;
-  --line:#E4E4E4;
-  --line-dark:#262626;
-  --yellow:#FFEA00;
-  --orange:#FF7A1A;
-  --pink:#FF2D95;
-  --neon:linear-gradient(90deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
-  --neon-v:linear-gradient(180deg, var(--yellow) 0%, var(--orange) 50%, var(--pink) 100%);
-  --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --display:'Anton', 'Impact', 'Arial Narrow', sans-serif;
-  --gutter:clamp(16px, 4vw, 48px);
+  /* from tokens.css: light and dark come from there */
+  --ink:var(--t-ink);
+  --paper:var(--t-surface-strong);   /* the home page has always been white, not the grey of the other pages (audit A-13) */
+  --text:var(--t-text);
+  --grey:var(--t-muted);             /* was #8C8C8C: 3.4:1 on white, below AA */
+  --line:var(--t-line);
+  --line-dark:var(--t-band-line);
+  --yellow:var(--t-yellow);
+  --orange:var(--t-orange);
+  --pink:var(--t-pink);
+  --neon:var(--t-neon);
+  --neon-v:var(--t-neon-v);
+  --mono:var(--t-font-mono);
+  --display:var(--t-font-display);
+  --gutter:var(--t-gutter);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:13px;line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--pink);color:var(--paper)}
+::selection{background:var(--pink);color:var(--t-on-neon)}
 
-.idx{font-size:11px;letter-spacing:.08em;color:var(--grey)}
-.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--grey)}
+.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .btn{display:inline-flex;align-items:center;gap:18px;padding:14px 20px;border:1px solid var(--ink);position:relative;
   font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
@@ -43,12 +47,12 @@ a{color:inherit;text-decoration:none}
 .btn.solid:hover{box-shadow:4px 4px 0 var(--pink), 8px 8px 0 var(--yellow)}
 .btn.ghost{background:transparent;color:var(--ink)}
 .btn.ghost:hover{background:var(--ink);color:var(--paper)}
-.dark .btn.solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.dark .btn.solid{background:var(--t-band-ink);color:var(--t-band);border-color:var(--t-band-ink)}
 .arrow{width:12px;height:12px;flex:none}
 
 /* ── top bar ── */
 .bar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:28px;
-  padding:14px var(--gutter);background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  padding:14px var(--gutter);background:var(--t-bar);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line)}
 .bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
 .mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap}
@@ -58,31 +62,32 @@ a{color:inherit;text-decoration:none}
 .nav a + a::before{content:'/';position:absolute;left:-14px;color:var(--grey)}
 .nav a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--neon);transition:right .3s}
 .nav a:hover::after{right:0}
-.clock{font-size:10.5px;line-height:1.4;color:var(--grey);text-align:right;white-space:nowrap}
+.clock{font-size:12px;line-height:1.4;color:var(--grey);text-align:right;white-space:nowrap}
 .clock b{color:var(--ink);font-weight:500}
 
 /* ── hero ── */
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:calc(100vh - 57px);border-bottom:1px solid var(--line);position:relative}
 .hero-side{position:absolute;left:calc(var(--gutter) / 2 - 6px);top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center;
-  font-size:10px;letter-spacing:.2em;color:var(--grey);white-space:nowrap}
+  font-size:12px;letter-spacing:.2em;color:var(--grey);white-space:nowrap}
 .hero-copy{padding:clamp(40px,8vh,96px) var(--gutter);display:flex;flex-direction:column;justify-content:center;gap:22px}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(68px,11vw,176px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase}
 .hero h1 span{display:block}
 .hero .tag{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
-.hero p{max-width:460px;color:#333}
+.hero p{max-width:480px;color:var(--text)}
+.hero .pos{font-size:clamp(18px,1.8vw,22px);line-height:1.35;color:var(--ink);font-weight:600;max-width:560px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
 .hero-art{position:relative;border-left:1px solid var(--line);overflow:hidden;min-height:420px}
 #art{position:absolute;inset:0;width:100%;height:100%}
-.coord{position:absolute;right:var(--gutter);bottom:28px;border:1px solid var(--ink);background:var(--paper);padding:10px 14px;font-size:11px;line-height:1.7;box-shadow:4px 4px 0 var(--yellow)}
-.render{position:absolute;left:24px;top:24px;font-size:10.5px;line-height:1.6}
-.scn{position:absolute;right:var(--gutter);top:24px;font-size:10.5px;letter-spacing:.1em}
+.coord{position:absolute;right:var(--gutter);bottom:28px;border:1px solid var(--ink);background:var(--paper);padding:10px 14px;font-size:12px;line-height:1.7;box-shadow:4px 4px 0 var(--yellow)}
+.render{position:absolute;left:24px;top:24px;font-size:12px;line-height:1.6}
+.scn{position:absolute;right:var(--gutter);top:24px;font-size:12px;letter-spacing:.1em}
 
 /* ── marquee ── */
-.ticker{background:var(--ink);color:var(--paper);overflow:hidden}
+.ticker{background:var(--t-band);color:var(--t-band-ink);overflow:hidden}
 .ticker-track{display:flex;width:max-content;animation:slide 48s linear infinite}
 .ticker-item{display:flex;align-items:center;gap:18px;padding:14px 18px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
-.pill{border:1px solid var(--paper);border-radius:999px;padding:5px 14px;transition:background .3s,color .3s,border-color .3s}
-.pill:hover{background:var(--neon);color:var(--ink);border-color:transparent}
+.pill{border:1px solid var(--t-band-ink);border-radius:999px;padding:5px 14px;transition:background .3s,color .3s,border-color .3s}
+.pill:hover{background:var(--neon);color:var(--t-on-neon);border-color:transparent}
 .chev{font-size:9px;letter-spacing:-2px}
 .ticker-item:nth-child(3n+1) .chev{color:var(--yellow)}
 .ticker-item:nth-child(3n+2) .chev{color:var(--orange)}
@@ -91,9 +96,9 @@ a{color:inherit;text-decoration:none}
 
 /* ── sections ── */
 section{position:relative;scroll-margin-top:56px}
-.dark{background:var(--ink);color:var(--paper)}
+.dark{background:var(--t-band);color:var(--t-band-ink)}
 .sec-head{display:flex;align-items:baseline;gap:18px;padding:56px var(--gutter) 0;flex-wrap:wrap}
-.dark .idx{color:#777}
+.dark .idx{color:var(--t-band-muted)}
 
 /* services: the word split in two, each half sliding its own way */
 .split{position:relative;height:clamp(110px,22vw,330px);margin:28px 0 0;overflow:hidden;user-select:none}
@@ -102,7 +107,7 @@ section{position:relative;scroll-margin-top:56px}
 .split-word.top{clip-path:inset(0 0 50% 0)}
 .split-word.bot{clip-path:inset(50% 0 0 0);background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
 .split-script{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-6deg);font-family:var(--mono);font-style:italic;
-  font-size:clamp(14px,2vw,22px);letter-spacing:.3em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:6px 16px;white-space:nowrap;
+  font-size:clamp(14px,2vw,22px);letter-spacing:.3em;text-transform:uppercase;background:var(--t-band);color:var(--t-band-ink);padding:6px 16px;white-space:nowrap;
   border:1px solid var(--pink);box-shadow:0 0 24px rgba(255,45,149,.45)}
 .svc-list{padding:0 var(--gutter) 88px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px}
 .svc{padding:28px 24px 32px;border-top:1px solid var(--line-dark);border-right:1px solid var(--line-dark);display:flex;flex-direction:column;gap:14px;
@@ -110,32 +115,45 @@ section{position:relative;scroll-margin-top:56px}
 .svc:nth-child(3n){border-right:none}
 .svc::before{content:'';position:absolute;inset:0;background:var(--neon);opacity:0;transition:opacity .35s;z-index:0}
 .svc > *{position:relative;z-index:1}
-.svc:hover{color:var(--ink)}
+.svc:hover{color:var(--t-on-neon)}
 .svc:hover::before{opacity:1}
-.svc:hover .idx,.svc:hover p{color:var(--ink)}
+.svc:hover .idx,.svc:hover p,.svc:hover .svc-q{color:var(--t-on-neon)}
 .svc h3{font-family:var(--display);font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1;text-transform:uppercase;margin-top:24px}
-.svc p{font-size:12.5px;color:#BDBDBD;max-width:340px}
+.svc p{font-size:13.5px;color:var(--t-band-text);max-width:340px}
+.svc .svc-grp{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--t-band-muted)}
+.svc .svc-q{font-size:14px;color:var(--t-band-ink);font-style:italic}
+.svc:hover .svc-grp{color:var(--t-on-neon)}
 .svc-icon{width:34px;height:34px}
-.svc .note{font-size:10.5px;color:#7A7A7A;margin-top:auto;padding-top:6px}
-.svc:hover .note{color:#3A3A3A}
+
+
+/* where we work — the three sectors */
+.sectors{padding:56px var(--gutter) 72px;border-bottom:1px solid var(--line)}
+.sectors h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;text-transform:uppercase;margin:18px 0 10px}
+.sectors .sub{font-size:15px;color:var(--text);max-width:560px;margin-bottom:32px}
+.sec-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.sec-item{padding:22px 24px 8px 0}
+.sec-item + .sec-item{padding-left:24px;border-left:1px solid var(--line)}
+.sec-item b{display:block;font-size:12px;letter-spacing:.14em;color:var(--grey)}
+.sec-item h3{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1.02;text-transform:uppercase;margin:8px 0 10px}
+.sec-item p{font-size:14px;color:var(--text);max-width:360px}
 
 /* pricing — the sliding scale */
 .pricing{padding:0 var(--gutter) 96px}
 .pricing-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding-top:28px}
 .pricing h2{font-family:var(--display);font-weight:400;font-size:clamp(54px,8vw,120px);line-height:.9;text-transform:uppercase}
-.pricing-top p{font-size:14px;color:#222;max-width:520px}
+.pricing-top p{font-size:14px;color:var(--text);max-width:520px}
 .pricing-top p + p{margin-top:12px}
-.scale-card{margin-top:56px;border:1px solid var(--ink);padding:clamp(24px,5vw,56px) clamp(18px,5vw,64px) 40px;background:#F7F7F7;position:relative}
+.scale-card{margin-top:56px;border:1px solid var(--ink);padding:clamp(24px,5vw,56px) clamp(18px,5vw,64px) 40px;background:var(--t-surface);position:relative}
 .scale-card::before{content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--neon)}
-.scale-hint{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-bottom:34px}
+.scale-hint{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-bottom:34px}
 .scale{position:relative;height:120px;user-select:none;touch-action:none;margin:0 14px}
 .scale-words{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;font-size:14px}
 .scale-words span:nth-child(2){position:absolute;left:50%;transform:translateX(-50%)}
-.scale-track{position:absolute;left:0;right:0;top:58px;height:1px;background:#D2D2D2}
+.scale-track{position:absolute;left:0;right:0;top:58px;height:1px;background:var(--t-line-strong)}
 .scale-fill{position:absolute;left:0;top:57px;height:3px;background:var(--neon);width:0;transition:width .35s cubic-bezier(.2,.7,.2,1)}
 .scale-tick{position:absolute;top:47px;width:1px;height:23px;background:var(--ink);transform:translateX(-.5px)}
 .scale-tick.minor{top:53px;height:11px}
-.scale-tick.off{background:#D2D2D2}
+.scale-tick.off{background:var(--t-line-strong)}
 .scale-num{position:absolute;top:84px;font-size:18px;transform:translateX(-50%);cursor:pointer;padding:0 8px}
 .scale-knob{position:absolute;top:58px;width:58px;height:58px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);
   cursor:grab;transition:left .35s cubic-bezier(.2,.7,.2,1);display:grid;place-items:center;outline:none}
@@ -147,13 +165,13 @@ section{position:relative;scroll-margin-top:56px}
 .scale-level{font-family:var(--display);font-size:clamp(40px,6vw,72px);line-height:1;text-transform:uppercase}
 .scale-desc{font-size:13.5px;margin-top:10px;max-width:460px;min-height:3.2em}
 .bars{display:flex;align-items:flex-end;gap:10px;height:120px}
-.bars div{flex:1;background:#E2E2E2;transition:background .35s,height .35s}
+.bars div{flex:1;background:var(--t-line);transition:background .35s,height .35s}
 .bars div.on{background:var(--neon-v)}
-.bars-cap{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:8px}
+.bars-cap{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:8px}
 .mission{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ink)}
 .mission div{padding:22px 20px 0 0}
 .mission b{display:block;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05;text-transform:uppercase;margin-bottom:8px}
-.mission span{font-size:12.5px;color:#333}
+.mission span{font-size:13.5px;color:var(--text)}
 
 /* bixxville: stacked word, centre line solid, outer lines outlined */
 .stack{padding:30px 0 0;overflow:hidden;user-select:none}
@@ -165,27 +183,27 @@ section{position:relative;scroll-margin-top:56px}
 .wordmark{width:100%;max-width:520px;color:var(--ink);display:block}
 .wordmark path{fill:currentColor}
 .bx-text{display:flex;flex-direction:column;gap:18px;max-width:520px}
-.bx-text p{font-size:14px;color:#222}
+.bx-text p{font-size:14px;color:var(--text)}
 
 /* infographics — dark panels, neon lines */
 .graphs{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;padding:0 var(--gutter) 96px}
-.panel{background:#111;color:var(--paper);border-radius:18px;padding:28px 28px 22px;position:relative;overflow:hidden;
+.panel{background:#111;color:#FFFFFF;border-radius:18px;padding:28px 28px 22px;position:relative;overflow:hidden;
   background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);background-size:3px 3px}
-.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9A9A}
-.panel-chip{border:1px solid #333;border-radius:10px;padding:8px 14px;color:var(--paper);background:#181818;letter-spacing:.08em}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9A9A9A}
+.panel-chip{border:1px solid #333;border-radius:10px;padding:8px 14px;color:#FFFFFF;background:#181818;letter-spacing:.08em}
 .tiers{width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
 .tiers text{font-family:var(--mono);fill:#EDEDED}
 .tiers .big{font-weight:300;font-size:44px}
 .tiers .small{font-size:12px;fill:#A8A8A8}
 .tiers .dash{stroke:#3A3A3A;stroke-dasharray:3 4}
 .tiers .glow{filter:drop-shadow(0 0 6px rgba(255,45,149,.65))}
-.panel-foot{font-size:11px;color:#8A8A8A;margin-top:6px}
+.panel-foot{font-size:12px;color:#A8A8A8;margin-top:6px}
 .split-graph{display:flex;flex-direction:column;gap:22px;margin-top:22px}
 .donut{width:min(220px,100%);aspect-ratio:1;margin:6px auto 0;position:relative}
 .donut svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
 .donut-mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
 .donut-mid b{font-weight:300;font-size:46px;line-height:1}
-.donut-mid > span{font-size:11px;color:#A8A8A8;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.donut-mid > span{font-size:12px;color:#A8A8A8;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
 .legend{display:grid;gap:10px;font-size:12px}
 .legend > div{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed #333;padding-top:10px}
 .legend i{display:inline-block;width:10px;height:10px;margin-right:8px;vertical-align:0}
@@ -196,22 +214,22 @@ section{position:relative;scroll-margin-top:56px}
 /* shop */
 .shop{padding:0 var(--gutter) 96px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:var(--gutter)}
 .shop-word{font-family:var(--display);font-size:clamp(140px,30vw,460px);line-height:.8;text-transform:uppercase;color:transparent;
-  -webkit-text-stroke:2px var(--paper);background:var(--neon);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-stroke:2px var(--t-band-ink);background:var(--neon);-webkit-background-clip:text;background-clip:text;
   background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s cubic-bezier(.2,.7,.2,1)}
 .shop:hover .shop-word{background-size:100% 100%}
 .shop-side{display:flex;flex-direction:column;gap:18px;max-width:320px;padding-bottom:20px}
 .shop-side p{color:#BDBDBD}
 .draft{display:inline-block;border:1px dashed currentColor;padding:2px 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
 
-/* footer — the network stamp */
+/* footer — the company */
 footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line)}
-.stamp{font-size:11px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere}
-.stamp b{font-weight:600;letter-spacing:.03em}
-.f-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.f-col a{display:block;color:#444;margin-bottom:6px}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere}
+.co b{font-weight:600;letter-spacing:.03em}
+.f-col h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:var(--text);margin-bottom:6px}
 .f-col a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pink)}
-.fine{grid-column:1 / -1;font-size:10.5px;color:var(--grey);max-width:760px}
-.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.fine{grid-column:1 / -1;font-size:12px;color:var(--grey);max-width:760px}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
 .base .live::before{content:'';display:inline-block;width:6px;height:6px;background:var(--pink);margin-right:8px;vertical-align:1px;animation:blink 1.6s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 
@@ -227,6 +245,8 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   .hero-side{display:none}
   .hero-art{border-left:none;border-top:1px solid var(--line);height:72vw;min-height:300px}
   .svc-list{grid-template-columns:1fr}
+  .sec-grid{grid-template-columns:1fr}
+  .sec-item + .sec-item{padding-left:0;border-left:none;border-top:1px solid var(--line)}
   .svc{border-right:none}
   .pricing-top,.scale-read,.bx-body,.graphs,.shop{grid-template-columns:1fr}
   .mission{grid-template-columns:1fr}
@@ -241,6 +261,16 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   .svc-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .svc:nth-child(3n){border-right:1px solid var(--line-dark)}
   .svc:nth-child(2n){border-right:none}
+}
+@media print{
+  .hero{min-height:0;grid-template-columns:1fr}
+  .hero-art,.hero-side,.ticker,.split,.stack,.shop,.scale-card,.graphs,.hero-actions{display:none !important}
+  .dark,.panel{background:#fff !important;color:#000 !important}
+  .svc{border-color:#999 !important}
+  .svc p,.svc .svc-q,.svc .svc-grp,.dark .idx{color:#000 !important}
+  .split-word.bot,.neon-text,.stack-row span{background:none !important;-webkit-text-fill-color:#000 !important;color:#000 !important}
+  .rv{opacity:1 !important;transform:none !important}
+  footer,.base{background:#fff}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -259,28 +289,29 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     <a href="#bixxville">Bixxville</a>
     <a href="#shop">Shop</a>
   </nav>
-  <div class="clock">SYS.TIME<br><b id="clock">--:--:--</b><br>UTC−4 · AYEAYE</div>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
   <a class="btn solid shop-link" href="#shop">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
 </header>
 
 <main id="top">
   <section class="hero">
-    <div class="hero-side">LAND OF GEB, LLC — EST. ST. CROIX</div>
+    <div class="hero-side">LAND OF GEB, LLC — CHRISTIANSTED, ST. CROIX</div>
     <div class="hero-copy">
       <div class="idx rv">/01</div>
       <h1 class="rv"><span>Land</span><span>of Geb</span></h1>
-      <div class="tag rv">St. Croix · U.S. Virgin Islands</div>
-      <p class="rv">We build brands, teach the markets, and map projects from start to finish. Our goal is to educate you and help you make money — priced fairly for where you are.</p>
+      <div class="tag rv">Christiansted, St. Croix · U.S. Virgin Islands</div>
+      <p class="pos rv">Keeps critical operations running when demand surges and the network fails.</p>
+      <p class="rv">Operations break under overload: too much information, too many handoffs, too little capacity at the moment it matters. We find where it builds up and take it out, in order.</p>
       <div class="hero-actions rv">
-        <a class="btn solid" href="#services">Our services <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
-        <a class="btn ghost" href="#pricing">Sliding scale <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
+        <a class="btn solid" href="services.html#readiness-decomposition">Start with a Readiness Decomposition <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+        <a class="btn ghost" href="#services">See all six services <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
       <canvas id="art"></canvas>
       <div class="render">&gt; RENDERING<br><span id="pct">0</span>%</div>
       <div class="scn">//GEB_01</div>
-      <div class="coord">LAT 17.7275N<br>LON 64.747W<br>UTC_OFF −4</div>
+      <div class="coord">LAT 17.7275N<br>LON 64.747W<br>AST (UTC-04:00)</div>
     </div>
   </section>
 
@@ -288,75 +319,90 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     <div class="ticker-track" id="ticker"></div>
   </div>
 
-  <!-- ── /02 SERVICES ── -->
+  <!-- ── WHERE WE WORK ── -->
+  <section class="sectors" id="sectors">
+    <div class="sec-head" style="padding:0"><span class="idx">/02</span><span class="lbl">Where we work</span></div>
+    <h2 class="rv">Where we work.</h2>
+    <p class="sub rv">Three sectors, built for high-consequence operations.</p>
+    <div class="sec-grid">
+      <div class="sec-item rv"><b>01</b><h3>Rescue and disaster recovery</h3><p>Crews, supplies and calls, kept in order after a storm or a failure.</p></div>
+      <div class="sec-item rv"><b>02</b><h3>Ports, distribution and logistics</h3><p>Berths, cargo and trucks, kept moving when volume spikes.</p></div>
+      <div class="sec-item rv"><b>03</b><h3>Refineries</h3><p>Contractor crews and workforce planning for turnarounds and outages. We work on the contractor and workforce side only.</p></div>
+    </div>
+  </section>
+  <!-- ── /03 SERVICES ── -->
   <section class="dark" id="services">
-    <div class="sec-head"><span class="idx">/02</span><span class="lbl">Services</span></div>
+    <div class="sec-head"><span class="idx">/03</span><span class="lbl">Services · six, in three steps</span></div>
     <div class="split" aria-label="Services">
       <div class="split-word top" id="splitTop">Services</div>
       <div class="split-word bot" id="splitBot">Services</div>
-      <div class="split-script">start to finish</div>
+      <div class="split-script">assess · plan · staff</div>
     </div>
     <div class="svc-list">
-      <article class="svc rv">
-        <span class="idx">S.01</span>
+      <a class="svc rv" href="services.html#readiness-decomposition">
+        <span class="idx">S.01 · <span class="svc-grp">Assess</span></span>
         <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="17" cy="17" r="13"/><path d="M17 4v26M4 17h26"/><circle cx="17" cy="17" r="5"/></svg>
-        <h3>Branding</h3>
-        <p>An identity people recognize: the name, the mark, the voice, and the materials that carry them.</p>
-      </article>
-      <article class="svc rv">
-        <span class="idx">S.02</span>
+        <h3>Readiness Decomposition</h3>
+        <span class="svc-q">“Where will we break first?”</span>
+        <p>We show you where your operation will overload first, and what to fix in what order.</p>
+      </a>
+      <a class="svc rv" href="services.html#market-and-supply-readiness">
+        <span class="idx">S.02 · <span class="svc-grp">Assess</span></span>
         <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 28 13 17l6 6 11-15"/><path d="M23 8h7v7"/></svg>
-        <h3>Brand strategy</h3>
-        <p>Where your brand stands, who it's for, and the plan that moves it where it needs to be.</p>
-      </article>
-      <article class="svc rv">
-        <span class="idx">S.03</span>
-        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M7 6v22M7 10h-2v8h2M15 4v24M15 9h-2v10h2M23 8v20M23 12h-2v6h2M29 3v25M29 7h-2v12h2"/></svg>
-        <h3>Financial education</h3>
-        <p>Forex, futures and options: how the markets move, how a trade is built, and how risk is managed.</p>
-        <span class="note">Education, not financial advice. Trading carries risk of loss.</span>
-      </article>
-      <article class="svc rv">
-        <span class="idx">S.04</span>
-        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="4" width="20" height="26"/><path d="M9 10h12M9 15h12M9 20h7"/><circle cx="24" cy="23" r="5"/><path d="m28 27 4 4"/></svg>
-        <h3>Fundamental analysis</h3>
-        <p>How to understand a company: read its statements, know its business, and judge what it's worth.</p>
-      </article>
-      <article class="svc rv">
-        <span class="idx">S.05</span>
+        <h3>Market and Supply Readiness</h3>
+        <span class="svc-q">“What do we need on hand, and when do we reorder?”</span>
+        <p>We map what your operation needs from outside, and set the point at which you act.</p>
+      </a>
+      <a class="svc rv" href="services.html#project-mapping">
+        <span class="idx">S.03 · <span class="svc-grp">Plan</span></span>
         <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="13" width="7" height="7"/><rect x="24" y="4" width="7" height="7"/><rect x="24" y="23" width="7" height="7"/><path d="M10 16.5h7v-9h7M17 16.5v10h7"/></svg>
-        <h3>Project mapping</h3>
-        <p>Your goal decomposed into ordered, priced steps with our decomposition strategy — so you know what it takes before it starts.</p>
-      </article>
-      <article class="svc rv">
-        <span class="idx">S.06</span>
+        <h3>Project Mapping</h3>
+        <span class="svc-q">“What happens in what order, and what can slip?”</span>
+        <p>A dated map: what happens, when, by whom, and which steps cannot slip.</p>
+      </a>
+      <a class="svc rv" href="services.html#continuity-and-communications">
+        <span class="idx">S.04 · <span class="svc-grp">Plan</span></span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M7 6v22M7 10h-2v8h2M15 4v24M15 9h-2v10h2M23 8v20M23 12h-2v6h2M29 3v25M29 7h-2v12h2"/></svg>
+        <h3>Continuity and Communications Plans</h3>
+        <span class="svc-q">“Who do we call, how, when, and what if they don't answer?”</span>
+        <p>Who calls whom, by which channel, and what happens when no one answers.</p>
+      </a>
+      <a class="svc rv" href="services.html#talent-management">
+        <span class="idx">S.05 · <span class="svc-grp">Staff and present</span></span>
         <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="10" cy="11" r="4"/><circle cx="24" cy="11" r="4"/><circle cx="17" cy="24" r="4"/><path d="M13 14l2 7M21 14l-2 7M14 11h6"/></svg>
-        <h3>Talent management</h3>
-        <p>The right people on the right work: who it takes, at what level, and how they grow.</p>
-      </article>
+        <h3>Talent Management</h3>
+        <span class="svc-q">“Who is qualified, available and covered?”</span>
+        <p>Every critical role with a qualified person, a backup and a covered shift.</p>
+      </a>
+      <a class="svc rv" href="services.html#brand-and-voice">
+        <span class="idx">S.06 · <span class="svc-grp">Staff and present</span></span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="4" width="20" height="26"/><path d="M9 10h12M9 15h12M9 20h7"/><circle cx="24" cy="23" r="5"/><path d="m28 27 4 4"/></svg>
+        <h3>Brand and Voice</h3>
+        <span class="svc-q">“Can people understand us in one read?”</span>
+        <p>A name, a voice and documents that read clearly the first time, under pressure.</p>
+      </a>
     </div>
-    <div style="padding:0 var(--gutter) 88px;margin-top:-48px"><a class="btn solid" href="services.html">Explore every service <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
+    <div style="padding:0 var(--gutter) 88px;margin-top:-48px"><a class="btn solid" href="services.html">See every service <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
   </section>
 
   <!-- ── /03 PRICING ── -->
   <section class="pricing" id="pricing">
-    <div class="sec-head" style="padding-left:0;padding-right:0"><span class="idx">/03</span><span class="lbl">Pricing</span></div>
+    <div class="sec-head" style="padding-left:0;padding-right:0"><span class="idx">/04</span><span class="lbl">Pricing</span></div>
     <div class="pricing-top">
       <h2 class="rv">A sliding<br><span class="neon-text">scale.</span></h2>
       <div class="rv">
-        <p><strong>Price follows where you are.</strong> Every region is looked at on its own, by its economic standing, and priced to match. The same work costs less where people have less to spend.</p>
-        <p>We'd rather be fair than uniform. Our goal is to educate you and help you make money — and we trust ourselves to be efficient enough to do it at a price your region can carry.</p>
+        <p><strong>Price follows where you are.</strong> Each region is priced on its own, by what it can carry. The same work costs less where there is less to spend.</p>
       </div>
     </div>
 
     <div class="scale-card rv">
-      <div class="scale-hint">Drag the scale — regional economic standing</div>
+      <div class="scale-hint">Drag the scale — what the region can carry</div>
       <div class="scale" id="scale">
         <div class="scale-words"><span>Low</span><span>Medium</span><span>High</span></div>
         <div class="scale-track"></div>
         <div class="scale-fill" id="scaleFill"></div>
         <div id="scaleTicks"></div>
-        <div class="scale-knob" id="knob" role="slider" tabindex="0" aria-label="Regional economic standing" aria-valuemin="1" aria-valuemax="5" aria-valuenow="4"></div>
+        <div class="scale-knob" id="knob" role="slider" tabindex="0" aria-label="What the region can carry" aria-valuemin="1" aria-valuemax="5" aria-valuenow="4"></div>
       </div>
       <div class="scale-read">
         <div>
@@ -371,15 +417,15 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     </div>
 
     <div class="mission">
-      <div class="rv"><b>Educate</b><span>You leave knowing how it works — not just with the work done.</span></div>
-      <div class="rv"><b>Help you earn</b><span>Everything we teach and build is pointed at making you money.</span></div>
-      <div class="rv"><b>Efficient</b><span>Mapped, staffed and verified, so nothing is paid for twice.</span></div>
+      <div class="rv"><b>Plain</b><span>Reports you can read once.</span></div>
+      <div class="rv"><b>Ordered</b><span>Weak points ranked, fixes in order.</span></div>
+      <div class="rv"><b>Fair</b><span>Priced for your region.</span></div>
     </div>
   </section>
 
   <!-- ── /04 BIXXVILLE ── -->
   <section id="bixxville">
-    <div class="sec-head"><span class="idx">/04</span><span class="lbl">The network</span></div>
+    <div class="sec-head"><span class="idx">/05</span><span class="lbl">The system we run on</span></div>
     <div class="stack" aria-hidden="true">
       <div class="stack-row ghost" data-dir="-1"></div>
       <div class="stack-row" data-dir="1"></div>
@@ -400,17 +446,16 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 </svg>
       </div>
       <div class="bx-text rv">
-        <p><strong>Bixxville is the network Land of Geb runs on.</strong> Every project is decomposed into steps. Each step is granted to a member at a tier, worked, proven with evidence, and verified before it pays.</p>
-        <p>Value is counted in LOGs and settled on 28-day cycles. Every record carries the network's stamp.</p>
+        <p><strong>Bixxville is the system we run our work on.</strong> Each job is broken into checkpoints. Each checkpoint is checked and marked verified before it is paid.</p>
         <div><a class="btn solid" href="https://www.bixxville.xyz" target="_blank" rel="noopener">Visit bixxville.xyz <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
       </div>
     </div>
 
     <div class="graphs">
       <div class="panel rv" id="tierPanel">
-        <div class="panel-head"><span class="panel-chip">Tier rates</span><span>Per LOG · USD</span></div>
-        <svg class="tiers" id="tiers" viewBox="0 0 760 380" role="img" aria-label="Bixxville tier rates per LOG: Apprentice 39 dollars, Wrangler 65, Architect 85, Operator 100"></svg>
-        <div class="panel-foot">The four Bixxville tiers and what each earns for one LOG of work.</div>
+        <div class="panel-head"><span class="panel-chip">Rates</span><span>Per hour · USD</span></div>
+        <svg class="tiers" id="tiers" viewBox="0 0 760 380" role="img" aria-label="Bixxville rates per hour: Apprentice 39 dollars, Wrangler 65, Architect 85, Operator 100"></svg>
+        <div class="panel-foot">The four Bixxville levels and what each earns for one verified hour.</div>
       </div>
       <div class="panel rv" id="splitPanel">
         <div class="panel-head"><span class="panel-chip">Every price</span><span>How it splits</span></div>
@@ -424,9 +469,9 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
             <div class="donut-mid"><b><i id="donutNum" style="font-style:normal">0</i>%</b><span>to the work</span></div>
           </div>
           <div class="legend">
-            <div><span><i style="background:var(--neon)"></i>Labor — paid to members</span><span>75%</span></div>
-            <div><span><i style="background:#262626;border:1px solid #444"></i>Network reserve</span><span>25%</span></div>
-            <div style="flex-direction:column"><span>A 28-day cycle · settles at the end</span><div class="cycle" id="cycle"></div></div>
+            <div><span><i style="background:var(--neon)"></i>Paid to the people doing the work</span><span>75%</span></div>
+            <div><span><i style="background:#262626;border:1px solid #444"></i>Kept in reserve</span><span>25%</span></div>
+            <div style="flex-direction:column"><span>Paid every 28 days, after the work is verified</span><div class="cycle" id="cycle"></div></div>
           </div>
         </div>
       </div>
@@ -435,7 +480,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 
   <!-- ── /05 SHOP ── -->
   <section class="dark" id="shop">
-    <div class="sec-head"><span class="idx">/05</span><span class="lbl">Shop</span></div>
+    <div class="sec-head"><span class="idx">/06</span><span class="lbl">Shop</span></div>
     <div class="shop">
       <div class="shop-word">Shop</div>
       <div class="shop-side rv">
@@ -452,7 +497,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
       <h2>Let's be in <span>contact.</span></h2>
     </div>
     <div>
-      <p>Questions, projects, classes, or anything on this page — send an email and we'll be in touch.</p>
+      <p>Send us the operation and the date you need it ready by. We answer by email.</p>
       <a class="c-mail" href="mailto:bixxvill@proton.me">bixxvill@proton.me</a>
       <div class="c-row">
         <a class="c-btn solid" href="mailto:bixxvill@proton.me?subject=Land%20of%20Geb%20%E2%80%94%20hello">Send an email <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
@@ -463,11 +508,11 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 </main>
 
 <footer>
-  <div class="stamp">
-    <b>Bixxville Network Operational Briefing</b><br>
-    VALIDATOR 1: Benjo Bixx ID: BIX_00271<br>
-    REGION: LOC_REG=AyeAye | LAT=17.7275N | LON=64.747W | UTC_OFF=−4 |<br>
-    System Date: <span id="sysdate">—</span>  Operational Standard: ISO 8601 / USC
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
   </div>
   <div class="f-col">
     <h4>Land of Geb</h4>
@@ -482,14 +527,15 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     <a href="#bixxville">About Bixxville</a>
     <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
   </div>
-  <p class="fine">Financial education is for learning only and is not investment advice. Trading forex, futures and options carries a substantial risk of loss and isn't suitable for everyone.</p>
+  <p class="fine">Planning, analysis and administrative services. Not engineering, safety certification, legal, financial or medical advice.</p>
 </footer>
 <div class="base">
-  <span class="live">Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span class="live">Land of Geb, LLC · Christiansted, St. Croix · U.S. Virgin Islands</span>
   <span>© <span id="yr"></span> Land of Geb, LLC</span>
 </div>
 
 <script src="site.js"></script>
+<script src="theme.js"></script>
 <script>
 // ── The store. Paste the Shopify address here and every Shop button uses it.
 const SHOP_URL = 'https://bixxville.myshopify.com';
@@ -504,18 +550,12 @@ const SHOP_URL = 'https://bixxville.myshopify.com';
     $('shop-pending')?.remove();
   }
 
-  // AyeAye time — Atlantic Standard Time, −04:00 all year
-  const ast = () => new Date(Date.now() - 4 * 3600e3);
-  const tick = () => {
-    const iso = ast().toISOString();
-    $('clock').textContent = iso.slice(11, 19);
-    $('sysdate').textContent = iso.slice(0, 19) + '-04:00';
-  };
-  tick(); setInterval(tick, 1000);
-  $('yr').textContent = ast().getUTCFullYear();
+  // Local time, the house way (site.js): Fri 24 Oct 2026, 14:30 AST (UTC-04:00)
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
+  tick(); setInterval(tick, 15000);
 
   // Ticker
-  const words = ['Branding', 'Brand strategy', 'Forex', 'Futures', 'Options', 'Fundamentals', 'Project mapping', 'Talent'];
+  const words = ['Readiness Decomposition', 'Market and Supply Readiness', 'Project Mapping', 'Continuity and Communications', 'Talent Management', 'Brand and Voice'];
   $('ticker').innerHTML = words.map(w => `<span class="ticker-item"><span class="pill">${w}</span><span class="chev">▶▶</span></span>`).join('').repeat(3);
 
   // Stacked word rows
@@ -524,7 +564,7 @@ const SHOP_URL = 'https://bixxville.myshopify.com';
   // ── The sliding scale ──
   const LEVELS = [
     null,
-    { name: 'Low',          desc: 'Regions with the least to spend. Our lowest prices — the work and the teaching are the same.' },
+    { name: 'Low',          desc: 'Regions with the least to spend. Our lowest prices. The work is the same.' },
     { name: 'Low-medium',   desc: 'Developing local economies. Priced well below our full rate.' },
     { name: 'Medium',       desc: 'Middle-income regions. A price in the middle of the scale.' },
     { name: 'Medium-high',  desc: 'Stronger regional economies. Close to our full rate.' },
@@ -706,11 +746,13 @@ const SHOP_URL = 'https://bixxville.myshopify.com';
   const draw = now => {
     const t = (now - t0) / 1000;
     ctx.clearRect(0, 0, W, H);
-    ctx.strokeStyle = '#EDEDED'; ctx.lineWidth = 1;
+    const dark = (window.gebTheme ? gebTheme() : 'light') === 'dark';
+    const INK = dark ? '#F4F5F7' : '#0A0A0A', PAGE = dark ? '#0D0F11' : '#FFFFFF';
+    ctx.strokeStyle = dark ? 'rgba(244,245,247,.08)' : '#EDEDED'; ctx.lineWidth = 1;
     const g = 28;
     for (let x = (W / 2) % g; x < W; x += g) { ctx.beginPath(); ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, H); ctx.stroke(); }
     for (let y = (H / 2) % g; y < H; y += g) { ctx.beginPath(); ctx.moveTo(0, y + .5); ctx.lineTo(W, y + .5); ctx.stroke(); }
-    ctx.strokeStyle = '#0A0A0A';
+    ctx.strokeStyle = INK;
     [[.18, .22], [.82, .7], [.26, .8], [.74, .18]].forEach(([u, v]) => {
       const x = Math.round(u * W) + .5, y = Math.round(v * H) + .5;
       ctx.beginPath(); ctx.moveTo(x - 5, y); ctx.lineTo(x + 5, y); ctx.moveTo(x, y - 5); ctx.lineTo(x, y + 5); ctx.stroke();
@@ -727,14 +769,15 @@ const SHOP_URL = 'https://bixxville.myshopify.com';
       const sz = s * p.p * .84;
       const shade = Math.max(0, Math.min(1, (p.z + 5) / 10));
       const tone = p.k === 0 ? 10 : Math.round(40 + shade * 170 + p.k * 6);
-      ctx.fillStyle = p.neon || `rgb(${tone},${tone},${tone})`;
+      const tn = dark ? 255 - tone : tone;            // the same cube, drawn light on dark
+      ctx.fillStyle = p.neon || `rgb(${tn},${tn},${tn})`;
       ctx.fillRect(p.x - sz / 2, p.y - sz / 2, sz, sz);
-      if (p.k === 1 || p.k === 3) { ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = .6; ctx.strokeRect(p.x - sz / 2 + .5, p.y - sz / 2 + .5, sz - 1, sz - 1); }
+      if (p.k === 1 || p.k === 3) { ctx.strokeStyle = PAGE; ctx.lineWidth = .6; ctx.strokeRect(p.x - sz / 2 + .5, p.y - sz / 2 + .5, sz - 1, sz - 1); }
     });
     for (let i = 0; i < 14; i++) {
       const ang = i * 2.39 + t * .05, rad = s * (5.2 + (i % 4) * .9);
       const x = W / 2 + Math.cos(ang) * rad, y = H / 2 + Math.sin(ang * 1.3) * rad * .7;
-      ctx.fillStyle = i % 4 === 0 ? NEON[i % 3] : i % 3 ? '#0A0A0A' : '#BDBDBD';
+      ctx.fillStyle = i % 4 === 0 ? NEON[i % 3] : i % 3 ? INK : '#BDBDBD';
       const q = s * (.25 + (i % 3) * .15);
       ctx.fillRect(x, y, q, q);
     }
