@@ -12,7 +12,7 @@ window.gebTime = (d = new Date()) => {
 };
 
 (() => {
-  const EMAIL = 'bixxvill@proton.me';   // as on the live site; see audit A-07 (bixxville.xyz uses bixxville@proton.me)
+  const EMAIL = 'bixxville@proton.me';   // the one public address (decided 23 Oct 2026)
   const LINKS = [
     ['index.html', 'Home'],
     ['services.html', 'Services'],
