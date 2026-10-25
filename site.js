@@ -18,7 +18,7 @@ window.gebTime = (d = new Date()) => {
     ['services.html', 'Services'],
     ['about.html', 'About'],
     ['index.html#pricing', 'Pricing'],
-    ['index.html#bixxville', 'Bixxville'],
+    ['https://www.bixxville.xyz', 'Bixxville'],
     ['https://bixxville.myshopify.com', 'Shop'],
   ];
   const here = location.pathname.split('/').pop() || 'index.html';
