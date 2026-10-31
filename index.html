@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Land of Geb — Christiansted, St. Croix, U.S. Virgin Islands</title>
-<meta name="description" content="Land of Geb keeps critical operations running when demand surges and the network fails. Readiness, planning, staffing and communications for rescue and disaster recovery, ports and logistics, and refinery contractors.">
+<meta name="description" content="Land of Geb keeps critical operations running when demand surges and the network fails. Readiness, planning, staffing and communications.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -126,17 +126,6 @@ section{position:relative;scroll-margin-top:56px}
 .svc-icon{width:34px;height:34px}
 
 
-/* where we work — the three sectors */
-.sectors{padding:56px var(--gutter) 72px;border-bottom:1px solid var(--line)}
-.sectors h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;text-transform:uppercase;margin:18px 0 10px}
-.sectors .sub{font-size:15px;color:var(--text);max-width:560px;margin-bottom:32px}
-.sec-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
-.sec-item{padding:22px 24px 8px 0}
-.sec-item + .sec-item{padding-left:24px;border-left:1px solid var(--line)}
-.sec-item b{display:block;font-size:12px;letter-spacing:.14em;color:var(--grey)}
-.sec-item h3{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1.02;text-transform:uppercase;margin:8px 0 10px}
-.sec-item p{font-size:14px;color:var(--text);max-width:360px}
-
 /* pricing — the sliding scale */
 .pricing{padding:0 var(--gutter) 96px}
 .pricing-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding-top:28px}
@@ -245,8 +234,6 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   .hero-side{display:none}
   .hero-art{border-left:none;border-top:1px solid var(--line);height:72vw;min-height:300px}
   .svc-list{grid-template-columns:1fr}
-  .sec-grid{grid-template-columns:1fr}
-  .sec-item + .sec-item{padding-left:0;border-left:none;border-top:1px solid var(--line)}
   .svc{border-right:none}
   .pricing-top,.scale-read,.bx-body,.graphs,.shop{grid-template-columns:1fr}
   .mission{grid-template-columns:1fr}
@@ -319,20 +306,9 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     <div class="ticker-track" id="ticker"></div>
   </div>
 
-  <!-- ── WHERE WE WORK ── -->
-  <section class="sectors" id="sectors">
-    <div class="sec-head" style="padding:0"><span class="idx">/02</span><span class="lbl">Where we're focused</span></div>
-    <h2 class="rv">Where we're focused.</h2>
-    <p class="sub rv">Three areas we are building for first. They are our focus, not our limit. We are a new company and have not worked in them yet, so we claim no record there. If your operation looks different, ask.</p>
-    <div class="sec-grid">
-      <div class="sec-item rv"><b>01</b><h3>Rescue and disaster recovery</h3><p>Putting crews, supplies and calls in order after a storm or a failure.</p></div>
-      <div class="sec-item rv"><b>02</b><h3>Ports, distribution and logistics</h3><p>Keeping berths, cargo and trucks moving when volume spikes.</p></div>
-      <div class="sec-item rv"><b>03</b><h3>Refineries</h3><p>Contractor crews and workforce planning for turnarounds and outages. Our focus there is the contractor and workforce side.</p></div>
-    </div>
-  </section>
-  <!-- ── /03 SERVICES ── -->
+  <!-- ── /02 SERVICES ── -->
   <section class="dark" id="services">
-    <div class="sec-head"><span class="idx">/03</span><span class="lbl">Services · six, in three steps</span></div>
+    <div class="sec-head"><span class="idx">/02</span><span class="lbl">Services · six, in three steps</span></div>
     <div class="split" aria-label="Services">
       <div class="split-word top" id="splitTop">Services</div>
       <div class="split-word bot" id="splitBot">Services</div>
@@ -387,7 +363,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 
   <!-- ── /03 PRICING ── -->
   <section class="pricing" id="pricing">
-    <div class="sec-head" style="padding-left:0;padding-right:0"><span class="idx">/04</span><span class="lbl">Pricing</span></div>
+    <div class="sec-head" style="padding-left:0;padding-right:0"><span class="idx">/03</span><span class="lbl">Pricing</span></div>
     <div class="pricing-top">
       <h2 class="rv">A sliding<br><span class="neon-text">scale.</span></h2>
       <div class="rv">
@@ -425,7 +401,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 
   <!-- ── /04 BIXXVILLE ── -->
   <section id="bixxville">
-    <div class="sec-head"><span class="idx">/05</span><span class="lbl">The system we run on</span></div>
+    <div class="sec-head"><span class="idx">/04</span><span class="lbl">The system we run on</span></div>
     <div class="stack" aria-hidden="true">
       <div class="stack-row ghost" data-dir="-1"></div>
       <div class="stack-row" data-dir="1"></div>
@@ -480,7 +456,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 
   <!-- ── /05 SHOP ── -->
   <section class="dark" id="shop">
-    <div class="sec-head"><span class="idx">/06</span><span class="lbl">Shop</span></div>
+    <div class="sec-head"><span class="idx">/05</span><span class="lbl">Shop</span></div>
     <div class="shop">
       <div class="shop-word">Shop</div>
       <div class="shop-side rv">
