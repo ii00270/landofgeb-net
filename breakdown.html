@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breakdown — Land of Geb</title>
+<meta name="description" content="A hands-on breakdown of one Land of Geb service: what we look at, what you get, and a working example on made-up numbers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:var(--t-ink);
+  --body:var(--t-text);
+  --soft:var(--t-muted);
+  --faint:var(--t-faint);
+  --bg:var(--t-bg);
+  --card:var(--t-surface);
+  --line:var(--t-line);
+  --yellow:var(--t-yellow);
+  --orange:var(--t-orange);
+  --pink:var(--t-pink);
+  --neon:var(--t-neon);
+  --mono:var(--t-font-mono);
+  --display:var(--t-font-display);
+  --gutter:var(--t-gutter);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--t-on-neon)}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s,background .25s,color .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.arrow{width:12px;height:12px;flex:none}
+
+/* ── top bar (same as the home page) ── */
+.bar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:28px;
+  padding:14px var(--gutter);background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.nav{display:flex;gap:22px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+.d-q{font-size:18px;color:var(--ink);font-weight:500;border-left:3px solid var(--pink);padding-left:14px}
+.d-lead{font-size:16px;max-width:640px}
+.swap{animation:swap .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+
+/* ── the breakdown page: one service, opened from the services page ── */
+.bk-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px var(--gutter) 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.bk-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding:40px var(--gutter) 28px;border-bottom:1px solid var(--ink)}
+.bk-hero .idx{margin-bottom:14px}
+.bk-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,8vw,124px);line-height:.88;text-transform:uppercase;color:var(--ink)}
+.bk-hero .d-lead{margin-top:14px}
+.bd-info h4:first-child{margin-top:0}
+.bk-pager{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:48px}
+.bk-pager a{display:block;padding:24px var(--gutter);color:var(--ink);font-size:14px;transition:background .2s}
+.bk-pager a small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.bk-pager a + a{text-align:right;border-left:1px solid var(--line)}
+.bk-pager a:hover{background:var(--card)}
+.no-js .bk-pager,.no-js .bd-panel{display:none}
+.bk-nojs{display:none;padding:32px var(--gutter);font-size:15px;color:var(--ink)}
+.no-js .bk-nojs{display:block}
+
+/* ── the breakdown: a hands-on example of each service (made-up numbers, never the method) ── */
+.bd-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:var(--gutter);padding:32px var(--gutter) 8px}
+.bd-info h3{font-family:var(--display);font-weight:400;font-size:clamp(36px,4vw,56px);line-height:.95;text-transform:uppercase;color:var(--ink);margin:10px 0 22px}
+.bd-info h4{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:18px 0 10px}
+.bd-chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.bd-chips li{border:1px solid var(--t-line-strong);padding:5px 10px;font-size:13px;color:var(--ink)}
+.bd-get{list-style:none;counter-reset:g;border-top:1px solid var(--ink)}
+.bd-get li{counter-increment:g;display:grid;grid-template-columns:34px 1fr;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink)}
+.bd-get li::before{content:counter(g,decimal-leading-zero);font-weight:600}
+.bd-info .d-act{margin-top:22px}
+.bd-note{font-size:12.5px;color:var(--soft);padding:14px var(--gutter) 0;max-width:calc(780px + 2 * var(--gutter))}
+.fx{border:1px solid var(--line);background:var(--card);padding:20px clamp(14px,2.4vw,26px) 22px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.fx-body{display:flex;flex-direction:column;gap:16px;min-width:0}
+.fx-cap{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.fx-cap b{color:var(--ink);font-weight:600}
+.fx-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink)}
+.fx-ctrl input[type=range]{flex:1;min-width:140px;accent-color:var(--t-pink)}
+.fx-ctrl output{font-weight:600;min-width:46px;text-align:right}
+.fx-ctrl select{font-family:var(--mono);font-size:13px;padding:8px 10px;border:1px solid var(--t-line-strong);background:var(--bg);color:var(--ink)}
+.fx-chk{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.fx-chk input{accent-color:var(--t-pink);width:16px;height:16px}
+.fx-btn{appearance:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:9px 12px;min-height:40px;border:1px solid var(--t-line-strong);
+  background:var(--bg);color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+.fx-btn:hover{border-color:var(--ink)}
+.fx-btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fx-seg{display:inline-flex}
+.fx-seg .fx-btn + .fx-btn{border-left:none}
+.fx-out{font-size:14px;color:var(--ink);border-top:1px solid var(--line);padding-top:12px;min-height:46px}
+.fx-out small{color:var(--soft)}
+.fx-key{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--soft)}
+.fx-key i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:-1px}
+.k-ok{background:var(--t-muted)}.k-warm{background:var(--t-orange)}.k-over{background:var(--t-pink)}.k-crit{background:var(--neon)}
+/* 01 decomposition */
+.rd{display:grid;gap:14px}
+.rd-br > b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:500;margin-bottom:4px}
+.rd-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) 44px;gap:10px;align-items:center;padding:4px 0;font-size:13.5px;color:var(--ink)}
+.rd-row span i{font-style:normal;font-size:11px;margin-left:8px;padding:1px 6px;border:1px solid var(--t-line-strong);color:var(--soft);white-space:nowrap}
+.rd-bar{position:relative;height:10px;background:var(--t-line)}
+.rd-bar div{height:100%;background:var(--t-muted);transition:width .25s,background .25s}
+.rd-bar em{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.rd-row.warm .rd-bar div{background:var(--t-orange)}
+.rd-row.over .rd-bar div{background:var(--t-pink)}
+.rd-row.over span{font-weight:600}
+.rd-row small{text-align:right;font-weight:600}
+.rk{display:inline-grid;place-items:center;width:20px;height:20px;margin:0 6px 0 10px;background:var(--t-pink);color:var(--t-on-neon);font-size:11px;font-weight:600}
+/* 02 supply */
+.ms-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ms-list button{appearance:none;display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:10px 12px;border:1px solid var(--t-line-strong);background:var(--bg);
+  color:var(--ink);font-family:var(--mono);font-size:13px;cursor:pointer;text-align:left;transition:border-color .2s,box-shadow .2s}
+.ms-list button[aria-checked="true"]{border-color:var(--ink);box-shadow:inset 0 -3px 0 var(--pink)}
+.ms-exp{display:flex;gap:3px}
+.ms-exp i{width:14px;height:5px;background:var(--t-line-strong)}
+.ms-exp i.on{background:var(--t-orange)}
+.ms-chart{width:100%;height:auto;display:block}
+.ms-chart .ax{stroke:var(--t-line-strong);stroke-width:1}
+.ms-chart .tk{fill:var(--t-muted);font:10px var(--mono)}
+.ms-chart .trig{stroke:var(--t-orange);stroke-width:1.5;stroke-dasharray:5 4}
+.ms-chart .tl{fill:var(--t-orange);font:600 10px var(--mono)}
+.ms-chart .stock{fill:none;stroke:var(--t-ink);stroke-width:2.5;stroke-linecap:round}
+.ms-chart .actdot{fill:var(--t-orange)}
+.ms-chart .outdot{fill:var(--t-pink)}
+/* 03 project map */
+.pm{display:grid;gap:6px}
+.pm-row{appearance:none;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2fr);gap:12px;align-items:center;width:100%;padding:5px 0;background:none;border:none;
+  font-family:var(--mono);font-size:13px;color:var(--ink);cursor:pointer;text-align:left}
+.pm-row:hover .pm-n{text-decoration:underline;text-decoration-color:var(--pink)}
+.pm-track{position:relative;height:18px;background:repeating-linear-gradient(90deg,var(--t-line) 0 1px,transparent 1px var(--g,25%))}
+.pm-bar,.pm-slip{position:absolute;top:2px;bottom:2px;transition:left .3s,width .3s}
+.pm-bar{background:var(--t-muted)}
+.pm-row.crit .pm-bar{background:var(--neon)}
+.pm-slip{background:repeating-linear-gradient(45deg,var(--t-pink) 0 3px,transparent 3px 6px);outline:1px solid var(--t-pink);outline-offset:-1px}
+.pm-due{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--ink)}
+.pm-ax{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2fr);gap:12px;font-size:10.5px;color:var(--soft)}
+.pm-ax .pm-track{background:none;height:14px}
+.pm-ax em{position:absolute;font-style:normal;transform:translateX(-50%);white-space:nowrap}
+/* 04 call tree */
+.cc{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.cc .edge{stroke:var(--t-line-strong);stroke-width:1.5;transition:stroke .25s,opacity .25s}
+.cc .edge.miss{stroke:var(--t-pink);stroke-dasharray:4 4}
+.cc .edge.dead{opacity:.25}
+.cc .edge.bk{stroke:var(--t-orange);stroke-width:2;stroke-dasharray:6 4}
+.cc .el{font:10px var(--mono);fill:var(--t-muted);paint-order:stroke;stroke:var(--card);stroke-width:4px}
+.cc .el.bk{fill:var(--t-orange);font-weight:600}
+.cc .node{fill:var(--bg);stroke:var(--t-ink);stroke-width:1.5}
+.cc .node.off{stroke:var(--t-pink);stroke-dasharray:4 3}
+.cc .nt{font:600 11px var(--mono);fill:var(--t-ink)}
+.cc-lad{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.cc-lad li{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--soft);transition:color .25s}
+.cc-lad li b{font-weight:600}
+.cc-lad li.on{color:var(--ink)}
+.cc-lad li.on b{color:var(--t-pink)}
+/* 05 roster */
+.tm{display:grid;grid-template-columns:minmax(0,1.1fr) repeat(3,minmax(0,1fr));gap:4px;font-size:13px}
+.tm > b{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);padding:4px 2px}
+.tm > span{color:var(--ink);padding:10px 2px;align-self:center}
+.tm-c{padding:10px 8px;text-align:center;font-weight:600;transition:background .25s,color .25s}
+.tm-c.ok{background:var(--t-green);color:var(--t-on-green)}
+.tm-c.one{background:var(--t-orange);color:var(--t-on-neon)}
+.tm-c.gap{background:var(--t-pink);color:var(--t-on-neon)}
+.k-green{background:var(--t-green)}
+/* 06 notice */
+.bv{border:1px solid var(--t-line-strong);background:var(--bg);padding:16px 18px;font-size:15px;line-height:1.7;color:var(--soft)}
+.bv b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.bv span{transition:color .2s,background .2s}
+.bv span.hl{color:var(--ink);background:linear-gradient(transparent 62%,rgba(255,45,149,.28) 62%)}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:var(--t-surface-strong)}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere;color:var(--ink)}
+.co b{font-weight:600}
+.f-col h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px;color:var(--ink)}
+.f-col a{display:block;color:var(--body);margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.fine{grid-column:1 / -1;font-size:12px;color:var(--soft);max-width:780px}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--t-surface-strong)}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+@media (max-width:960px){
+  .bar{grid-template-columns:1fr auto;gap:14px}
+  .nav,.clock{display:none}
+  .bk-hero,.bd-panel{grid-template-columns:1fr}
+  .bk-hero{padding-top:28px}
+  .ms-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rd-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 40px}
+  .pm-row,.pm-ax{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}
+  .bk-pager{grid-template-columns:1fr}
+  .bk-pager a + a{border-left:none;border-top:1px solid var(--line)}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .swap{animation:none}
+}
+@media print{
+  .bk-nav,.bk-pager,.d-act{display:none !important}
+  footer,.base{background:#fff}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js', 'js');</script>
+
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">Bixxville</a>
+  </nav>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
+  <a class="btn solid shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main>
+  <nav class="bk-nav" aria-label="Breakdown">
+    <a class="btn" id="back" href="services.html"><svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 6H1M5 2 1 6l4 4"/></svg> Back to services</a>
+    <span id="pos"></span>
+  </nav>
+  <section class="bk-hero">
+    <div>
+      <div class="idx" id="kicker">Breakdown</div>
+      <h1 id="name">Breakdown</h1>
+    </div>
+    <div>
+      <p class="d-q" id="q"></p>
+      <p class="d-lead" id="lead"></p>
+    </div>
+  </section>
+  <section class="bd-panel" id="bdPanel" aria-live="polite"></section>
+  <p class="bk-nojs">The breakdowns are interactive and need JavaScript. <a href="services.html" style="text-decoration:underline">See the services instead.</a></p>
+  <p class="bd-note">Every example here uses made-up numbers. Your breakdown is built from your own operation.</p>
+  <nav class="bk-pager" aria-label="Other services"><a id="prev" href="#"></a><a id="next" href="#"></a></nav>
+</main>
+
+<footer>
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact &amp; network</h4>
+    <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    <a href="index.html#bixxville">About Bixxville</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+  <p class="fine">Planning, analysis and administrative services. Not engineering, safety certification, legal, financial or medical advice.</p>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · Christiansted, St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script src="site.js"></script>
+<script src="theme.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
+  tick(); setInterval(tick, 15000);
+
+  // ── The six services, in the order of the dial on the services page ──
+  const SERVICES = [
+    { id: 'readiness-decomposition', name: 'Readiness Decomposition', group: 'Assess', q: 'Where will we break first?',
+      lead: 'We show you where your operation will overload first, and what to fix in what order.', ask: 'Ask for a Readiness Decomposition' },
+    { id: 'market-and-supply-readiness', name: 'Market and Supply Readiness', group: 'Assess', q: 'What do we need on hand, and when do we reorder?',
+      lead: 'We map what your operation needs from outside, and set the point at which you act.', ask: 'Ask about supply readiness' },
+    { id: 'project-mapping', name: 'Project Mapping', group: 'Plan', q: 'What happens in what order, and what can slip?',
+      lead: 'We turn a project into a dated map: what happens, when, by whom, and which steps cannot slip.', ask: 'Ask for a project map' },
+    { id: 'continuity-and-communications', name: 'Continuity and Communications Plans', group: 'Plan', q: "Who do we call, how, when, and what if they don't answer?",
+      lead: 'We write down who calls whom, by which channel, and what happens when no one answers.', ask: 'Ask for a continuity plan' },
+    { id: 'talent-management', name: 'Talent Management', group: 'Staff and present', q: 'Who is qualified, available and covered?',
+      lead: 'We make sure every critical role has a qualified person, a backup, and a covered shift.', ask: 'Ask about staffing' },
+    { id: 'brand-and-voice', name: 'Brand and Voice', group: 'Staff and present', q: 'Can people understand us in one read?',
+      lead: 'We give you a name, a voice and documents that read clearly the first time, under pressure.', ask: 'Ask about brand and voice' },
+  ];
+  const N = SERVICES.length;
+  const pad = i => String(i + 1).padStart(2, '0');
+  const ARROW = '<svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg>';
+
+  // What we look at, what you get, and a hands-on example. Every example runs on made-up numbers:
+  // it shows what the work produces, never how we produce it.
+  const BD = {
+    'readiness-decomposition': { look: ['Tasks', 'Who does each one', 'What each one waits on', 'Labor hours', 'Surge capacity'],
+      get: ['Weak points, ranked', 'Single points of failure', 'Overload points', 'The order to fix them'],
+      tip: 'Push demand up and watch where it breaks first.', fig: figRD },
+    'market-and-supply-readiness': { look: ['Fuel', 'Parts', 'Goods', 'Port capacity', 'Prices'],
+      get: ['Every outside input, listed', 'How exposed each one is', 'A trigger point for each'],
+      tip: 'Pick an input, then raise demand: the day you must act moves.', fig: figMS },
+    'project-mapping': { look: ['Tasks', 'What each one waits on', 'Owners', 'Dates'],
+      get: ['A dated dependency map', 'The critical path', 'Action cards'],
+      tip: 'Tap a task to make it slip two days. Does the end date move?', fig: figPM },
+    'continuity-and-communications': { look: ['Who reaches whom', 'Phone, radio, in person', 'Shift handoffs', 'What happens offline'],
+      get: ['Call tree', 'Escalation ladder', 'Handoff format', 'One-page field card', 'After-action review'],
+      tip: 'Take the network down, or make someone miss the call.', fig: figCC },
+    'talent-management': { look: ['Roles', 'Credentials', 'Availability', 'Shifts'],
+      get: ['Staffing plan', 'Roster with backups', 'Cross-training plan', 'Skill levels'],
+      tip: 'Compare before and after, then take someone off the roster.', fig: figTM },
+    'brand-and-voice': { look: ['Names', 'Notices', 'Forms', 'Signs'],
+      get: ['Voice and visual system', 'Brand sheet', 'Your templates, rebuilt'],
+      tip: 'How much of the notice does a reader in a hurry take in?', fig: figBV },
+  };
+
+  // ── Show one service; its address is breakdown.html#service-id ──
+  const bdPanel = $('bdPanel');
+  const show = i => {
+    const s = SERVICES[i], d = BD[s.id], p = SERVICES[(i + N - 1) % N], n = SERVICES[(i + 1) % N];
+    document.title = `${s.name} — Breakdown — Land of Geb`;
+    $('kicker').textContent = `${s.group} · Service ${pad(i)} · Breakdown`;
+    $('name').textContent = s.name;
+    $('q').textContent = `“${s.q}”`;
+    $('lead').textContent = s.lead;
+    $('pos').textContent = `${pad(i)} of ${String(N).padStart(2, '0')}`;
+    $('back').href = `services.html#${s.id}`;
+    bdPanel.innerHTML = `
+      <div class="bd-info">
+        <h4>What we look at</h4><ul class="bd-chips">${d.look.map(x => `<li>${x}</li>`).join('')}</ul>
+        <h4>What you get</h4><ol class="bd-get">${d.get.map(x => `<li>${x}</li>`).join('')}</ol>
+        <div class="d-act"><a class="btn solid" href="mailto:bixxville@proton.me?subject=${encodeURIComponent(s.name)}">${s.ask} ${ARROW}</a></div></div>
+      <div class="fx"><div class="fx-cap"><b>Try it</b> · ${d.tip}</div><div class="fx-body"></div></div>`;
+    d.fig(bdPanel.querySelector('.fx-body'));
+    bdPanel.classList.remove('swap'); void bdPanel.offsetWidth; bdPanel.classList.add('swap');
+    const link = (a, t, lab) => { a.href = `#${t.id}`; a.dataset.id = t.id; a.innerHTML = `<small>${lab}</small>${pad(SERVICES.indexOf(t))} · ${t.name}`; };
+    link($('prev'), p, '← Previous'); link($('next'), n, 'Next →');
+  };
+  const fromHash = () => { const i = SERVICES.findIndex(s => '#' + s.id === location.hash); show(i < 0 ? 0 : i); };
+
+  // Previous / next swap the page in place, so "Back" still returns to the services page in one step.
+  document.querySelectorAll('.bk-pager a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    history.replaceState(null, '', '#' + a.dataset.id);
+    fromHash();
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }));
+  // Back: if you came from the services page and are still on the same service, return to exactly where you were;
+  // otherwise open the services page at the service you are looking at.
+  const arrived = location.hash;
+  $('back').addEventListener('click', e => {
+    let fromServices = false;
+    try { const r = new URL(document.referrer); fromServices = r.origin === location.origin && /services\.html$/.test(r.pathname); } catch (err) {}
+    if (fromServices && location.hash === arrived && history.length > 1) { e.preventDefault(); history.back(); }
+  });
+  addEventListener('hashchange', fromHash);
+
+  const range = (id, label, min, max, step, val, fmt) =>
+    `<div class="fx-ctrl"><label for="${id}">${label}</label><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}"><output id="${id}O">${fmt(val)}</output></div>`;
+  const times = v => (+v).toFixed(1) + '×';
+
+  // 01 — a sample operation broken into branches and tasks; each bar is load against capacity
+  function figRD(el) {
+    const BR = [['Intake', [['Log requests', 40, 90], ['Check stock', 30, 60], ['Approve orders', 26, 40, 1]]],
+                ['Dispatch', [['Assign drivers', 35, 70], ['Load trucks', 50, 80], ['Plan routes', 20, 45, 1]]],
+                ['Supply', [['Reorder fuel', 15, 50], ['Receive goods', 45, 75], ['Count stock', 25, 55]]]];
+    const MAX = 1.5;
+    el.innerHTML = range('rdS', 'Demand', 1, 3, .1, 1, times) +
+      `<div class="fx-key"><span><i class="k-ok"></i>Has room</span><span><i class="k-warm"></i>Near the limit</span><span><i class="k-over"></i>Over capacity</span><span>| = capacity</span></div>
+       <div class="rd" id="rdT"></div><div class="fx-out" id="rdR"></div>`;
+    const s = el.querySelector('#rdS');
+    const draw = () => {
+      const k = +s.value, rows = [];
+      el.querySelector('#rdSO').textContent = times(k);
+      el.querySelector('#rdT').innerHTML = BR.map(([b, ts]) => `<div class="rd-br"><b>${b}</b>${ts.map(([n, load, cap, one]) => {
+        const r = load * k / cap; rows.push({ n, b, r });
+        return `<div class="rd-row ${r >= 1 ? 'over' : r >= .75 ? 'warm' : ''}"><span>${n}${one ? '<i>one person</i>' : ''}</span>
+          <div class="rd-bar"><div style="width:${Math.min(r, MAX) / MAX * 100}%"></div><em style="left:${100 / MAX}%"></em></div><small>${Math.round(r * 100)}%</small></div>`;
+      }).join('')}</div>`).join('');
+      const over = rows.filter(x => x.r >= 1).sort((a, b) => b.r - a.r);
+      el.querySelector('#rdR').innerHTML = over.length
+        ? `<b>Breaks first:</b>${over.slice(0, 3).map((x, i) => `<span class="rk">${i + 1}</span>${x.n} <small>(${x.b})</small>`).join('')}`
+        : `<b>Holding.</b> Nothing is over capacity at ${times(k)} demand. <small>Push it up.</small>`;
+    };
+    s.addEventListener('input', draw); draw();
+  }
+
+  // 02 — outside inputs, how exposed each is, and the day you must act
+  function figMS(el) {
+    const IN = [['Fuel', 3, 800, 40, 300, 'gallons'], ['Spare parts', 2, 120, 4, 40, 'parts'], ['Bottled water', 3, 2000, 90, 900, 'cases'], ['Port slots', 2, 30, 1, 12, 'slots']];
+    let cur = 0;
+    el.innerHTML = `<div class="ms-list" role="radiogroup" aria-label="Outside inputs">${IN.map(([n, x], i) =>
+        `<button type="button" role="radio" data-i="${i}" aria-checked="false"><span>${n}</span><span class="ms-exp" title="Exposure: ${['', 'low', 'medium', 'high'][x]}">${[1, 2, 3].map(k => `<i class="${k <= x ? 'on' : ''}"></i>`).join('')}</span></button>`).join('')}</div>` +
+      range('msS', 'Demand', 1, 3, .1, 1, times) +
+      `<svg class="ms-chart" id="msC" viewBox="0 0 340 172" role="img" aria-label="Stock over 30 days"></svg><div class="fx-out" id="msR"></div>`;
+    const draw = () => {
+      const [, , st, use, trig, unit] = IN[cur], k = +el.querySelector('#msS').value, u = use * k;
+      el.querySelector('#msSO').textContent = times(k);
+      el.querySelectorAll('.ms-list button').forEach((b, i) => b.setAttribute('aria-checked', i === cur));
+      const X = d => 34 + d / 30 * 296, Y = v => 150 - v / st * 128;
+      const out = st / u, act = (st - trig) / u, end = Math.min(out, 30);
+      el.querySelector('#msC').innerHTML = `
+        <line class="ax" x1="34" y1="150" x2="330" y2="150"/><line class="ax" x1="34" y1="18" x2="34" y2="150"/>
+        ${[0, 10, 20, 30].map(d => `<text class="tk" x="${X(d)}" y="166" text-anchor="${d === 30 ? 'end' : 'middle'}">Day ${d}</text>`).join('')}
+        <text class="tk" x="30" y="${Y(st) + 4}" text-anchor="end">Full</text><text class="tk" x="30" y="154" text-anchor="end">0</text>
+        <line class="trig" x1="34" x2="330" y1="${Y(trig)}" y2="${Y(trig)}"/><text class="tl" x="328" y="${Y(trig) - 7}" text-anchor="end">Trigger point</text>
+        <polyline class="stock" points="${X(0)},${Y(st)} ${X(end)},${Y(Math.max(0, st - u * end))}"/>
+        ${act <= 30 ? `<circle class="actdot" cx="${X(act)}" cy="${Y(trig)}" r="5.5"/>` : ''}
+        ${out <= 30 ? `<circle class="outdot" cx="${X(out)}" cy="${Y(0)}" r="4.5"/>` : ''}`;
+      el.querySelector('#msR').innerHTML = out <= 30
+        ? `<b>Act by day ${Math.floor(act)}.</b> At ${Math.round(u)} ${unit} a day it runs out on day ${Math.floor(out)}.`
+        : `<b>Act by day ${Math.floor(act)}.</b> At ${Math.round(u)} ${unit} a day it lasts past day 30.`;
+    };
+    el.querySelector('.ms-list').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { cur = +b.dataset.i; draw(); } });
+    el.querySelector('#msS').addEventListener('input', draw); draw();
+  }
+
+  // 03 — a sample job on a dependency map; slip a task and see if the end date moves
+  function figPM(el) {
+    const T = [['A', 'Survey the site', 3, []], ['B', 'Order materials', 5, ['A']], ['C', 'Get permits', 6, []],
+               ['D', 'Build', 8, ['B', 'C']], ['E', 'Train the crew', 4, ['C']], ['F', 'Hand over', 2, ['D', 'E']]];
+    const DUE = 18, slip = {};
+    let msg = '';
+    el.innerHTML = `<div class="fx-ctrl"><label class="fx-chk"><input type="checkbox" id="pmC" checked> Show the critical path</label><button type="button" class="fx-btn" id="pmR">Reset</button></div>
+      <div class="fx-key"><span><i class="k-crit"></i>Critical path</span><span><i class="k-ok"></i>Has slack</span><span><i class="k-over"></i>Slipped</span><span>┆ = due date</span></div>
+      <div class="pm" id="pmG"></div><div class="fx-out" id="pmO"></div>`;
+    const plan = () => {
+      const es = {}, ef = {}, ls = {};
+      T.forEach(([id, , d, dep]) => { es[id] = Math.max(0, ...dep.map(x => ef[x])); ef[id] = es[id] + d + (slip[id] || 0); });
+      const end = Math.max(...Object.values(ef));
+      [...T].reverse().forEach(([id, , d]) => {
+        const next = T.filter(t => t[3].includes(id));
+        ls[id] = (next.length ? Math.min(...next.map(t => ls[t[0]])) : end) - d - (slip[id] || 0);
+      });
+      return { es, ls, end };
+    };
+    const draw = () => {
+      const { es, ls, end } = plan(), W = Math.max(20, end + 2), P = v => v / W * 100, crit = el.querySelector('#pmC').checked;
+      el.querySelector('#pmG').style.setProperty('--g', P(5) + '%');
+      el.querySelector('#pmG').innerHTML =T.map(([id, n, d]) => `
+        <button type="button" class="pm-row ${crit && ls[id] === es[id] ? 'crit' : ''}" data-id="${id}" aria-pressed="${!!slip[id]}">
+          <span class="pm-n">${n}</span><span class="pm-track"><span class="pm-bar" style="left:${P(es[id])}%;width:${P(d)}%"></span>
+          ${slip[id] ? `<span class="pm-slip" style="left:${P(es[id] + d)}%;width:${P(slip[id])}%"></span>` : ''}<i class="pm-due" style="left:${P(DUE)}%"></i></span></button>`).join('') +
+        `<div class="pm-ax"><span></span><span class="pm-track">${[0, 5, 10, 15, 20].filter(v => v <= W).map(v => `<em style="left:${P(v)}%">${v ? v : 'Day 0'}</em>`).join('')}</span></div>`;
+      const late = end - DUE;
+      el.querySelector('#pmO').innerHTML = `<b>${late > 0 ? `Finishes day ${end}: ${late} days late.` : `Finishes day ${end}: on time.`}</b> <small>${msg}</small>`;
+    };
+    el.querySelector('#pmG').addEventListener('click', e => {
+      const b = e.target.closest('.pm-row'); if (!b) return;
+      const id = b.dataset.id, name = T.find(t => t[0] === id)[1], before = plan().end;
+      slip[id] = slip[id] ? 0 : 2;
+      const after = plan().end;
+      msg = !slip[id] ? '' : after > before ? `${name} is on the critical path, so the end date moved.` : `${name} had room to slip, so the end date held.`;
+      draw();
+    });
+    el.querySelector('#pmC').addEventListener('change', draw);
+    el.querySelector('#pmR').addEventListener('click', () => { Object.keys(slip).forEach(k => delete slip[k]); msg = ''; draw(); });
+    msg = 'Tap a task to make it slip.'; draw();
+  }
+
+  // 04 — a sample call tree with its escalation ladder
+  function figCC(el) {
+    let down = false, miss = false;
+    el.innerHTML = `<div class="fx-ctrl"><button type="button" class="fx-btn" id="ccD" aria-pressed="false">Network down</button><button type="button" class="fx-btn" id="ccM" aria-pressed="false">Supervisor B misses the call</button></div>
+      <svg class="cc" id="ccS" viewBox="0 0 360 240" role="img" aria-label="Call tree"></svg><ol class="cc-lad" id="ccL"></ol>`;
+    const N = { L: [180, 24, 'Lead'], A: [95, 116, 'Supervisor A'], B: [265, 116, 'Supervisor B'],
+                a1: [48, 212, 'Crew 1'], a2: [138, 212, 'Crew 2'], b1: [222, 212, 'Crew 3'], b2: [312, 212, 'Crew 4'] };
+    const draw = () => {
+      const up = down ? 'Radio' : 'Phone', dn = down ? 'In person' : 'Text';
+      // crew lines are labelled on the outside only, so the labels never overlap on a phone
+      const E = [['L', 'A', up], ['L', 'B', up, miss ? 'miss' : ''], ['A', 'a1', dn], ['A', 'a2', ''], ['B', 'b1', '', miss ? 'dead' : ''], ['B', 'b2', dn, miss ? 'dead' : '']];
+      if (miss) E.push(['A', 'b1', '', 'bk'], ['A', 'b2', 'Backup', 'bk']);
+      const line = ([f, t, lab, c]) => {
+        const [x1, y1] = N[f], [x2, y2] = N[t], mx = (x1 + x2) / 2, my = (y1 + y2) / 2 + 3;
+        return `<line class="edge ${c || ''}" x1="${x1}" y1="${y1 + 14}" x2="${x2}" y2="${y2 - 14}"/>` + (lab ? `<text class="el ${c || ''}" x="${mx}" y="${my}" text-anchor="middle">${lab}</text>` : '');
+      };
+      el.querySelector('#ccS').innerHTML = E.map(line).join('') + Object.entries(N).map(([k, [x, y, n]]) =>
+        `<rect class="node ${miss && k === 'B' ? 'off' : ''}" x="${x - (n.length > 6 ? 44 : 34)}" y="${y - 14}" width="${n.length > 6 ? 88 : 68}" height="28" rx="14"/><text class="nt" x="${x}" y="${y + 4}" text-anchor="middle">${n}</text>`).join('');
+      const steps = [['0 min', `Lead calls both supervisors by ${up.toLowerCase()}.`],
+                     ['+10 min', 'No answer: Supervisor A takes Crew 3 and Crew 4.'],
+                     ['+20 min', down ? 'Still nothing: a runner goes in person.' : 'Still nothing: switch to radio.'],
+                     ['After', 'Review what happened. Update the field card.']];
+      el.querySelector('#ccL').innerHTML = steps.map(([t, s], i) => `<li class="${miss || i === 0 || i === 3 ? 'on' : ''}"><b>${t}</b><span>${s}</span></li>`).join('');
+      el.querySelector('#ccD').setAttribute('aria-pressed', down);
+      el.querySelector('#ccM').setAttribute('aria-pressed', miss);
+    };
+    el.querySelector('#ccD').addEventListener('click', () => { down = !down; draw(); });
+    el.querySelector('#ccM').addEventListener('click', () => { miss = !miss; draw(); });
+    draw();
+  }
+
+  // 05 — a sample roster: every role and shift, before and after
+  function figTM(el) {
+    const R = ['Dispatcher', 'Driver', 'Forklift', 'Radio'], S = ['Day', 'Swing', 'Night'];
+    const BEFORE = [[['A'], ['A'], []], [['B', 'C'], ['C'], ['D']], [['E'], ['E'], []], [['A'], [], ['D']]];
+    const AFTER = [[['A', 'F'], ['C', 'A'], ['F', 'D']], [['B', 'C'], ['C', 'E'], ['D', 'B']], [['E', 'B'], ['E', 'F'], ['F', 'D']], [['A', 'D'], ['C', 'F'], ['D', 'A']]];
+    let after = false;
+    el.innerHTML = `<div class="fx-ctrl"><span class="fx-seg"><button type="button" class="fx-btn" data-v="0">Before</button><button type="button" class="fx-btn" data-v="1">After</button></span>
+        <label for="tmO">Take out</label><select id="tmO"><option value="">Nobody</option>${'ABCDEF'.split('').map(p => `<option>Person ${p}</option>`).join('')}</select></div>
+      <div class="fx-key"><span><i class="k-green"></i>Covered, with a backup</span><span><i class="k-warm"></i>One person</span><span><i class="k-over"></i>Gap</span></div>
+      <div class="tm" id="tmG"></div><div class="fx-out" id="tmR"></div>`;
+    const draw = () => {
+      const out = el.querySelector('#tmO').value.slice(-1), M = after ? AFTER : BEFORE, n = { ok: 0, one: 0, gap: 0 };
+      el.querySelectorAll('.fx-seg .fx-btn').forEach(b => b.setAttribute('aria-pressed', +b.dataset.v === +after));
+      el.querySelector('#tmG').innerHTML = '<b></b>' + S.map(s => `<b>${s}</b>`).join('') + R.map((r, i) => `<span>${r}</span>` + S.map((s, j) => {
+        const who = M[i][j].filter(p => p !== out), c = who.length >= 2 ? 'ok' : who.length ? 'one' : 'gap'; n[c]++;
+        return `<div class="tm-c ${c}" title="${r}, ${s}">${who.length ? who.join(' · ') : 'Gap'}</div>`;
+      }).join('')).join('');
+      el.querySelector('#tmR').innerHTML = `<b>${n.gap} gap${n.gap === 1 ? '' : 's'} · ${n.one} on one person · ${n.ok} backed up.</b> ${out ? `<small>Person ${out} is out.</small>` : ''}`;
+    };
+    el.querySelector('.fx-seg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { after = b.dataset.v === '1'; draw(); } });
+    el.querySelector('#tmO').addEventListener('change', draw);
+    draw();
+  }
+
+  // 06 — the same notice, before and after: how much does a hurried reader take in?
+  function figBV(el) {
+    const TX = ['Please be advised that, due to anticipated adverse weather conditions affecting the region, all personnel scheduled for the evening shift are hereby requested to report to the secondary staging location, which is situated at the north warehouse facility, no later than 17:00 hours, unless otherwise instructed by their direct supervisor.',
+                'Storm tonight. Evening shift: report to the North Warehouse by 5:00 pm. Questions? Ask your supervisor.'];
+    const WPS = 3.5;   // a quick reading pace, about 210 words a minute
+    let v = 0;
+    el.innerHTML = `<div class="fx-ctrl"><span class="fx-seg"><button type="button" class="fx-btn" data-v="0">Before</button><button type="button" class="fx-btn" data-v="1">After</button></span></div>` +
+      range('bvS', 'Seconds to read', 2, 15, 1, 5, x => x + ' s') + `<div class="bv" id="bvT"></div><div class="fx-out" id="bvR"></div>`;
+    const draw = () => {
+      const sec = +el.querySelector('#bvS').value, w = TX[v].split(' '), n = Math.min(w.length, Math.floor(sec * WPS));
+      el.querySelector('#bvSO').textContent = sec + ' s';
+      el.querySelectorAll('.fx-seg .fx-btn').forEach(b => b.setAttribute('aria-pressed', +b.dataset.v === v));
+      el.querySelector('#bvT').innerHTML = `<b>${v ? 'After' : 'Before'} · notice</b>` + w.map((x, i) => `<span class="${i < n ? 'hl' : ''}">${x}</span>`).join(' ');
+      const longest = Math.max(...TX[v].split(/[.?!]\s/).map(s => s.split(' ').length));
+      el.querySelector('#bvR').innerHTML = `<b>${n} of ${w.length} words read in ${sec} seconds (${Math.round(n / w.length * 100)}%).</b> <small>Longest sentence: ${longest} words.</small>`;
+    };
+    el.querySelector('.fx-seg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { v = +b.dataset.v; draw(); } });
+    el.querySelector('#bvS').addEventListener('input', draw);
+    draw();
+  }
+
+  fromHash();
+
+  // scroll progress
+  const bar = $('bar');
+  addEventListener('scroll', () => {
+    const d = document.documentElement;
+    bar.style.setProperty('--progress', (scrollY / Math.max(1, d.scrollHeight - innerHeight) * 100) + '%');
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
