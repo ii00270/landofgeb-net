@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — Land of Geb</title>
-<meta name="description" content="Six services that take overload out of critical operations: Readiness Decomposition, Market and Supply Readiness, Project Mapping, Continuity and Communications Plans, Talent Management, and Brand and Voice.">
+<meta name="description" content="Eight services: six that take overload out of critical operations, a full business build with a custom website, and teaching for your team on markets, real estate mapping, math and economics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -90,7 +90,7 @@ a{color:inherit;text-decoration:none}
 .dial-hint{position:absolute;right:24px;top:22px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
 .no-js .dial{display:none}
 
-/* ── one service, in full (all six show without script, and when printed) ── */
+/* ── one service, in full (all eight show without script, and when printed) ── */
 .detail{padding:44px clamp(20px,4vw,56px) 48px;min-width:0}
 .svc{display:flex;flex-direction:column;gap:20px;scroll-margin-top:80px}
 .js .svc[hidden]{display:none}
@@ -115,7 +115,7 @@ a{color:inherit;text-decoration:none}
 /* ── the three groups ── */
 .groups{padding:72px var(--gutter) 24px}
 .groups h2,.cta h2,.scope h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;text-transform:uppercase;color:var(--ink);margin:14px 0 26px}
-.g-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.g-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink)}
 .g-col{padding:18px 24px 26px 0;position:relative}
 .g-col + .g-col{padding-left:24px;border-left:1px solid var(--line)}
 .g-col b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
@@ -208,15 +208,15 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     </div>
     <div class="rv">
       <p>Overload is what breaks an operation: too much information, too many handoffs, too little capacity at the moment it matters.</p>
-      <p>These six services find where it builds up and take it out, in order.</p>
+      <p>The first six find where it builds up and take it out, in order. The last two build the whole business around you, and teach your team to run it.</p>
       <p class="start">Start with a Readiness Decomposition. Every other service builds on it.</p>
       <div class="how how-fine"><span>Drag the dial</span><span>Scroll over it</span><span>Use ← → keys</span><span>Tap a number</span></div>
       <div class="how how-touch"><span>Swipe the dial round</span><span>Tap a number</span><span>Or use ← →</span></div>
     </div>
   </section>
 
-  <section class="stage" aria-label="The six services">
-    <div class="dial t-no-print" id="dial" tabindex="0" role="slider" aria-label="Choose a service" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+  <section class="stage" aria-label="The eight services">
+    <div class="dial t-no-print" id="dial" tabindex="0" role="slider" aria-label="Choose a service" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1">
       <div class="dial-hint">Turn to choose</div>
       <svg id="dialSvg" aria-hidden="true"></svg>
       <div id="dialNums"></div>
@@ -224,7 +224,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <div class="dial-ctrls">
         <button id="prev" aria-label="Previous service">←</button>
         <button id="next" aria-label="Next service">→</button>
-        <span id="dialCount">1 of 6</span>
+        <span id="dialCount">1 of 8</span>
       </div>
     </div>
 
@@ -333,12 +333,48 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
         <div class="d-act"><a class="btn solid" href="request.html?service=brand-and-voice&src=services">Ask about brand and voice <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
       </article>
 
+      <article class="svc" id="full-build" data-q="What would it take to build all of this around me?">
+        <div class="d-topic">Build and teach · Service 07</div>
+        <h2 class="d-title">Full Business Build</h2>
+        <p class="d-q">“What would it take to build all of this around me?”</p>
+        <p class="d-lead">We build the whole business and its structure around you: every service above, and a custom website.</p>
+        <div class="d-facts">
+          <div><h4>For</h4><p>People starting a business, and organizations that need to be rebuilt, who want it built once, in order, around how they actually work.</p></div>
+          <div><h4>You get</h4><p>A working business built around you: the roles and structure, the operating documents, each of the six services above applied to your operation, and a custom website. It is yours at hand-over.</p></div>
+        </div>
+        <div class="d-steps"><h4>How it works</h4><ol>
+          <li>We learn you and the goal: what you offer, to whom, and what has to be true for it to run.</li>
+          <li>We map the business: the roles, the work, the hand-offs, and the order to build it in.</li>
+          <li>We build it, with your sign-off at each step: the structure, the documents, the services and the website. Then we hand it over.</li>
+        </ol></div>
+        <p class="d-note">We plan and build. Legal, tax and financial decisions stay with you and your own advisers.</p>
+        <div class="d-act"><a class="btn solid" href="request.html?service=full-build&src=services">Ask about a full build <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
+      </article>
+
+      <article class="svc" id="teaching-and-training" data-q="Can my team read this on its own?">
+        <div class="d-topic">Build and teach · Service 08</div>
+        <h2 class="d-title">Teaching and Training</h2>
+        <p class="d-q">“Can my team read this on its own?”</p>
+        <p class="d-lead">We teach your team, or work beside it, so it can read markets, maps and numbers without us.</p>
+        <div class="d-facts">
+          <div><h4>For</h4><p>Teams, schools and organizations that want the fundamentals, or want a hand while they do real work.</p></div>
+          <div><h4>You get</h4><p>A course or a coaching plan for your team: the lessons, worked examples on your own numbers, and exercises. You choose: we teach it, or we sit with your team while they do the work.</p></div>
+        </div>
+        <div class="d-steps"><h4>What we teach</h4><ol>
+          <li>Trading markets: how they are built, what the instruments cost and what they risk.</li>
+          <li>Markets and real estate mapping: how supply, demand and place set a price.</li>
+          <li>Math and economics, and how people behave inside them: ratio, probability, expected value, and where judgment breaks under pressure.</li>
+        </ol></div>
+        <p class="d-note">This is education, not investing advice. We do not tell anyone what to buy, sell or trade, and we do not manage money. Trading is risky: losses can exceed what you put in, and most retail traders lose money. We teach that first.</p>
+        <div class="d-act"><a class="btn solid" href="request.html?service=teaching-and-training&src=services">Ask about teaching <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
+      </article>
+
     </div>
   </section>
 
   <section class="groups">
-    <div class="idx">/03 — In three steps</div>
-    <h2>Assess. Plan.<br><span class="neon-text">Staff and present.</span></h2>
+    <div class="idx">/03 — In four steps</div>
+    <h2>Assess. Plan.<br><span class="neon-text">Staff and present.</span><br>Build and teach.</h2>
     <div class="g-grid">
       <div class="g-col"><b>Step 1</b><strong>Assess</strong><p>Find the weak points before demand finds them.</p>
         <a href="#readiness-decomposition">Readiness Decomposition<small>Where will we break first?</small></a>
@@ -349,6 +385,9 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <div class="g-col"><b>Step 3</b><strong>Staff and present</strong><p>Cover every role, and say it so it reads once.</p>
         <a href="#talent-management">Talent Management<small>Who is qualified, available and covered?</small></a>
         <a href="#brand-and-voice">Brand and Voice<small>Can people understand us in one read?</small></a></div>
+      <div class="g-col"><b>Step 4</b><strong>Build and teach</strong><p>Build it around you, then teach your team to run it.</p>
+        <a href="#full-build">Full Business Build<small>What would it take to build all of this around me?</small></a>
+        <a href="#teaching-and-training">Teaching and Training<small>Can my team read this on its own?</small></a></div>
     </div>
   </section>
 
@@ -429,7 +468,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
   tick(); setInterval(tick, 15000);
 
-  // ── The six services: read from the page itself, so the words live in one place ──
+  // ── The eight services: read from the page itself, so the words live in one place ──
   const ARTS = [...document.querySelectorAll('#detail .svc')];
   const SERVICES = ARTS.map(a => ({ id: a.id, name: a.querySelector('.d-title').textContent, q: a.dataset.q }));
   const N = SERVICES.length;

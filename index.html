@@ -291,7 +291,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
       <p class="rv">Operations break under overload: too much information, too many handoffs, too little capacity at the moment it matters. We find where it builds up and take it out, in order.</p>
       <div class="hero-actions rv">
         <a class="btn solid" href="services.html#readiness-decomposition">Start with a Readiness Decomposition <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
-        <a class="btn ghost" href="#services">See all six services <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
+        <a class="btn ghost" href="#services">See all eight services <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v10M1 6l5 5 5-5"/></svg></a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
@@ -308,11 +308,11 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
 
   <!-- ── /02 SERVICES ── -->
   <section class="dark" id="services">
-    <div class="sec-head"><span class="idx">/02</span><span class="lbl">Services · six, in three steps</span></div>
+    <div class="sec-head"><span class="idx">/02</span><span class="lbl">Services · eight, in four steps</span></div>
     <div class="split" aria-label="Services">
       <div class="split-word top" id="splitTop">Services</div>
       <div class="split-word bot" id="splitBot">Services</div>
-      <div class="split-script">assess · plan · staff</div>
+      <div class="split-script">assess · plan · staff · build · teach</div>
     </div>
     <div class="svc-list">
       <a class="svc rv" href="services.html#readiness-decomposition">
@@ -356,6 +356,20 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
         <h3>Brand and Voice</h3>
         <span class="svc-q">“Can people understand us in one read?”</span>
         <p>A name, a voice and documents that read clearly the first time, under pressure.</p>
+      </a>
+      <a class="svc rv" href="services.html#full-build">
+        <span class="idx">S.07 · <span class="svc-grp">Build and teach</span></span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 30h26M7 30V14l10-8 10 8v16M13 30V20h8v10"/></svg>
+        <h3>Full Business Build</h3>
+        <span class="svc-q">“What would it take to build all of this around me?”</span>
+        <p>The whole business and its structure built around you: every service, and a custom website.</p>
+      </a>
+      <a class="svc rv" href="services.html#teaching-and-training">
+        <span class="idx">S.08 · <span class="svc-grp">Build and teach</span></span>
+        <svg class="svc-icon" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 11 17 5l14 6-14 6zM9 14v8c0 2 4 4 8 4s8-2 8-4v-8M31 11v10"/></svg>
+        <h3>Teaching and Training</h3>
+        <span class="svc-q">“Can my team read this on its own?”</span>
+        <p>We teach your team, or work beside it: markets, real estate mapping, math and economics.</p>
       </a>
     </div>
     <div style="padding:0 var(--gutter) 88px;margin-top:-48px"><a class="btn solid" href="services.html">See every service <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div>
@@ -531,7 +545,7 @@ const SHOP_URL = 'https://bixxville.myshopify.com';
   tick(); setInterval(tick, 15000);
 
   // Ticker
-  const words = ['Readiness Decomposition', 'Market and Supply Readiness', 'Project Mapping', 'Continuity and Communications', 'Talent Management', 'Brand and Voice'];
+  const words = ['Readiness Decomposition', 'Market and Supply Readiness', 'Project Mapping', 'Continuity and Communications', 'Talent Management', 'Brand and Voice', 'Full Business Build', 'Teaching and Training'];
   $('ticker').innerHTML = words.map(w => `<span class="ticker-item"><span class="pill">${w}</span><span class="chev">▶▶</span></span>`).join('').repeat(3);
 
   // Stacked word rows

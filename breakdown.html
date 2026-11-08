@@ -291,7 +291,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
   tick(); setInterval(tick, 15000);
 
-  // ── The six services, in the order of the dial on the services page ──
+  // ── The eight services, in the order of the dial on the services page ──
   const SERVICES = [
     { id: 'readiness-decomposition', name: 'Readiness Decomposition', group: 'Assess', q: 'Where will we break first?',
       lead: 'We show you where your operation will overload first, and what to fix in what order.', ask: 'Ask for a Readiness Decomposition' },
@@ -305,6 +305,10 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       lead: 'We make sure every critical role has a qualified person, a backup, and a covered shift.', ask: 'Ask about staffing' },
     { id: 'brand-and-voice', name: 'Brand and Voice', group: 'Staff and present', q: 'Can people understand us in one read?',
       lead: 'We give you a name, a voice and documents that read clearly the first time, under pressure.', ask: 'Ask about brand and voice' },
+    { id: 'full-build', name: 'Full Business Build', group: 'Build and teach', q: 'What would it take to build all of this around me?',
+      lead: 'We build the whole business and its structure around you: every service, and a custom website.', ask: 'Ask about a full build' },
+    { id: 'teaching-and-training', name: 'Teaching and Training', group: 'Build and teach', q: 'Can my team read this on its own?',
+      lead: 'We teach your team, or work beside it, so it can read markets, maps and numbers without us.', ask: 'Ask about teaching' },
   ];
   const N = SERVICES.length;
   const pad = i => String(i + 1).padStart(2, '0');
@@ -331,6 +335,12 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     'brand-and-voice': { look: ['Names', 'Notices', 'Forms', 'Signs'],
       get: ['Voice and visual system', 'Brand sheet', 'Your templates, rebuilt'],
       tip: 'How much of the notice does a reader in a hurry take in?', fig: figBV },
+    'full-build': { look: ['Who you are and what you offer', 'Your roles and hand-offs', 'The work, in order', 'What you have today'],
+      get: ['The business structure and roles', 'Operating documents', 'The six services applied to you', 'A custom website', 'Everything handed over'],
+      tip: 'Pick what you want built. Anything it depends on is pulled in, in build order.', fig: figFB },
+    'teaching-and-training': { look: ['Your team and what it knows', 'The work it does', 'Your own numbers', 'Teach it, or sit beside it'],
+      get: ['Lessons for your team', 'Worked examples on your numbers', 'Exercises', 'A coaching plan, if you want one'],
+      tip: 'Change the odds and the payoff. Does the average trade pay, and how often is a short run still down?', fig: figTT },
   };
 
   // ── Show one service; its address is breakdown.html#service-id ──
@@ -550,6 +560,54 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     };
     el.querySelector('.fx-seg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { v = +b.dataset.v; draw(); } });
     el.querySelector('#bvS').addEventListener('input', draw);
+    draw();
+  }
+
+  // 07 — pick parts of the build; whatever each one depends on is pulled in, and the build order is shown
+  function figFB(el) {
+    const P = [
+      { id: 'rd', n: 'Readiness Decomposition', needs: [] },
+      { id: 'sp', n: 'Supply brief', needs: ['rd'] },
+      { id: 'pm', n: 'Project map', needs: ['rd'] },
+      { id: 'cc', n: 'Continuity plan', needs: ['pm'] },
+      { id: 'tm', n: 'Staffing plan', needs: ['pm'] },
+      { id: 'bv', n: 'Brand and voice', needs: [] },
+      { id: 'ws', n: 'Custom website', needs: ['bv', 'pm'] },
+    ];
+    const by = Object.fromEntries(P.map(p => [p.id, p]));
+    const picked = new Set(['ws']);
+    el.innerHTML = `<div class="fx-ctrl"><span id="fbSeg" style="display:flex;flex-wrap:wrap;gap:6px">${P.map(p => `<button type="button" class="fx-btn" data-id="${p.id}">${p.n}</button>`).join('')}</span></div><div class="fx-out" id="fbR"></div>`;
+    const draw = () => {
+      const all = new Set(), add = id => { if (all.has(id)) return; by[id].needs.forEach(add); all.add(id); };
+      [...picked].forEach(add);
+      const order = [...all];                       // dependencies are added before the part that needs them
+      el.querySelectorAll('#fbSeg .fx-btn').forEach(b => { const id = b.dataset.id; b.setAttribute('aria-pressed', picked.has(id)); b.style.opacity = all.has(id) && !picked.has(id) ? '.65' : ''; });
+      el.querySelector('#fbR').innerHTML = order.length
+        ? `<b>${order.length} of ${P.length} parts, in this order:</b><ol style="margin:8px 0 0 18px">${order.map(id => `<li>${by[id].n}${picked.has(id) ? '' : ' <small>(needed first)</small>'}</li>`).join('')}</ol>`
+        : '<b>Pick a part to see its build order.</b>';
+    };
+    el.querySelector('#fbSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const id = b.dataset.id; picked.has(id) ? picked.delete(id) : picked.add(id); draw(); });
+    draw();
+  }
+
+  // 08 — made-up odds and payoffs: the average result of one trade, and how often a short run is still down
+  function figTT(el) {
+    el.innerHTML = range('ttW', 'Chance a trade wins', 10, 90, 1, 40, x => x + '%') + range('ttG', 'Win pays', 50, 400, 10, 150, x => '$' + x) +
+      range('ttL', 'Loss costs', 50, 400, 10, 100, x => '$' + x) + range('ttN', 'Number of trades', 5, 100, 5, 20, x => x) + '<div class="fx-out" id="ttR"></div>';
+    const draw = () => {
+      const p = +el.querySelector('#ttW').value / 100, g = +el.querySelector('#ttG').value, l = +el.querySelector('#ttL').value, n = +el.querySelector('#ttN').value;
+      el.querySelector('#ttWO').textContent = Math.round(p * 100) + '%'; el.querySelector('#ttGO').textContent = '$' + g; el.querySelector('#ttLO').textContent = '$' + l; el.querySelector('#ttNO').textContent = n;
+      const ev = p * g - (1 - p) * l;
+      // chance the run ends below zero: sum the binomial odds of every win count whose total is negative
+      let down = 0, c = 1;
+      for (let k = 0; k <= n; k++) {
+        if (k > 0) c = c * (n - k + 1) / k;
+        if (k * g - (n - k) * l < 0) down += c * Math.pow(p, k) * Math.pow(1 - p, n - k);
+      }
+      const fmt = v => (v < 0 ? '−$' : '$') + Math.abs(v).toFixed(2);
+      el.querySelector('#ttR').innerHTML = `<b>Average per trade: ${fmt(ev)}.</b> Over ${n} trades: ${fmt(ev * n)}. <small>A run of ${n} trades ends below zero ${Math.round(down * 100)}% of the time. Made-up numbers; this teaches how to read odds, it is not a forecast or advice.</small>`;
+    };
+    el.querySelectorAll('input').forEach(i => i.addEventListener('input', draw));
     draw();
   }
 
