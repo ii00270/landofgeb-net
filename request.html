@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request — Land of Geb</title>
+<meta name="description" content="Tell Land of Geb what you need. We read every request and write back by email.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:var(--t-ink);
+  --body:var(--t-text);
+  --soft:var(--t-muted);
+  --faint:var(--t-faint);
+  --bg:var(--t-bg);
+  --card:var(--t-surface);
+  --line:var(--t-line);
+  --yellow:var(--t-yellow);
+  --orange:var(--t-orange);
+  --pink:var(--t-pink);
+  --neon:var(--t-neon);
+  --mono:var(--t-font-mono);
+  --display:var(--t-font-display);
+  --gutter:var(--t-gutter);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--t-on-neon)}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s,background .25s,color .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.arrow{width:12px;height:12px;flex:none}
+
+/* ── top bar (same as the home page) ── */
+.bar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:28px;
+  padding:14px var(--gutter);background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.nav{display:flex;gap:22px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:var(--t-surface-strong)}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere;color:var(--ink)}
+.co b{font-weight:600}
+.f-col h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px;color:var(--ink)}
+.f-col a{display:block;color:var(--body);margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.fine{grid-column:1 / -1;font-size:12px;color:var(--soft);max-width:780px}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--t-surface-strong)}
+
+
+.rq-hero{padding:48px var(--gutter) 28px;border-bottom:1px solid var(--ink)}
+.rq-hero .idx{margin-bottom:14px}
+.rq-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,8vw,124px);line-height:.88;text-transform:uppercase;color:var(--ink)}
+.rq-hero .d-lead{margin-top:14px;max-width:640px;font-size:16px}
+.rq-wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--gutter);padding:32px var(--gutter) 56px;align-items:start}
+.rq-form{display:grid;gap:18px;max-width:700px}
+.rq-g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rq-f > label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.rq-f > label small{letter-spacing:.04em;text-transform:none;font-size:12px}
+.rq-f input[type=text],.rq-f input[type=email],.rq-f input[type=tel],.rq-f select,.rq-f textarea{width:100%;font-family:var(--mono);font-size:15px;color:var(--ink);background:var(--bg);
+  border:1px solid var(--t-line-strong);border-radius:0;padding:12px;appearance:none;-webkit-appearance:none}
+.rq-f select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+.rq-f textarea{min-height:140px;resize:vertical;line-height:1.55}
+.rq-f input:focus,.rq-f select:focus,.rq-f textarea:focus{outline:2px solid var(--pink);outline-offset:1px;border-color:var(--ink)}
+.rq-chk{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.6;color:var(--ink);cursor:pointer}
+.rq-chk input{width:18px;height:18px;flex:none;margin-top:3px;accent-color:var(--t-pink)}
+.rq-chk a{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
+.rq-hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.rq-msg{font-size:14px;color:var(--ink);min-height:1.5em}
+.rq-msg.err{border-left:3px solid var(--pink);padding-left:12px}
+.rq-form .btn{justify-self:start}
+.rq-form .btn[disabled]{opacity:.55;cursor:default;box-shadow:none}
+.rq-side{border:1px solid var(--line);background:var(--card);padding:22px}
+.rq-side h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:14px}
+.rq-side ol{list-style:none;counter-reset:s;border-top:1px solid var(--ink)}
+.rq-side li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink)}
+.rq-side li::before{content:counter(s,decimal-leading-zero);font-weight:600}
+.rq-side p{font-size:13px;color:var(--soft);margin-top:14px}
+.rq-side p a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
+.rq-done{border:1px solid var(--ink);background:var(--card);padding:28px;max-width:700px}
+.rq-done h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,4vw,56px);line-height:.95;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.rq-done p{font-size:15px;color:var(--ink);max-width:520px}
+.rq-done p + p{margin-top:10px;color:var(--soft);font-size:13.5px}
+.rq-nojs{display:none;padding:24px var(--gutter);font-size:15px;color:var(--ink)}
+.no-js .rq-nojs{display:block}
+.no-js .rq-form{display:none}
+.pv{padding:40px var(--gutter) 56px;max-width:calc(780px + 2 * var(--gutter))}
+.pv h2{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:30px 0 10px}
+.pv p,.pv li{font-size:15px;color:var(--ink);margin-bottom:10px}
+.pv ul{list-style:none;border-top:1px solid var(--line);margin-bottom:10px}
+.pv li{padding:8px 0;border-bottom:1px solid var(--line);margin:0}
+.pv a{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
+.pv .stamp{font-size:12px;color:var(--soft);margin-top:30px}
+@media (max-width:960px){
+  .bar{grid-template-columns:1fr auto;gap:14px}
+  .nav,.clock{display:none}
+  .rq-wrap{grid-template-columns:1fr}
+  .rq-g2{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js', 'js');</script>
+
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">Bixxville</a>
+  </nav>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
+  <a class="btn solid shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main>
+  <section class="rq-hero">
+    <div class="idx">Request</div>
+    <h1>Tell us what<br>you need</h1>
+    <p class="d-lead">Say what you are trying to get done. We read every request and write back by email.</p>
+  </section>
+  <p class="rq-nojs">The request form needs JavaScript. You can write to <a href="mailto:bixxville@proton.me" style="text-decoration:underline">bixxville@proton.me</a> instead.</p>
+  <section class="rq-wrap" id="rqWrap">
+    <form class="rq-form" id="rq" action="#" method="post">
+      <div class="rq-g2">
+        <div class="rq-f"><label for="rq-name">Your name</label><input type="text" id="rq-name" name="name" autocomplete="name" maxlength="120" required></div>
+        <div class="rq-f"><label for="rq-email">Email</label><input type="email" id="rq-email" name="email" autocomplete="email" maxlength="254" required></div>
+      </div>
+      <div class="rq-g2">
+        <div class="rq-f"><label for="rq-org">Organization <small>(optional)</small></label><input type="text" id="rq-org" name="organization" autocomplete="organization" maxlength="160"></div>
+        <div class="rq-f"><label for="rq-phone">Phone <small>(optional)</small></label><input type="tel" id="rq-phone" name="phone" autocomplete="tel" maxlength="40"></div>
+      </div>
+      <div class="rq-f"><label for="rq-svc">What would you like help with?</label>
+        <select id="rq-svc" name="service"><option value="general">I am not sure yet</option><option value="readiness-decomposition">Readiness Decomposition</option><option value="market-and-supply-readiness">Market and Supply Readiness</option><option value="project-mapping">Project Mapping</option><option value="continuity-and-communications">Continuity and Communications Plans</option><option value="talent-management">Talent Management</option><option value="brand-and-voice">Brand and Voice</option></select></div>
+      <div class="rq-f"><label for="rq-msg">Tell us a little about it <small>(optional)</small></label><textarea id="rq-msg" name="message" maxlength="2000" placeholder="What you run, what keeps going wrong, and when you need it."></textarea></div>
+      <div class="rq-hp" aria-hidden="true"><label for="rq-web">Leave this empty</label><input type="text" id="rq-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <label class="rq-chk"><input type="checkbox" id="rq-ok" required><span id="rq-ok-text">Yes, Land of Geb may reply to this request by email or phone. I can ask them to stop, or to erase my details, at any time. <a href="privacy.html">Privacy note</a></span></label>
+      <div class="rq-msg" id="rq-out" role="alert" aria-live="polite"></div>
+      <button class="btn solid" type="submit" id="rq-go">Send request <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></button>
+    </form>
+    <aside class="rq-side">
+      <h2>What happens next</h2>
+      <ol>
+        <li>We read your request.</li>
+        <li>We write back by email, and may ask a question or two.</li>
+        <li>If it is a fit, we agree the scope and the price with you before any work starts.</li>
+      </ol>
+      <p>Prefer email? Write to <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>.</p>
+    </aside>
+  </section>
+</main>
+
+<footer>
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact &amp; network</h4>
+    <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    <a href="index.html#bixxville">About Bixxville</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+  <p class="fine">Planning, analysis and administrative services. Not engineering, safety certification, legal, financial or medical advice.</p>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · Christiansted, St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+
+<script src="site.js"></script>
+<script src="theme.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
+  tick(); setInterval(tick, 15000);
+})();
+</script>
+
+<script>
+(() => {
+  // The one public function the form calls. It can only add a request; it cannot read anything back.
+  const SB_URL = 'https://deotcopartijomfveakr.supabase.co';
+  const SB_KEY = 'sb_publishable_yi4AJEt5MLMafDBgTgXnBg_1gvB4gtz';   // the public key; the database does the guarding
+  const $ = id => document.getElementById(id);
+  const q = new URLSearchParams(location.search);
+  const t0 = Date.now();
+  const svc = q.get('service');
+  if (svc && [...$('rq-svc').options].some(o => o.value === svc)) $('rq-svc').value = svc;
+  const src = (q.get('src') || '').trim().slice(0, 80);
+
+  const say = (msg, err) => { const o = $('rq-out'); o.textContent = msg || ''; o.classList.toggle('err', !!err); };
+  $('rq').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = $('rq');
+    if (!f.reportValidity()) return;
+    const go = $('rq-go');
+    go.disabled = true; say('Sending…');
+    const v = id => $(id).value.trim();
+    try {
+      const res = await fetch(SB_URL + '/rest/v1/rpc/submit_prospect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY },
+        body: JSON.stringify({
+          p_name: v('rq-name'), p_email: v('rq-email'), p_phone: v('rq-phone') || null, p_organization: v('rq-org') || null,
+          p_interest: $('rq-svc').value, p_message: v('rq-msg') || null, p_source: src || null,
+          p_consent: $('rq-ok').checked, p_consent_text: $('rq-ok-text').textContent.trim(),
+          p_website: v('rq-web') || null, p_elapsed_ms: Date.now() - t0,
+        }),
+      });
+      if (!res.ok) {
+        let body = null; try { body = await res.json(); } catch (x) { /* not JSON */ }
+        // The database's own messages (code P0001) are written for visitors; anything else gets the plain fallback.
+        say(body && body.code === 'P0001' && body.message ? body.message : 'Something went wrong on our side. Please email bixxville@proton.me instead.', true);
+        go.disabled = false; return;
+      }
+      $('rqWrap').innerHTML = '<div class="rq-done"><h2>Thank you</h2><p>We have your request. We will reply to you by email.</p><p>If you do not hear from us, write to <a href="mailto:bixxville@proton.me" style="text-decoration:underline">bixxville@proton.me</a>.</p></div>';
+      scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (x) {
+      say('We could not reach the server. Check your connection, or email bixxville@proton.me instead.', true);
+      go.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

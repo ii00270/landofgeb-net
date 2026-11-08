@@ -348,7 +348,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <div class="bd-info">
         <h4>What we look at</h4><ul class="bd-chips">${d.look.map(x => `<li>${x}</li>`).join('')}</ul>
         <h4>What you get</h4><ol class="bd-get">${d.get.map(x => `<li>${x}</li>`).join('')}</ol>
-        <div class="d-act"><a class="btn solid" href="mailto:bixxville@proton.me?subject=${encodeURIComponent(s.name)}">${s.ask} ${ARROW}</a></div></div>
+        <div class="d-act"><a class="btn solid" href="request.html?service=${s.id}&src=breakdown">${s.ask} ${ARROW}</a></div></div>
       <div class="fx"><div class="fx-cap"><b>Try it</b> · ${d.tip}</div><div class="fx-body"></div></div>`;
     d.fig(bdPanel.querySelector('.fx-body'));
     bdPanel.classList.remove('swap'); void bdPanel.offsetWidth; bdPanel.classList.add('swap');
