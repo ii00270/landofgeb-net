@@ -17,7 +17,7 @@ window.gebTime = (d = new Date()) => {
     ['index.html', 'Home'],
     ['services.html', 'Services'],
     ['about.html', 'About'],
-    ['index.html#pricing', 'Pricing'],
+    ['team.html', 'Team'],
     ['https://www.bixxville.xyz', 'Bixxville'],
     ['https://bixxville.myshopify.com', 'Shop'],
   ];
@@ -54,7 +54,7 @@ window.gebTime = (d = new Date()) => {
       </div>
       <div>
         <h5>Where we're going</h5>
-        <div class="menu-next"><span>Electronics</span><span>Robotics</span><span>Mathematics</span></div>
+        <div class="menu-next"><span>Communities</span><span>Governments</span><span>Efficiency</span></div>
       </div>
       <div class="menu-clock">Land of Geb, LLC · Christiansted, St. Croix, U.S. Virgin Islands<br><b id="menuClock">—</b></div>
     </div>`;

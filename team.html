@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Land of Geb</title>
+<meta name="description" content="Who delivers the work at Land of Geb, what we are qualified in, and our public wallet, so anyone can check us.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:var(--t-ink); --body:var(--t-text); --soft:var(--t-muted); --faint:var(--t-faint); --bg:var(--t-bg); --card:var(--t-surface); --line:var(--t-line);
+  --yellow:var(--t-yellow); --orange:var(--t-orange); --pink:var(--t-pink);
+  --neon:var(--t-neon);
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--t-on-neon)}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.arrow{width:12px;height:12px;flex:none}
+
+.bar{position:sticky;top:0;z-index:20;display:grid;align-items:center;gap:28px;padding:14px var(--gutter);
+  background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--gutter);align-items:end;padding:64px var(--gutter) 56px;border-bottom:1px solid var(--line)}
+.intro .idx{margin-bottom:14px}
+.intro h1{font-family:var(--display);font-weight:400;font-size:clamp(72px,12vw,190px);line-height:.85;text-transform:uppercase;color:var(--ink)}
+.intro p{font-size:16px;max-width:520px}
+.intro p + p{margin-top:12px}
+.sec{padding:72px var(--gutter);border-bottom:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--gutter);align-items:end;margin-bottom:36px}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,7vw,104px);line-height:.92;text-transform:uppercase;color:var(--ink);margin-top:12px}
+.sec-head p{font-size:14.5px;max-width:520px}
+.creds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.cred{padding:22px 22px 26px 0;border-bottom:1px solid var(--line)}
+.cred small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:8px}
+.cred b{display:block;font-size:15px;color:var(--ink);margin-bottom:6px;line-height:1.35}
+.cred span{font-size:13.5px}
+.held{margin-top:16px;font-size:12px;color:var(--soft);letter-spacing:.04em}
+.net{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.net > div{border:1px solid var(--line);background:var(--card);padding:22px}
+.net b{display:block;font-family:var(--display);font-weight:400;font-size:26px;text-transform:uppercase;color:var(--ink);margin-bottom:8px;line-height:1.05}
+.net span{font-size:13.5px}
+.net .open{border-style:dashed;background:transparent}
+.dark{background:var(--t-band);color:var(--t-band-ink)}
+.dark .idx{color:var(--t-band-muted)}
+.dark .sec-head h2{color:var(--t-band-ink)}
+.dark .sec-head p{color:var(--t-band-text)}
+.wallet{border:1px solid var(--t-band-ink);position:relative;max-width:900px}
+.wallet::before{content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--neon)}
+.w-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:16px 22px;border-bottom:1px solid var(--t-band-line);font-size:13.5px;align-items:center}
+.w-row:last-child{border-bottom:none}
+.w-row small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--t-band-muted)}
+.w-addr{font-size:14px;word-break:break-all;color:var(--t-band-ink)}
+.w-act{display:flex;gap:10px;flex-wrap:wrap}
+.dark .btn{color:var(--t-band-ink);border-color:var(--t-band-ink)}
+.dark .btn:hover{background:var(--t-band-ink);color:var(--t-band)}
+.w-note{margin-top:18px;font-size:13px;color:var(--t-band-text);max-width:780px}
+.w-note p + p{margin-top:8px}
+.contact-note{display:none}
+/* ── the leaderboard: the same card the Bixxville OS uses for its Members view ── */
+.os{background:#0B0B0E;color:#EDEDEB;border:1px solid #26262b;border-radius:26px;padding:22px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;max-width:980px}
+.os-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin:2px 4px 16px}
+.os-top b{font-size:28px;font-weight:600;letter-spacing:-.03em}
+.os-top span{font-size:13px;color:#8A8A88}
+.os-row{--c:#FF2D95;position:relative;background:rgba(255,255,255,.055);border:1px solid #26262b;border-radius:20px;overflow:hidden;margin-bottom:8px}
+.os-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.os-row::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 16%,transparent),transparent 40%);pointer-events:none}
+.os-main{position:relative;z-index:1;display:grid;grid-template-columns:30px 44px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:14px 16px 14px 18px;width:100%;text-align:left;background:none;border:0;color:inherit;font:inherit;cursor:pointer}
+.os-main:focus-visible{outline:2px solid #fff;outline-offset:-3px;border-radius:20px}
+.os-rk{font-size:20px;font-weight:600;text-align:center;color:#E8B923}
+.os-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:600;background:color-mix(in srgb,var(--c) 22%,#222)}
+.os-nm b{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:16px;font-weight:600}
+.os-nm small{display:block;margin-top:2px;font-size:12.5px;color:#8A8A88}
+.os-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:linear-gradient(180deg,#fff,#c8c8c4);color:#0A0A0A}
+.os-stats{display:flex;gap:20px}
+.os-st{text-align:right;min-width:44px}
+.os-st b{display:block;font-size:21px;line-height:1.05;font-weight:600;letter-spacing:-.02em}
+.os-st small{display:block;margin-top:3px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A8A88}
+.os-see{font-size:12px;letter-spacing:.06em;color:#8A8A88;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.os-see svg{width:14px;height:14px;transition:transform .2s}
+.os-row.open .os-see svg{transform:rotate(90deg)}
+.os-more{display:none;position:relative;z-index:1;padding:4px 18px 20px;border-top:1px solid #26262b}
+.os-row.open .os-more{display:block}
+.os-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.os-fact{background:rgba(255,255,255,.045);border-radius:14px;padding:10px 12px}
+.os-fact b{display:block;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.os-fact small{display:block;margin-top:2px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A8A88}
+.os-sub{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A8A88;margin:14px 0 8px}
+.os-chips{display:flex;gap:6px;flex-wrap:wrap}
+.os-chip{font-size:12.5px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.08)}
+.os-work{list-style:none;display:grid;gap:0}
+.os-work li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:12px;padding:10px 0;border-bottom:1px solid #26262b;font-size:13.5px}
+.os-work li:last-child{border-bottom:none}
+.os-work b{font-weight:600}
+.os-work span{color:#8A8A88}
+.os-open{border:1px dashed #3a3a40;border-radius:20px;padding:16px 18px;display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:center;color:#8A8A88;font-size:13.5px;margin-bottom:8px}
+.os-open .os-rk{color:#555}
+.os-note{margin-top:12px;font-size:12px;color:#8A8A88}
+.os-fig{margin:28px 0 0;max-width:980px}
+.os-fig .shots{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:16px;align-items:end}
+.os-fig img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line)}
+.os-fig figcaption{margin-top:12px;font-size:12.5px;color:var(--soft)}
+@media (max-width:860px){
+  .os{padding:14px;border-radius:22px}
+  .os-main{grid-template-columns:26px 40px minmax(0,1fr) auto;gap:10px;padding:12px 12px 12px 16px}
+  .os-av{width:40px;height:40px}
+  .os-stats{grid-column:2 / -1;grid-row:2;gap:6px;justify-content:space-between}
+  .os-st{text-align:left;min-width:0}
+  .os-see span{display:none}
+  .os-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .os-work li{grid-template-columns:1fr;gap:2px}
+  .os-fig .shots{grid-template-columns:1fr}
+  .os-fig .shots img + img{max-width:260px}
+}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:var(--t-surface-strong)}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere;color:var(--ink)}
+.co b{font-weight:600}
+.f-col h4{font-size:12px;color:var(--ink);letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:var(--body);margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--t-surface-strong)}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .intro,.sec-head{grid-template-columns:1fr}
+  .creds,.net{grid-template-columns:1fr}
+  .cred{padding-right:0}
+  .w-row{grid-template-columns:1fr;gap:6px}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav"></nav>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
+  <a class="btn solid shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="rv">
+      <div class="idx">/04 — Land of Geb</div>
+      <h1>Team</h1>
+    </div>
+    <div class="rv">
+      <p><strong>We let the work speak. Where it cannot yet, our credentials do.</strong></p>
+      <p>Our work is delivered by trusted members of our labor and skilled network. Members join by invitation and take on defined pieces of a job. Their work is checked before it counts, and before they are paid.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <div class="rv"><div class="idx">01 — Credentials</div><h2>What we are<br><span class="neon-text">qualified in.</span></h2></div>
+      <p class="rv">These are held by our founder and lead operator, Rueben James. Each one is something done, not something claimed.</p>
+    </div>
+    <div class="creds rv">
+      <div class="cred"><small>2023 to now</small><b>Operations and process design</b><span>Built the method and the controls this network runs on: task order, step verification and settlement audit.</span></div>
+      <div class="cred"><small>2025 to now</small><b>Regulated federal paperwork</b><span>Processes federally regulated transactions daily, with full accuracy, where one error is a legal problem.</span></div>
+      <div class="cred"><small>2021 to 2023</small><b>Records management</b><span>Digitized more than 500 sensitive files for the Virgin Islands Department of Education and prepared them for audit.</span></div>
+      <div class="cred"><small>2019 to 2020</small><b>Community partnerships</b><span>Partnership Specialist, U.S. Census Bureau, St. Croix. Built outreach from demographic data and kept the program accountable.</span></div>
+      <div class="cred"><small>2020 to 2021</small><b>Industrial piping</b><span>Assistant pipe fitter in the U.S. Virgin Islands. Reads P&amp;IDs, works under strict safety frameworks. Holds a current TWIC.</span></div>
+      <div class="cred"><small>2018</small><b>Marketing and management</b><span>B.S., La Roche University. Previously ran a full-cycle recruitment pipeline and tracked its conversion.</span></div>
+    </div>
+    <p class="held rv">Credentials come from the founder's résumé and can be confirmed on request.</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <div class="rv"><div class="idx">02 — The network</div><h2>Trusted<br><span class="neon-text">members.</span></h2></div>
+      <p class="rv">We are new, and the network is small. We would rather list a few people we can stand behind than a long list of names. Tap a card to see more.</p>
+    </div>
+    <div class="os rv" id="leaderboard">
+      <div class="os-top"><b>Members</b><span>Ranked by what each has recorded</span></div>
+      <div class="os-row open" id="mRJ">
+        <button class="os-main" type="button" aria-expanded="true" aria-controls="mRJmore">
+          <span class="os-rk">1</span><span class="os-av">RJ</span>
+          <span class="os-nm"><b>Rueben James<span class="os-pill">Executive</span></b><small>St. Croix, USVI · Member since Jun 2026</small></span>
+          <span class="os-stats"><span class="os-st"><b>1,521</b><small>LOGs</small></span><span class="os-st"><b>0</b><small>Verified</small></span><span class="os-st"><b>0</b><small>Now</small></span></span>
+          <span class="os-see"><span>See less</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></span>
+        </button>
+        <div class="os-more" id="mRJmore">
+          <div class="os-facts">
+            <div class="os-fact"><b>1,521</b><small>LOGs recorded</small></div>
+            <div class="os-fact"><b>1</b><small>Job audited on the public record</small></div>
+            <div class="os-fact"><b>2024</b><small>First on-chain record</small></div>
+            <div class="os-fact"><b>5</b><small>Places worked</small></div>
+          </div>
+          <div class="os-sub">Skills</div>
+          <div class="os-chips"><span class="os-chip">Marketing and Management, B.S.</span><span class="os-chip">Forex and Futures Trader</span><span class="os-chip">Coordination Protocol Developer</span></div>
+          <div class="os-sub">Where they have worked</div>
+          <ul class="os-work">
+            <li><b>Land of Geb, LLC</b><span>Operations and process design</span><span>2023 to now</span></li>
+            <li><b>Virgin Islands Department of Education</b><span>Records management</span><span>2021 to 2023</span></li>
+            <li><b>Limetree Bay</b><span>Assistant pipe fitter</span><span>2020 to 2021</span></li>
+            <li><b>U.S. Census Bureau</b><span>Partnership Specialist</span><span>2019 to 2020</span></li>
+            <li><b>La Roche University</b><span>Admissions Counselor</span><span>2018 to 2019</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="os-open"><span class="os-rk">2</span><span>Open seat. Members join by invitation and appear here with their consent.</span></div>
+      <p class="os-note">LOGs are units of recorded work in the network's own ledger. Counts restart at a clean start; the network last reset on 25 Oct 2026.</p>
+    </div>
+    <figure class="os-fig rv">
+      <div class="shots"><img src="img/os-members.jpg" width="1100" height="640" alt="The Members view in the Bixxville OS: a scoreboard of totals, then one ranked card per member" loading="lazy"><img src="img/os-members-phone.jpg" width="500" height="960" alt="The same Members view on a phone" loading="lazy"></div>
+      <figcaption>The same board, in the Bixxville OS, on a computer and on a phone. Shown with the one member who agreed to be listed.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sec dark" id="wallet">
+    <div class="sec-head">
+      <div class="rv"><div class="idx">03 — Public wallet</div><h2>Check us<br><span class="neon-text">on-chain.</span></h2></div>
+      <p class="rv">Money for work is held and released on Hedera, a public ledger. This is the network's wallet. Anyone can look it up and see for themselves.</p>
+    </div>
+    <div class="wallet rv">
+      <div class="w-row"><small>Network</small><span>Hedera mainnet</span></div>
+      <div class="w-row"><small>Account</small><span class="w-addr">0.0.10938860</span></div>
+      <div class="w-row"><small>Address</small><span class="w-addr" id="wAddr">0x5ef1867a22dfe853311d4a2d346e97b8069f9025</span></div>
+      <div class="w-row"><small></small><div class="w-act"><button class="btn" type="button" id="wCopy">Copy address</button><a class="btn" href="https://hashscan.io/mainnet/account/0.0.10938860" target="_blank" rel="noopener">View on HashScan <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a></div></div>
+    </div>
+    <div class="w-note rv">
+      <p>Pay by bank transfer, cash or check today. USDC on Hedera is coming.</p>
+      <p>If anyone ever asks you to pay a different address, check with us by email first.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div>
+      <div class="c-idx">/ Contact</div>
+      <h2>Let's be in <span>contact.</span></h2>
+    </div>
+    <div>
+      <p>Questions, projects, or anything on this page: send us a request and we will answer by email.</p>
+      <a class="c-mail" href="request.html?src=team">Make a request</a>
+      <div class="c-row">
+        <button class="c-btn" type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('bixxville@proton.me').then(()=>{this.firstChild.textContent='Copied '})">Copy address </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact</h4>
+    <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script src="site.js"></script>
+<script src="theme.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; };
+  tick(); setInterval(tick, 15000);
+  $('yr').textContent = gebTime().year;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(x => io.observe(x));
+  const bar = $('bar');
+  addEventListener('scroll', () => { const d = document.documentElement; bar.style.setProperty('--progress', (scrollY / Math.max(1, d.scrollHeight - innerHeight) * 100) + '%'); }, { passive: true });
+  document.querySelectorAll('.os-main').forEach(b => b.addEventListener('click', () => {
+    const row = b.closest('.os-row'), open = !row.classList.contains('open');
+    row.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+    const t = b.querySelector('.os-see span'); if (t) t.textContent = open ? 'See less' : 'See more';
+  }));
+  $('wCopy').addEventListener('click', async e => {
+    const b = e.currentTarget, a = $('wAddr').textContent.trim();
+    try { await navigator.clipboard.writeText(a); b.textContent = 'Copied'; }
+    catch (x) { const r = document.createRange(); r.selectNodeContents($('wAddr')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Select and copy'; }
+    setTimeout(() => { b.textContent = 'Copy address'; }, 1800);
+  });
+})();
+</script>
+</body>
+</html>

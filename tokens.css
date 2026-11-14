@@ -101,6 +101,34 @@
    Body and secondary text are both above 7:1, which is what holds up best on a phone in bright sun.
    NEW: --t-faint (dark) #5C6166 and --t-band-line (dark) #2A2D31 are decoration-only greys chosen for this set. */
 
+/* ── The Bixxville OS palette, shared with the sites (added 14 Nov 2026) ──
+   The OS frames every screen in a soft graphite-to-black gradient with one highlight at the top right, puts controls on a silver
+   gradient, and lays rows and cards as translucent panels. These tokens carry the same colours here, so the sites and the app read as one system. */
+:root{
+  --t-frame:radial-gradient(70% 14% at 82% 0%,rgba(255,255,255,.55),transparent 72%),radial-gradient(95% 55% at 50% 0%,#F6F3ED 0%,#E8E4DD 55%,#D3CFC7 100%);
+  --t-silver:linear-gradient(180deg,#0A0A0A,#0A0A0A);   /* light theme: the OS uses solid black buttons */
+  --t-panel:rgba(20,18,14,.06);
+  --t-tier-app:#64748B; --t-tier-wra:#3B82F6; --t-tier-arc:#8B5CF6; --t-tier-ope:#FF7A1A;   /* the OS tier colours */
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --t-frame:radial-gradient(70% 14% at 82% 0%,rgba(255,255,255,.20),transparent 72%),radial-gradient(95% 55% at 50% 0%,#2A2A2E 0%,#18181B 55%,#0B0B0E 100%);
+    --t-silver:linear-gradient(180deg,#FFFFFF 0%,#E6E6E3 48%,#C8C8C4 100%);
+    --t-panel:rgba(255,255,255,.055);
+  }
+}
+:root[data-theme="dark"]{
+  --t-frame:radial-gradient(70% 14% at 82% 0%,rgba(255,255,255,.20),transparent 72%),radial-gradient(95% 55% at 50% 0%,#2A2A2E 0%,#18181B 55%,#0B0B0E 100%);
+  --t-silver:linear-gradient(180deg,#FFFFFF 0%,#E6E6E3 48%,#C8C8C4 100%);
+  --t-panel:rgba(255,255,255,.055);
+}
+/* the page sits on the OS frame, and solid buttons take the OS silver in dark */
+html{min-height:100%}
+body{background-image:var(--t-frame) !important;background-repeat:no-repeat !important;background-attachment:fixed !important;background-size:100% 100% !important}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .btn.solid{background-image:var(--t-silver) !important;color:#0A0A0A !important;border-color:transparent !important} }
+:root[data-theme="dark"] .btn.solid{background-image:var(--t-silver) !important;color:#0A0A0A !important;border-color:transparent !important}
+@media print{ body{background-image:none !important} }
+
 /* ── the theme button (same on every site: top right of the bar) ── */
 .t-theme{appearance:none;-webkit-appearance:none;display:inline-grid;place-items:center;width:var(--t-target);height:var(--t-target);
   border:1px solid var(--t-line-strong);border-radius:var(--t-radius-pill);background:transparent;color:var(--t-ink);cursor:pointer;

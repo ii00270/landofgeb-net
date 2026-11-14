@@ -65,8 +65,10 @@ a{color:inherit;text-decoration:none}
 .intro .how span::before{content:'';display:inline-block;width:6px;height:6px;margin-right:8px;background:var(--pink);vertical-align:2px}
 
 /* ── the dial stage ── */
-.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:680px}
-.dial{position:relative;overflow:hidden;cursor:grab;touch-action:none;user-select:none;outline:none;border-right:1px solid var(--line)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start;border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:680px}
+/* a fixed-height dial that stays in view while you read: its size never depends on the service that is open, so it is drawn right the first time and never jumps */
+.dial{position:sticky;top:57px;height:min(720px,calc(100vh - 57px));min-height:520px;overflow:hidden;cursor:grab;touch-action:none;user-select:none;outline:none}
+.detail{border-left:1px solid var(--line)}
 .dial.dragging{cursor:grabbing}
 .dial:focus-visible{box-shadow:inset 0 0 0 2px var(--pink)}
 .dial svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -152,7 +154,8 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   .nav,.clock{display:none}
   .intro{grid-template-columns:1fr;padding-top:40px}
   .stage{grid-template-columns:1fr;min-height:0}
-  .dial{height:430px;border-right:none;border-bottom:1px solid var(--line)}
+  .dial{position:relative;top:auto;height:430px;min-height:0;border-bottom:1px solid var(--line)}
+  .detail{border-left:none}
   .dial-num{font-size:30px}
   .dial-active{gap:14px}
   .dial-active b{font-size:clamp(56px,17vw,84px)}
@@ -238,6 +241,9 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
         <div class="d-facts">
           <div><h4>For</h4><p>Operations leads who need to know their weak points before the next surge.</p></div>
           <div><h4>You get</h4><p>A written report, with a ranked list of weak points and a fix order. Inside: the tasks, what each one depends on, the labor in hours, the single points of failure, and the points where the operation overloads.</p></div>
+          <div><h4>Pilot price</h4><p><strong>$100</strong>, fixed. Delivered in five working days. Half to start, half on delivery.</p></div>
+          <div><h4>Who</h4><p>Delivered by a trusted member of our labor and skilled network. <a href="team.html" style="text-decoration:underline">About the team</a>.</p></div>
+          <div><h4>What we don't do</h4><p>Work that needs a licence, such as legal, medical or electrical. We tell you plainly, and point you to someone who holds one.</p></div>
         </div>
         <div class="d-steps"><h4>How it works</h4><ol>
           <li>We review the operation with you: the tasks, who does them, and what each one waits on.</li>
@@ -441,6 +447,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
+    <a href="team.html">Team</a>
     <a href="index.html#pricing">Pricing</a>
     <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
   </div>
@@ -629,6 +636,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
 
   layout();
   if (!fromHash()) choose(0, { fromHash: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => layout());   // fonts can change the size once they arrive
 
   // reveal + scroll progress
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });

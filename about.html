@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Land of Geb</title>
-<meta name="description" content="Land of Geb, LLC — a St. Croix company. How we work, who founded it, and where we're going: electronics, robotics and the continuous pursuit of mathematics.">
+<meta name="description" content="Land of Geb, LLC — a St. Croix company. Our mission is to make complex situations manageable. How we work, who delivers, and where we are going.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -81,23 +81,52 @@ a{color:inherit;text-decoration:none}
 .stage{opacity:.35;transition:opacity .6s}
 .stage.lit{opacity:1}
 
-/* ── founder ── */
-.founder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:var(--gutter);padding:88px var(--gutter);border-bottom:1px solid var(--line)}
-.founder h2{font-family:var(--display);font-weight:400;font-size:clamp(56px,8vw,120px);line-height:.88;text-transform:uppercase;color:var(--ink);margin:14px 0 18px}
-.founder .role{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:22px}
-.founder p{font-size:15.5px;max-width:480px}
-.founder p + p{margin-top:14px}
-.bg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
-.bg-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
-.bg-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--neon);opacity:0;transition:opacity .3s}
-.bg-card:hover{transform:translateY(-3px);box-shadow:var(--t-shadow)}
-.bg-card:hover::before{opacity:1}
-.bg-card svg{width:30px;height:30px;color:var(--ink);margin-bottom:12px}
-.bg-card b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
-.bg-card span{font-size:13.5px}
-.bg-card.wide{grid-column:1 / -1;background:var(--t-band);color:var(--t-band-ink);border-color:var(--t-band)}
-.bg-card.wide b{color:var(--t-band-ink)}
-.bg-card.wide span{color:var(--t-band-text)}
+/* ── what every map shows ── */
+.maps{padding:80px var(--gutter);border-bottom:1px solid var(--line)}
+.sec-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--gutter);align-items:end;margin-bottom:34px}
+.sec-top h2{font-family:var(--display);font-weight:400;font-size:clamp(44px,6.5vw,96px);line-height:.92;text-transform:uppercase;color:var(--ink);margin-top:12px}
+.sec-top p{font-size:15px;max-width:520px}
+.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--ink)}
+.five div{padding:20px 18px 6px 0}
+.five .n{font-family:var(--display);font-size:44px;line-height:1;margin-bottom:8px}
+.five b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.five span{font-size:13.5px}
+/* ── the record ── */
+.record{background:var(--t-band);color:var(--t-band-ink);padding:84px var(--gutter) 90px}
+.record .idx{color:var(--t-band-muted)}
+.record .sec-top h2{color:var(--t-band-ink)}
+.record .sec-top p{color:var(--t-band-text)}
+.rec{border:1px solid var(--t-band-ink);position:relative;max-width:980px}
+.rec::before{content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--neon)}
+.rec-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 22px;border-bottom:1px solid var(--t-band-line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--t-band-muted)}
+.rec-head b{color:var(--t-band-ink);font-weight:500}
+.rec-row{display:grid;grid-template-columns:36px minmax(0,1.3fr) minmax(0,1fr) auto;gap:16px;padding:15px 22px;border-bottom:1px solid var(--t-band-line);align-items:center;font-size:13.5px}
+.rec-row .n{font-family:var(--display);font-size:24px;line-height:1;color:var(--t-band-ink)}
+.rec-row b{font-weight:500;color:var(--t-band-ink)}
+.rec-row small{display:block;font-size:12px;color:var(--t-band-muted);letter-spacing:.04em}
+.rec-row a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--t-band-line);padding:7px 12px;white-space:nowrap;color:var(--t-band-text)}
+.rec-row a:hover{background:var(--t-band-ink);color:var(--t-band)}
+.rec-foot{padding:16px 22px;font-size:13px;color:var(--t-band-text)}
+.rec-foot b{color:var(--t-band-ink);font-weight:500}
+.rec-not{max-width:980px;margin-top:18px;font-size:13px;color:var(--t-band-text)}
+.rec-not b{color:var(--t-band-ink);font-weight:500}
+/* ── what we hold to ── */
+.hold{padding:80px var(--gutter);border-bottom:1px solid var(--line)}
+.hold-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.hold-grid div{padding:22px 24px 26px 0;border-bottom:1px solid var(--line)}
+.hold-grid .n{font-size:12px;letter-spacing:.14em;color:var(--soft);display:block;margin-bottom:8px}
+.hold-grid b{display:block;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.hold-grid span.t{font-size:14px;display:block;max-width:300px}
+
+/* ── who delivers ── */
+.people{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:var(--gutter);padding:88px var(--gutter);border-bottom:1px solid var(--line);align-items:center}
+.people h2{font-family:var(--display);font-weight:400;font-size:clamp(52px,7.5vw,112px);line-height:.9;text-transform:uppercase;color:var(--ink);margin-top:14px}
+.people p{font-size:15.5px;max-width:520px}
+.people p + p{margin-top:14px}
+.people .btn{margin-top:26px}
+.app-shot{margin:30px 0 0}
+.app-shot img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+.app-shot figcaption{margin-top:10px;font-size:12.5px;color:var(--soft)}
 
 /* ── roadmap: a glowing line, milestones either side ── */
 .roadmap{background:#06060A;color:#fff;padding:90px var(--gutter) 100px;position:relative;overflow:hidden}
@@ -142,7 +171,11 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:860px){
-  .intro,.founder{grid-template-columns:1fr}
+  .intro,.people,.sec-top{grid-template-columns:1fr}
+  .five{grid-template-columns:1fr 1fr}
+  .hold-grid{grid-template-columns:1fr}
+  .rec-row{grid-template-columns:30px 1fr;gap:6px 14px}
+  .rec-row > :nth-child(3),.rec-row > :nth-child(4){grid-column:2}
   .pillars{grid-template-columns:1fr}
   .pillars div,.pillars div:nth-child(2),.pillars div:last-child{border-right:none;border-bottom:1px solid var(--line);padding:20px 0}
   .spine::before,.spine-fill{left:10px}
@@ -150,7 +183,6 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   .stage:nth-child(odd) .dot,.stage:nth-child(even) .dot{left:0;right:auto}
   .stage:nth-child(odd) .chips{justify-content:flex-start}
   .stage:nth-child(odd){text-align:left}
-  .bg-grid{grid-template-columns:1fr}
   .rm::before{left:8px}
   .ms{grid-template-columns:1fr}
   .ms-node{left:8px}
@@ -166,8 +198,8 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   .stage{opacity:1}
 }
 @media print{
-  .stages,.roadmap,.bg-card.wide{background:#fff !important;color:#000 !important}
-  .stages *,.roadmap *,.bg-card.wide *{color:#000 !important;border-color:#999 !important;box-shadow:none !important}
+  .stages,.roadmap{background:#fff !important;color:#000 !important}
+  .stages *,.roadmap *{color:#000 !important;border-color:#999 !important;box-shadow:none !important}
   .ms-when,.neon-text{background:none !important;-webkit-text-fill-color:#000 !important}
   .ms-more{max-height:none !important}
   .stage{opacity:1 !important}
@@ -192,8 +224,9 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <h1>About</h1>
     </div>
     <div class="rv">
-      <p><strong>Land of Geb, LLC keeps critical operations running when demand surges and the network fails.</strong> It is registered in Pennsylvania and operates from Christiansted, St. Croix.</p>
-      <p>We find where an operation overloads and take the overload out, in order. We run our own work on Bixxville, the system we built to do it.</p>
+      <p><strong>Our mission is to make complex situations manageable.</strong></p>
+      <p>Our goal is to bring advancement to human complexity. We do it one operation at a time: find where it overloads, take the overload out, in order.</p>
+      <p>Land of Geb, LLC is a private network registered in Pennsylvania and headquartered in Christiansted, St. Croix, U.S. Virgin Islands. We run our own work on Bixxville, the system we built to do it.</p>
     </div>
   </section>
 
@@ -227,26 +260,68 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     </div>
   </section>
 
-  <!-- ── Founder ── -->
-  <section class="founder" id="founder">
-    <div class="rv">
-      <div class="idx">02 — Founder</div>
-      <h2>Benjo<br><span class="neon-text">Bixx</span></h2>
-      <div class="role">Founder · Land of Geb &amp; Bixxville · St. Croix</div>
-      <p>Every field he has worked in is a system — markets, people, plant piping, a grappling exchange — and every system can be broken down into the moves that make it work.</p>
-      <p>That is where our decomposition method comes from: take anything complicated, find its parts and their order, and turn it into steps people can actually do, prove and get paid for.</p>
+  <!-- ── What every map shows ── -->
+  <section class="maps" id="maps">
+    <div class="sec-top">
+      <div class="rv"><div class="idx">02 — The work</div><h2>Every map<br><span class="neon-text">shows five things.</span></h2></div>
+      <p class="rv">We take an operation apart until each piece can be seen, checked and fixed in order. Whatever the size, the map you get shows the same five things.</p>
     </div>
-    <div class="bg-grid">
-      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 24 11 14l5 5 11-13"/><path d="M20 6h7v7"/></svg>
-        <b>Markets</b><span>Day trading options, futures and forex, and long-term investing.</span></div>
-      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="15" cy="15" r="11"/><circle cx="15" cy="15" r="6"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/></svg>
-        <b>Marketing &amp; data</b><span>Segmentation and behavioral psychology — how what people see shapes what they decide.</span></div>
-      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="10" r="3.5"/><circle cx="21" cy="10" r="3.5"/><path d="M3 24c0-4 3-6 6-6s6 2 6 6M15 24c0-4 3-6 6-6s6 2 6 6"/></svg>
-        <b>Teams</b><span>Managed teams in census and local-government operations.</span></div>
-      <div class="bg-card rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 22c5-1 7-6 10-6s5 5 10 6"/><path d="M8 9c3 0 4 3 7 3s4-3 7-3"/><circle cx="15" cy="5" r="2"/></svg>
-        <b>Jiu-jitsu</b><span>Brazilian jiu-jitsu — where breaking a system down became a method.</span></div>
-      <div class="bg-card wide rv"><svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.3" style="color:#fff"><path d="M3 15h7l3-5 4 10 3-5h7"/><rect x="2" y="6" width="26" height="18" rx="1"/></svg>
-        <b>Industrial trades</b><span>Boilermaker and pipefitter with refinery experience; reads P&amp;IDs — the diagrams that show how a whole plant fits together.</span></div>
+    <div class="five">
+      <div class="rv"><div class="n neon-text">1</div><b>The tasks</b><span>Everything that has to happen, written plainly.</span></div>
+      <div class="rv"><div class="n neon-text">2</div><b>What each one waits on</b><span>The order, and what blocks what.</span></div>
+      <div class="rv"><div class="n neon-text">3</div><b>The labor</b><span>How many hours each piece takes.</span></div>
+      <div class="rv"><div class="n neon-text">4</div><b>Single points of failure</b><span>Where one person or one thing holds it all up.</span></div>
+      <div class="rv"><div class="n neon-text">5</div><b>Overload points</b><span>Where too much lands at once.</span></div>
+    </div>
+  </section>
+
+  <!-- ── The record ── -->
+  <section class="record" id="record">
+    <div class="sec-top">
+      <div class="rv"><div class="idx">03 — The record</div><h2>Check it<br><span class="neon-text">yourself.</span></h2></div>
+      <p class="rv">Our payment system ran a real job, start to finish, on a public ledger. Every step below is a public record, so you do not have to take our word for it.</p>
+    </div>
+    <div class="rec rv">
+      <div class="rec-head"><span><b>One job, seven steps</b> · Hedera main network</span><span>Fri 30 Oct to Sat 31 Oct 2026 · AST (UTC-04:00)</span></div>
+      <div class="rec-row"><span class="n">1</span><div><b>The contract is deployed</b><small>The rules for the job are set on the ledger</small></div><div><small>Fri 30 Oct, 21:29</small></div><a href="https://hashscan.io/mainnet/transaction/0x676aad19a27dfb9033004e7e953484a400ada94328ddfb1354bb3df1c3c7a5da" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">2</span><div><b>The client funds the job</b><small>The money is held, not paid out</small></div><div><small>Fri 30 Oct, 21:40</small></div><a href="https://hashscan.io/mainnet/transaction/0x2a73be94b00229cf8073c782221a5545f8ac64775187f5870ce7bbe97d52296a" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">3</span><div><b>The worker delivers</b><small>The work is marked done</small></div><div><small>Sat 31 Oct, 02:34</small></div><a href="https://hashscan.io/mainnet/transaction/0x1436762428b7ad7a9476ed533830247489026c21d9a94b61402488fd7c81f2ef" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">4</span><div><b>An auditor checks it</b><small>Someone other than the worker</small></div><div><small>Sat 31 Oct, 08:11</small></div><a href="https://hashscan.io/mainnet/transaction/0x21c22c922e7090fa801fdc1f87479330190557a072e4bc3f4150b1d491d08752" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">5</span><div><b>The client approves</b><small>The client has the final say</small></div><div><small>Sat 31 Oct, 08:13</small></div><a href="https://hashscan.io/mainnet/transaction/0xf83b4c5cd2a3d7e88d1a743863c16f6be896a5d3c774084b0621d1bea0a56857" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">6</span><div><b>The worker is paid</b><small>Sealed, and released to the worker</small></div><div><small>Sat 31 Oct, 08:15</small></div><a href="https://hashscan.io/mainnet/transaction/0xb62ed396345a4176f21cc83f8398c91695c52c3fd774fba8697e033f8c218ef1" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-row"><span class="n">7</span><div><b>The job closes</b><small>The rest is released, and the job is done</small></div><div><small>Sat 31 Oct, 08:16</small></div><a href="https://hashscan.io/mainnet/transaction/0x6bd7bce68fb76efa87336f88faedb42ec1e3bcaf4da95dd7fd5b2effa5e63b6c" target="_blank" rel="noopener">View</a></div>
+      <div class="rec-foot"><b>Result: passed.</b> One client, one worker, one job. It was a test with real money, $1.</div>
+    </div>
+    <p class="rec-not rv"><b>Not proven yet:</b> jobs with more than one line of work, refunds, and an outside audit of the contract. We will say so here when that changes.</p>
+  </section>
+
+  <!-- ── What we hold to ── -->
+  <section class="hold" id="hold">
+    <div class="sec-top">
+      <div class="rv"><div class="idx">04 — What we hold to</div><h2>Six<br><span class="neon-text">commitments.</span></h2></div>
+      <p class="rv">These are the rules the network is built on, not slogans.</p>
+    </div>
+    <div class="hold-grid">
+      <div class="rv"><span class="n">01</span><b>Checked before paid</b><span class="t">Work counts when someone other than the person who did it has checked it.</span></div>
+      <div class="rv"><span class="n">02</span><b>Small first steps</b><span class="t">Start with something you can try without risk, then decide the next step.</span></div>
+      <div class="rv"><span class="n">03</span><b>Priced for where you are</b><span class="t">Each region pays what it can carry. The work is the same.</span></div>
+      <div class="rv"><span class="n">04</span><b>In the open</b><span class="t">Our payments run on a public ledger that anyone can read.</span></div>
+      <div class="rv"><span class="n">05</span><b>Honest about limits</b><span class="t">We tell you what needs a licensed professional, and who to call.</span></div>
+      <div class="rv"><span class="n">06</span><b>Teach as we go</b><span class="t">The aim is that your team can run it without us.</span></div>
+    </div>
+  </section>
+
+  <!-- ── Who delivers ── -->
+  <section class="people" id="people">
+    <div class="rv">
+      <div class="idx">05 — Who delivers</div>
+      <h2>Let the work<br><span class="neon-text">speak.</span></h2>
+    </div>
+    <div class="rv">
+      <p>Our work is delivered by trusted members of our labor and skilled network, each matched to the piece they are qualified for. Where the work cannot speak yet, our credentials do.</p>
+      <p>The Team page lists those credentials, and our public wallet, so anyone can check us.</p>
+      <a class="btn solid" href="team.html">Meet the team <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+      <figure class="app-shot"><img src="img/os-members.jpg" width="1100" height="640" alt="The Members view in the Bixxville OS" loading="lazy"><figcaption>The Members view in the Bixxville OS, the system our network runs on.</figcaption></figure>
     </div>
   </section>
 
@@ -256,9 +331,12 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     <div class="rm-head rv">
       <small>Achievements &amp; goals</small>
       <h2>Where we're <span class="neon-text">going.</span></h2>
-      <p>Next: the app opens to members. Then electronics and robotics — and, always, the continuous pursuit of mathematics.</p>
+      <p>Next: the app opens to members. Then working with communities and governments, so efficient ways of running things reach the people who need them.</p>
     </div>
     <div class="rm" id="rm">
+      <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
+        <div class="ms-when">Nov 22, 2024</div><div class="ms-what">The first record</div>
+        <div class="ms-more">The network's first account opens on Hedera, a public ledger. The next day the Geb token is created there. Both can still be looked up today.</div></div></div></div>
       <div class="ms"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
         <div class="ms-when">Feb 27, 2025</div><div class="ms-what">Cycle 1 begins</div>
         <div class="ms-more">Bixxville's first 28-day cycle. Every cycle since is counted from this day, and every payout settles at the end of one.</div></div></div></div>
@@ -284,14 +362,14 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
         <div class="ms-when">Launch</div><div class="ms-what">Next</div>
         <div class="ms-more">The app opens to members, with payments on Hedera's main network.</div></div></div></div>
       <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
-        <div class="ms-when">Electronics</div><div class="ms-what">Next</div>
-        <div class="ms-more">Getting into the hardware: circuits, components, and the systems they make.</div></div></div></div>
+        <div class="ms-when">Communities</div><div class="ms-what">Next</div>
+        <div class="ms-more">Working alongside community groups, so the practices that make a local operation manageable are shared, not kept.</div></div></div></div>
       <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
-        <div class="ms-when">Robotics</div><div class="ms-what">Next</div>
-        <div class="ms-more">Where electronics, code and mechanics meet — machines that do real work.</div></div></div></div>
+        <div class="ms-when">Governments</div><div class="ms-what">Next</div>
+        <div class="ms-more">Working with local and regional government offices to bring clearer, more efficient ways of running public services.</div></div></div></div>
       <div class="ms future"><i class="ms-node"></i><div class="ms-card" tabindex="0"><div class="ms-box">
-        <div class="ms-when">Mathematics</div><div class="ms-what">Always</div>
-        <div class="ms-more">The continuous pursuit. The language under everything we build — from a price to a circuit to a machine.</div></div></div></div>
+        <div class="ms-when">Efficiency</div><div class="ms-what">Always</div>
+        <div class="ms-more">The thread through all of it: the same effort should get more done, for more people.</div></div></div></div>
     </div>
     <div class="ms-hint">Tap a milestone</div>
   </section>
@@ -324,6 +402,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
+    <a href="team.html">Team</a>
     <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
   </div>
   <div class="f-col">
