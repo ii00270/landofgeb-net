@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWAV — Land of Geb</title>
+<meta name="description" content="OWAV, established 2021, is the creative and learning body of Land of Geb. It is outdoors oriented and organized like a university: departments, a faculty, a catalog and a record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:var(--t-ink); --body:var(--t-text); --soft:var(--t-muted); --faint:var(--t-faint); --bg:var(--t-bg); --card:var(--t-surface); --line:var(--t-line);
+  --yellow:var(--t-yellow); --orange:var(--t-orange); --pink:var(--t-pink);
+  --neon:var(--t-neon);
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--pink);color:var(--t-on-neon)}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.neon-text{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover{box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.arrow{width:12px;height:12px;flex:none}
+
+.bar{position:sticky;top:0;z-index:20;display:grid;align-items:center;gap:28px;padding:14px var(--gutter);
+  background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* ══ OWAV: a university-style body, printed like a catalog. Always on paper, whatever the site theme. ══ */
+.owav{--paper:#F3EEE4;--paper2:#EBE4D4;--ink:#013B38;--ink2:#26221E;--mute:#5A554B;--rust:#C8452A;--rule:#013B38;color:var(--ink2);background:var(--paper);color-scheme:light;
+  font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.65;position:relative;overflow:hidden;
+  background-image:radial-gradient(120% 70% at 50% 0%,rgba(255,255,255,.55),transparent 60%),radial-gradient(rgba(1,59,56,.045) 1px,transparent 1.4px);background-size:100% 100%,6px 6px}
+.owav *{box-sizing:border-box}
+.owav a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.sheet{max-width:1080px;margin:0 auto;padding:clamp(26px,5vw,64px) clamp(18px,4vw,48px)}
+.frame{border:2px solid var(--rule);padding:6px}
+.frame > .in{border:1px solid var(--rule);padding:clamp(20px,4vw,46px)}
+.lab{font:500 12px/1.4 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cap{font-family:'Oswald','Arial Narrow',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);line-height:1.05}
+/* masthead */
+.mast{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,4vw,48px);align-items:center;padding-bottom:30px;border-bottom:3px double var(--rule)}
+.seal{position:relative;width:clamp(150px,22vw,220px);aspect-ratio:1}
+.seal svg{width:100%;height:100%;display:block}
+.seal .mk{position:absolute;left:50%;top:50%;width:21%;height:28%;transform:translate(-50%,-52%);background:var(--ink);-webkit-mask:url(img/land-of-geb-mark.svg) center/contain no-repeat;mask:url(img/land-of-geb-mark.svg) center/contain no-repeat}
+.wm{display:block;width:min(100%,520px);height:auto;aspect-ratio:734/169;background:var(--ink);-webkit-mask:url(img/owav-wordmark.svg) left center/contain no-repeat;mask:url(img/owav-wordmark.svg) left center/contain no-repeat}
+.mast h1{margin:0}
+.mast .sub{font-style:italic;font-size:clamp(18px,2.4vw,24px);color:var(--ink);margin-top:14px;max-width:34ch}
+.mast .place{margin-top:12px}
+.motto{display:inline-block;margin-top:18px;border:1px solid var(--rule);border-left:6px solid var(--rust);padding:8px 14px;font-style:italic;color:var(--ink)}
+/* sections */
+.sec{padding:clamp(28px,4vw,48px) 0 0}
+.sh{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:22px}
+.sh .no{font:600 13px 'IBM Plex Mono',monospace;border:1.5px solid var(--ink);padding:2px 8px;color:var(--ink)}
+.sh h2{font-size:clamp(28px,4.4vw,44px);margin:0}
+.lead{font-size:clamp(19px,2.2vw,23px);line-height:1.5;color:var(--ink2);max-width:44ch}
+.plain p{max-width:62ch;margin:0 0 12px}
+/* tags (departments), like a luggage tag with a punched hole */
+.tags{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:6px}
+.tag{position:relative;border:2px solid var(--ink);border-radius:18px 18px 4px 4px;background:#FBF8F1;padding:44px 0 0;box-shadow:3px 4px 0 rgba(1,59,56,.16)}
+.tag::before{content:"";position:absolute;left:50%;top:13px;width:18px;height:18px;margin-left:-9px;border:2px solid var(--ink);border-radius:50%;background:var(--paper)}
+.tag .row{border-top:1px solid var(--ink);padding:11px 16px}
+.tag .row:first-of-type{border-top:2px solid var(--ink)}
+.tag h3{margin:0;font-size:clamp(22px,2.4vw,28px)}
+.tag p{margin:0;font-size:15.5px}
+.tag .dn{display:flex;justify-content:space-between;align-items:baseline}
+.tag .dn .n{font:600 26px 'Oswald',sans-serif;color:var(--rust)}
+/* two kinds of work */
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:2px solid var(--ink)}
+.pair > div{padding:22px 24px}
+.pair > div + div{border-left:2px solid var(--ink)}
+.pair h3{margin:0 0 6px;font-size:28px}
+.pair .lab{margin-bottom:8px}
+.rule{margin-top:18px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:12px 4px;text-align:center;font-style:italic;color:var(--ink)}
+/* the record: a blank entry form and empty tickets */
+.stampwrap{position:relative}
+.stamp{position:absolute;right:2%;top:-6px;transform:rotate(-8deg);border:3px solid var(--rust);color:var(--rust);padding:6px 14px;border-radius:6px;font:700 15px 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.85;background:transparent}
+.form{border:2px solid var(--ink);background:#FBF8F1}
+.form .fr{display:grid;grid-template-columns:200px minmax(0,1fr);border-top:1px solid var(--ink)}
+.form .fr:first-child{border-top:none}
+.form .fr > div{padding:11px 14px}
+.form .fr > div:first-child{border-right:1px solid var(--ink);background:rgba(1,59,56,.05)}
+.form .fr .line{border-bottom:1px dotted var(--ink2);height:24px}
+.tickets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
+.tkt{border:2px dashed var(--ink);padding:16px 16px 14px;background:rgba(251,248,241,.6);text-align:left}
+.tkt .big{font:600 34px 'Oswald',sans-serif;color:var(--ink);line-height:1}
+.tkt .lab{margin-top:8px}
+/* roll */
+.roll{border:2px solid var(--ink);background:#FBF8F1}
+.roll .rr{display:grid;grid-template-columns:48px minmax(0,1.2fr) minmax(0,1fr) 120px;gap:12px;padding:11px 14px;border-top:1px solid var(--ink);align-items:center}
+.roll .rr:first-child{border-top:none;background:rgba(1,59,56,.06)}
+.roll .rr .line{border-bottom:1px dotted var(--ink2);height:20px}
+/* procedure */
+.proc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);background:#FBF8F1}
+.proc > div{padding:18px 18px 20px;border-left:1px solid var(--ink)}
+.proc > div:first-child{border-left:none}
+.proc .n{font:600 40px/1 'Oswald',sans-serif;color:var(--rust);margin-bottom:6px}
+.proc h3{margin:0 0 6px;font-size:22px}
+.proc p{margin:0;font-size:15px;line-height:1.5}
+/* notice and contact */
+.notice{border:2px solid var(--ink);padding:18px 20px;background:var(--paper2)}
+.notice b{font-family:'Oswald',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;border-top:3px double var(--rule);margin-top:clamp(28px,4vw,48px);padding-top:24px}
+.owbtn{display:inline-block;background:var(--ink);color:var(--paper);padding:14px 22px;font:600 13px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;text-decoration:none!important;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--rust)}
+.owbtn:hover{box-shadow:6px 6px 0 var(--rust)}
+.draftbar{background:#1c1c1c;color:#F3EEE4;text-align:center;font:500 12px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:8px 14px}
+.draftbar b{color:#FFEA00}
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:var(--t-surface-strong)}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere;color:var(--ink)}
+.co b{font-weight:600}
+.f-col h4{font-size:12px;color:var(--ink);letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:var(--body);margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--t-surface-strong)}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  .mast{grid-template-columns:1fr;justify-items:start}
+  .pair{grid-template-columns:1fr}
+  .pair > div + div{border-left:none;border-top:2px solid var(--ink)}
+  .proc{grid-template-columns:1fr 1fr}
+  .proc > div:nth-child(3){border-left:none}
+  .proc > div:nth-child(n+3){border-top:1px solid var(--ink)}
+  .form .fr{grid-template-columns:1fr}
+  .form .fr > div:first-child{border-right:none;border-bottom:1px solid var(--ink)}
+  .roll .rr{grid-template-columns:34px 1fr}
+  .roll .rr > :nth-child(n+3){display:none}
+  .stamp{position:static;display:inline-block;transform:rotate(-4deg);margin-bottom:14px}
+  footer{grid-template-columns:1fr}
+  .base{flex-direction:column}
+}
+@media (max-width:520px){.proc{grid-template-columns:1fr}.proc > div{border-left:none!important;border-top:1px solid var(--ink)}.proc > div:first-child{border-top:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.draftbar{display:none}}
+</style>
+</head>
+<body>
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav"></nav>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
+  <a class="btn solid shop-link" href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+</header>
+
+<main class="owav" id="top">
+    <div class="sheet"><div class="frame"><div class="in">
+
+    <header class="mast">
+      <div class="seal"><svg viewBox="0 0 240 240" role="img" aria-label="The OWAV seal"><defs><path id="ring" d="M120,120 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0"/></defs>
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#013B38" stroke-width="3"/>
+  <circle cx="120" cy="120" r="108" fill="none" stroke="#013B38" stroke-width="1"/>
+  <circle cx="120" cy="120" r="66" fill="none" stroke="#013B38" stroke-width="1.5"/>
+  <text font-family="Oswald,Arial Narrow,sans-serif" font-weight="600" font-size="17" letter-spacing="4.7" fill="#013B38"><textPath href="#ring" startOffset="2">OWAV ★ EST. 2021 ★ LAND OF GEB ★ ST. CROIX ★ </textPath></text>
+  <g fill="#C8452A"><path d="M120 70l2.2 6.8h7.1l-5.8 4.2 2.2 6.8-5.7-4.2-5.7 4.2 2.2-6.8-5.8-4.2h7.1z" transform="translate(0 -20) scale(1)" opacity="0"/></g>
+  </svg><div class="mk"></div></div>
+      <div>
+        <div class="lab">Established 2021 · A body of Land of Geb · Christiansted · St. Croix · U.S. Virgin Islands</div>
+        <h1 aria-label="OWAV"><span class="wm" role="img" aria-label="OWAV"></span></h1>
+        <p class="sub">The creative and learning body of Land of Geb.</p>
+        <span class="motto">Read the gap between two points.</span>
+      </div>
+    </header>
+
+    <section class="sec plain" id="charter">
+      <div class="sh"><span class="no">1</span><h2 class="cap">The charter</h2></div>
+      <p class="lead">OWAV is the creative and learning body of Land of Geb. It is organized like a university: departments, a faculty, a catalog and a record.</p>
+      <p>Its members are creatives and artists. They learn, make and show their work together.</p>
+      <p>OWAV is outdoors oriented. Its work includes real activities outside, not only work at a desk.</p>
+      <p>Before Land of Geb moved into building, most of its work came through OWAV.</p>
+    </section>
+
+    <section class="sec" id="departments">
+      <div class="sh"><span class="no">2</span><h2 class="cap">The departments</h2></div>
+      <div class="tags">
+        <article class="tag"><div class="row dn"><h3 class="cap">Collaboration</h3><span class="n">01</span></div><div class="row"><span class="lab">Covers</span><p>Working together on simple tasks and joint projects. Pairs, crews and studios.</p></div><div class="row"><span class="lab">Produces</span><p>Shared work, with every person credited.</p></div></article>
+        <article class="tag"><div class="row dn"><h3 class="cap">Coordination</h3><span class="n">02</span></div><div class="row"><span class="lab">Covers</span><p>Planning who does what, when and where. Schedules, roles and hand-offs, indoors and out.</p></div><div class="row"><span class="lab">Produces</span><p>Plans, rosters and run sheets.</p></div></article>
+        <article class="tag"><div class="row dn"><h3 class="cap">Lexicon and Mathematics</h3><span class="n">03</span></div><div class="row"><span class="lab">Covers</span><p>The words and the numbers behind the work. A lexicon, a math primer, and the writing that explains them.</p></div><div class="row"><span class="lab">Produces</span><p>Primers, definitions and short essays.</p></div></article>
+      </div>
+    </section>
+
+    <section class="sec" id="outdoors">
+      <div class="sh"><span class="no">3</span><h2 class="cap">Outdoors</h2></div>
+      <p class="lead">OWAV is outdoors oriented. A real part of the work is real activity outside.</p>
+      <p class="plain" style="max-width:62ch;margin:0 0 18px">Outings are planned, led and recorded like any other project. Each one is entered in the record: the date, the place, who came and what was done.</p>
+          </section>
+
+    <section class="sec" id="work">
+      <div class="sh"><span class="no">4</span><h2 class="cap">Two kinds of work</h2></div>
+      <div class="pair">
+        <div><div class="lab">Small</div><h3 class="cap">Assignments</h3><p>Simple tasks. One person or a pair, a clear brief and a short time. The quickest way to see how we work.</p></div>
+        <div><div class="lab">Together</div><h3 class="cap">Studios</h3><p>Joint projects. Several people, one brief, shared credit. The way to see how well we work together.</p></div>
+      </div>
+      <p class="rule">Every piece of work lists everyone who did it, by name, with their consent.</p>
+    </section>
+
+    <section class="sec" id="record">
+      <div class="sh"><span class="no">5</span><h2 class="cap">The record</h2></div>
+      <div class="stampwrap"><span class="stamp">Starting fresh</span>
+        <p class="plain" style="max-width:62ch;margin:0 0 18px">OWAV was established in 2021, and its record starts from scratch. Entries are added as work is made. Each one is set out the same way, so any two can be compared at a glance.</p></div>
+      <div class="form" aria-label="The entry form">
+        <div class="fr"><div class="lab">Entry no.</div><div><div class="line"></div></div></div>
+        <div class="fr"><div class="lab">Kind</div><div>Assignment or studio</div></div>
+        <div class="fr"><div class="lab">Year</div><div><div class="line"></div></div></div>
+        <div class="fr"><div class="lab">The ask</div><div><div class="line"></div></div></div>
+        <div class="fr"><div class="lab">What we did</div><div><div class="line"></div></div></div>
+        <div class="fr"><div class="lab">What came out</div><div><div class="line"></div></div></div>
+        <div class="fr"><div class="lab">Credits</div><div><div class="line"></div></div></div>
+      </div>
+      <div class="tickets">
+        <div class="tkt"><div class="big">No. 001</div><div class="lab">Open</div></div>
+        <div class="tkt"><div class="big">No. 002</div><div class="lab">Open</div></div>
+        <div class="tkt"><div class="big">No. 003</div><div class="lab">Open</div></div>
+      </div>
+    </section>
+
+    <section class="sec" id="roll">
+      <div class="sh"><span class="no">6</span><h2 class="cap">The roll</h2></div>
+      <p class="plain" style="max-width:62ch;margin:0 0 16px">Members are creatives and artists. Membership is by invitation. A name is added to the roll when its owner agrees.</p>
+      <div class="roll" aria-label="The roll">
+        <div class="rr lab"><span>No.</span><span>Name</span><span>Department</span><span>Since</span></div>
+        <div class="rr"><span class="lab">001</span><div class="line"></div><div class="line"></div><div class="line"></div></div>
+        <div class="rr"><span class="lab">002</span><div class="line"></div><div class="line"></div><div class="line"></div></div>
+        <div class="rr"><span class="lab">003</span><div class="line"></div><div class="line"></div><div class="line"></div></div>
+      </div>
+    </section>
+
+    <section class="sec" id="procedure">
+      <div class="sh"><span class="no">7</span><h2 class="cap">How a project runs</h2></div>
+      <div class="proc">
+        <div><div class="n">1</div><h3 class="cap">Brief</h3><p>The work is written down. Each deliverable is done or not done. No price comes before the brief.</p></div>
+        <div><div class="n">2</div><h3 class="cap">Review</h3><p>The project is reviewed and approved before it begins.</p></div>
+        <div><div class="n">3</div><h3 class="cap">Work</h3><p>It follows the same path as every Land of Geb job: assigned, done, proven, checked, paid and recorded.</p></div>
+        <div><div class="n">4</div><h3 class="cap">Record</h3><p>Everyone who did verified work is credited. The entry joins the record.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="notice">
+      <div class="notice"><p style="margin:0"><b>A notice.</b> University-style describes how OWAV is organized. It is not a legal status. OWAV is not an accredited institution and awards no degrees or credentials. Anything we teach is described on the <a href="services.html#teaching-and-training">Services page</a>.</p></div>
+    </section>
+
+    <div class="cta"><div><div class="lab">Write to OWAV</div><div class="cap" style="font-size:clamp(22px,3vw,30px);margin-top:6px">Have something to make, or want to join?</div></div><a class="owbtn" href="request.html?src=owav">Make a request</a></div>
+
+  </div></div></div>
+</main>
+
+<footer>
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="owav.html">OWAV</a>
+    <a href="https://bixxville.myshopify.com" target="_blank" rel="noopener">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact</h4>
+    <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script src="site.js"></script>
+<script src="theme.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; };
+  tick(); setInterval(tick, 15000);
+  $('yr').textContent = gebTime().year;
+  const bar = $('bar');
+  addEventListener('scroll', () => { const d = document.documentElement; bar.style.setProperty('--progress', (scrollY / Math.max(1, d.scrollHeight - innerHeight) * 100) + '%'); }, { passive: true });
+})();
+</script>
+</body>
+</html>

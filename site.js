@@ -18,6 +18,7 @@ window.gebTime = (d = new Date()) => {
     ['services.html', 'Services'],
     ['about.html', 'About'],
     ['team.html', 'Team'],
+    ['owav.html', 'OWAV'],
     ['https://www.bixxville.xyz', 'Bixxville'],
     ['https://bixxville.myshopify.com', 'Shop'],
   ];
