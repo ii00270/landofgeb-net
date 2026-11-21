@@ -20,7 +20,7 @@ window.gebTime = (d = new Date()) => {
     ['team.html', 'Team'],
     ['owav.html', 'OWAV'],
     ['https://www.bixxville.xyz', 'Bixxville'],
-    ['https://bixxville.myshopify.com', 'Shop'],
+    ['shop.html', 'Shop'],
   ];
   const here = location.pathname.split('/').pop() || 'index.html';
   const bar = document.querySelector('.bar');

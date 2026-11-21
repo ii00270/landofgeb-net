@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Land of Geb</title>
+<meta name="description" content="Hoodies, shirts and more, picked by Land of Geb. Checkout is on Shopify.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>(function(){try{var t=localStorage.getItem('bx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --ink:var(--t-ink); --body:var(--t-text); --soft:var(--t-muted); --faint:var(--t-faint); --bg:var(--t-bg); --card:var(--t-surface); --line:var(--t-line);
+  --yellow:var(--t-yellow); --orange:var(--t-orange); --pink:var(--t-pink); --neon:var(--t-neon);
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --display:'Anton','Impact','Arial Narrow',sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+::selection{background:var(--pink);color:var(--t-on-neon)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:16px;padding:14px 20px;border:1px solid var(--ink);font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .25s;background:transparent;color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn:hover:not(:disabled){box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.size:focus-visible,.qty button:focus-visible,.x:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.arrow{width:12px;height:12px;flex:none}
+.bar{position:sticky;top:0;z-index:20;display:grid;align-items:center;gap:28px;padding:14px var(--gutter);background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
+.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+
+/* test banner */
+.testbar{background:var(--t-band);color:var(--t-band-ink);font-size:12px;letter-spacing:.08em;padding:10px var(--gutter);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.testbar b{background:var(--neon);color:var(--t-on-neon);padding:2px 8px;letter-spacing:.14em}
+
+/* head */
+.shophead{padding:clamp(36px,7vw,84px) var(--gutter) 28px;display:grid;gap:18px;max-width:1280px;margin:0 auto}
+.idx{font-size:12px;letter-spacing:.08em;color:var(--soft)}
+.shophead h1{font-family:var(--display);font-weight:400;font-size:clamp(54px,11vw,140px);line-height:.92;letter-spacing:.005em;text-transform:uppercase;color:var(--ink)}
+.shophead h1 span{background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.shophead p{max-width:60ch;color:var(--body)}
+.how{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--soft);padding-top:6px}
+.how li{list-style:none;display:flex;gap:8px;align-items:baseline}
+.how li::before{content:'';width:8px;height:8px;background:var(--neon);flex:none;transform:translateY(-1px)}
+
+/* filter row */
+.tools{max-width:1280px;margin:0 auto;padding:0 var(--gutter) 22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--line)}
+.chip{border:1px solid var(--line-strong,var(--t-line-strong));background:transparent;color:var(--ink);padding:8px 14px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tools .count{margin-left:auto;font-size:12px;color:var(--soft)}
+
+/* grid */
+.grid{max-width:1280px;margin:0 auto;padding:30px var(--gutter) 70px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px}
+.card{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s}
+.card:hover{box-shadow:6px 6px 0 var(--pink),12px 12px 0 var(--yellow);transform:translate(-2px,-2px)}
+.ph{aspect-ratio:1/1;display:grid;place-items:center;border-bottom:1px solid var(--line);background:
+  radial-gradient(120% 90% at 50% 0%,rgba(255,255,255,.5),transparent 60%),var(--t-surface-strong);position:relative}
+.ph{overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.opt{margin:2px 0 4px}
+.opt .lab{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+.opt .lab b{color:var(--ink);font-weight:500}
+.more{margin-top:2px;font-size:12.5px;color:var(--soft)}
+.more summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:11.5px;color:var(--ink)}
+.more summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.more ul{margin:8px 0 0 16px}
+.more li{margin-bottom:3px}
+.state{grid-column:1/-1;padding:60px 0;text-align:center;color:var(--soft)}
+.ph .tag{position:absolute;left:12px;top:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:3px 8px}
+.ph .tag.out{background:var(--t-band-muted,#777);color:#000}
+.info{padding:16px 16px 18px;display:grid;gap:8px;flex:1;align-content:start}
+.maker{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.info h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase;color:var(--ink)}
+.price{font-weight:600;color:var(--ink)}
+.sizes{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
+.size{min-width:40px;padding:6px 10px;border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:12px;letter-spacing:.06em;cursor:pointer}
+.size[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.size:disabled{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.info .btn{width:100%;margin-top:auto}
+.note{font-size:12px;color:var(--soft)}
+
+/* cart button + drawer */
+.cartbtn{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--bg);border:0;padding:14px 18px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;box-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--yellow)}
+.cartbtn:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.cartbtn .n{background:var(--neon);color:var(--t-on-neon);min-width:22px;text-align:center;padding:1px 6px;font-weight:600}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--t-surface-strong);border-left:1px solid var(--ink);z-index:41;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column}
+body.cart-open .scrim{opacity:1;pointer-events:auto}
+body.cart-open .drawer{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.drawer header h2{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+.x{background:transparent;border:1px solid var(--ink);color:var(--ink);width:36px;height:36px;font-size:18px;cursor:pointer;line-height:1}
+.lines{flex:1;overflow:auto;padding:6px 20px}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.line .t{width:64px;height:64px;border:1px solid var(--line);display:grid;place-items:center;background:var(--card)}
+.line .t{overflow:hidden}
+.line .t img{width:100%;height:100%;object-fit:cover;display:block}
+.line b{display:block;color:var(--ink);font-weight:500;font-size:13.5px;line-height:1.35}
+.line small{color:var(--soft);font-size:12px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--ink);margin-top:6px}
+.qty button{width:28px;height:28px;border:0;background:transparent;color:var(--ink);cursor:pointer;font-size:15px}
+.qty span{min-width:26px;text-align:center;font-size:13px}
+.line .r{text-align:right;font-weight:600;color:var(--ink);font-size:13.5px}
+.rm{background:none;border:0;color:var(--soft);font-size:12px;text-decoration:underline;cursor:pointer;margin-top:6px}
+.empty{padding:40px 0;text-align:center;color:var(--soft)}
+.sum{padding:18px 20px 22px;border-top:1px solid var(--ink);display:grid;gap:10px;background:var(--card)}
+.sum .row{display:flex;justify-content:space-between;color:var(--ink);font-weight:600}
+.sum small{color:var(--soft);font-size:12px;line-height:1.55}
+.testbox{display:none;border:1px dashed var(--ink);padding:10px 12px;font-size:12px;word-break:break-all;color:var(--ink);background:var(--t-surface)}
+.testbox.on{display:block}
+
+footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:var(--gutter);border-top:1px solid var(--line);background:var(--t-surface-strong)}
+.co{font-size:12.5px;line-height:1.75;border:1px solid var(--ink);padding:12px 14px;overflow-wrap:anywhere;color:var(--ink)}
+.f-col h4{font-size:12px;color:var(--ink);letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.f-col a{display:block;color:var(--body);margin-bottom:6px}
+.f-col a:hover{text-decoration:underline;text-decoration-color:var(--pink)}
+.base{display:flex;justify-content:space-between;gap:16px;padding:14px var(--gutter);border-top:1px solid var(--line);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--t-surface-strong)}
+@media(max-width:760px){footer{grid-template-columns:1fr}.base{flex-direction:column}.clock{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="bar" id="bar">
+  <a class="mark" href="index.html" aria-label="Land of Geb — home"><span class="mark-glyph"></span>LAND OF GEB_</a>
+  <nav class="nav"></nav>
+  <div class="clock">CHRISTIANSTED<br><b id="clock">—</b><br>AST (UTC-04:00)</div>
+</header>
+
+<div class="testbar" id="testbar" role="note"><b>TEST</b><span>Your real products, read live from your Shopify store. The checkout button shows the Shopify link and does not open it.</span></div>
+
+<main>
+  <section class="shophead">
+    <div class="idx">/ SHOP</div>
+    <h1>The <span>Shop</span></h1>
+    <p>Hoodies, shirts and more, picked by Land of Geb. You choose, then pay on Shopify's secure checkout.</p>
+    <ul class="how">
+      <li>Pick a size</li>
+      <li>Add to your bag</li>
+      <li>Pay on Shopify's checkout</li>
+    </ul>
+  </section>
+
+  <div class="tools" id="tools" role="group" aria-label="Filter products"></div>
+  <section class="grid" id="grid" aria-live="polite"></section>
+</main>
+
+<button class="cartbtn" id="cartbtn" aria-haspopup="dialog" aria-controls="drawer">Bag <span class="n" id="cartn">0</span></button>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-label="Your bag" aria-hidden="true">
+  <header><h2>Your bag</h2><button class="x" id="closecart" aria-label="Close bag">×</button></header>
+  <div class="lines" id="lines"></div>
+  <div class="sum">
+    <div class="row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <small>Shipping and tax are worked out on Shopify's checkout.</small>
+    <button class="btn solid" id="checkout" disabled>Check out on Shopify <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></button>
+    <div class="testbox" id="testbox"></div>
+  </div>
+</aside>
+
+<footer>
+  <div class="co">
+    <b>Land of Geb, LLC</b><br>
+    Registered in Pennsylvania.<br>
+    Operating in Christiansted, St. Croix, U.S. Virgin Islands.<br>
+    Local time: <span id="sysdate">—</span>
+  </div>
+  <div class="f-col">
+    <h4>Land of Geb</h4>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="owav.html">OWAV</a>
+    <a href="shop.html">Shop</a>
+  </div>
+  <div class="f-col">
+    <h4>Contact</h4>
+    <a href="mailto:bixxville@proton.me">bixxville@proton.me</a>
+    <a href="https://www.bixxville.xyz" target="_blank" rel="noopener">bixxville.xyz</a>
+  </div>
+</footer>
+<div class="base">
+  <span>Land of Geb, LLC · St. Croix · U.S. Virgin Islands</span>
+  <span>© <span id="yr"></span> Land of Geb, LLC</span>
+</div>
+
+<script src="site.js"></script>
+<script src="theme.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  /* ── SETTINGS ──────────────────────────────────────────────────────────
+     TEST_MODE true  → the checkout button only shows the Shopify link.
+     TEST_MODE false → the button goes to the real Shopify checkout.
+     SHOP_DOMAIN     → the store's address (the one the old Shop link used).
+     SNAPSHOT        → a saved copy of the product list, used only if the
+                       store cannot be reached.                              */
+  const TEST_MODE = false;
+  const SHOP_DOMAIN = 'bixxville.myshopify.com';
+  const SNAPSHOT = 'products-snapshot.json';
+
+  const money = n => '$' + n.toFixed(2);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const sized = (src, w) => src ? src + (src.includes('?') ? '&' : '?') + 'width=' + w : '';
+
+  /* ── read the products ──────────────────────────────────────────────── */
+  const bullets = html => {
+    const t = String(html || '').replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|li|div)>/gi, '\n');
+    const text = new DOMParser().parseFromString(t, 'text/html').body.textContent;
+    return text.split('\n').map(s => s.replace(/^[\s•\-–]+/, '').trim()).filter(Boolean);
+  };
+  const category = p => {
+    const t = (p.product_type || p.title).toLowerCase();
+    if (/hoodie|sweat|shirt|tee|jacket|top/.test(t)) return 'Tops';
+    if (/short|pant|jogger/.test(t)) return 'Bottoms';
+    return 'Extras';
+  };
+  const normalize = raw => raw.products.map(p => ({
+    id: p.id, title: p.title, maker: p.vendor, type: category(p),
+    img: (p.images[0] || {}).src,
+    lines: bullets(p.body_html),
+    opts: p.options.filter(o => !(o.name === 'Title' && o.values.length === 1)).map(o => ({ name: o.name, pos: o.position, values: o.values })),
+    variants: p.variants.map(v => ({ id: v.id, opt: [v.option1, v.option2, v.option3], price: +v.price, available: !!v.available, img: v.featured_image && v.featured_image.src }))
+  }));
+  let source = '';
+  const loadProducts = async () => {
+    try {
+      const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 8000);
+      const r = await fetch(`https://${SHOP_DOMAIN}/products.json?limit=250`, { signal: ctl.signal });
+      clearTimeout(to);
+      if (!r.ok) throw new Error(r.status);
+      source = 'live from Shopify';
+      return normalize(await r.json());
+    } catch (e) {
+      const r = await fetch(SNAPSHOT);
+      if (!r.ok) throw e;
+      source = 'saved copy, the store could not be reached';
+      return normalize(await r.json());
+    }
+  };
+
+  /* ── state ── */
+  let products = [], filter = 'All';
+  const sel = {};                          // product id → { option position → chosen value }
+  let cart = [];                           // [{variantId, qty}]
+  try { cart = JSON.parse(localStorage.getItem('bx-cart') || '[]').filter(l => l && l.variantId && l.qty > 0); } catch (e) {}
+  const save = () => { try { localStorage.setItem('bx-cart', JSON.stringify(cart)); } catch (e) {} };
+  const findVariant = vid => { for (const p of products) { const v = p.variants.find(v => v.id === vid); if (v) return { p, v }; } return null; };
+
+  /* choosing options */
+  const matches = (v, s) => Object.entries(s).every(([pos, val]) => v.opt[pos - 1] === val);
+  const chosen = p => v => matches(v, sel[p.id] || {});
+  const initSel = p => {
+    sel[p.id] = {};
+    p.opts.forEach(o => {
+      if (/colou?r/i.test(o.name)) {           // colour starts on the first one in stock
+        const v = p.variants.find(v => v.available);
+        if (v) sel[p.id][o.pos] = v.opt[o.pos - 1];
+      }
+    });
+  };
+  const valueOK = (p, o, val) => p.variants.some(v => v.available && v.opt[o.pos - 1] === val && matches(v, Object.fromEntries(Object.entries(sel[p.id]).filter(([pos]) => +pos !== o.pos))));
+  const current = p => p.variants.find(v => p.opts.every(o => sel[p.id][o.pos] !== undefined) && chosen(p)(v));
+  const shownImg = p => { const v = p.variants.find(chosen(p)); return (v && v.img) || p.img; };
+  const priceText = p => { const ps = p.variants.map(v => v.price); const lo = Math.min(...ps); return (lo === Math.max(...ps) ? '' : 'From ') + money(lo); };
+  const variantLabel = v => v.opt.filter(x => x && x !== 'Default Title').join(' / ');
+
+  /* ── grid ── */
+  const types = () => ['All', ...new Set(products.map(p => p.type))];
+  const drawTools = () => {
+    const n = products.filter(p => filter === 'All' || p.type === filter).length;
+    $('tools').innerHTML = types().map(t => `<button class="chip" aria-pressed="${t === filter}" data-f="${esc(t)}">${esc(t)}</button>`).join('') +
+      `<span class="count">${n} item${n === 1 ? '' : 's'} · ${esc(source)}</span>`;
+  };
+  const cardHTML = p => {
+    const anyIn = p.variants.some(v => v.available);
+    const img = shownImg(p);
+    return `<article class="card" data-p="${p.id}">
+      <div class="ph">${img ? `<img src="${esc(sized(img, 640))}" alt="${esc(p.title)}" width="640" height="640" loading="lazy">` : ''}${anyIn ? '' : '<span class="tag out">Sold out</span>'}</div>
+      <div class="info">
+        ${/^bixxville/i.test(p.maker || "") ? "" : `<div class="maker">${esc(p.maker)}</div>`}
+        <h3>${esc(p.title)}</h3>
+        <div class="price">${priceText(p)}</div>
+        ${p.opts.map(o => `<div class="opt" role="group" aria-label="${esc(o.name)} for ${esc(p.title)}">
+          <div class="lab">${esc(o.name)}${sel[p.id][o.pos] ? ': <b>' + esc(sel[p.id][o.pos]) + '</b>' : ''}</div>
+          <div class="sizes">${o.values.map(val => `<button class="size" data-o="${o.pos}" data-val="${esc(val)}" aria-pressed="${sel[p.id][o.pos] === val}" ${valueOK(p, o, val) ? '' : 'disabled'}>${esc(val)}</button>`).join('')}</div>
+        </div>`).join('')}
+        <button class="btn solid add" ${anyIn ? '' : 'disabled'}>${anyIn ? 'Add to bag' : 'Sold out'}</button>
+        <div class="note" data-msg aria-live="polite"></div>
+        ${p.lines.length ? `<details class="more"><summary>Details</summary><ul>${p.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul></details>` : ''}
+      </div>
+    </article>`;
+  };
+  const drawGrid = () => {
+    const list = products.filter(p => filter === 'All' || p.type === filter);
+    $('grid').innerHTML = list.length ? list.map(cardHTML).join('') : '<div class="state">Nothing here yet.</div>';
+  };
+
+  /* ── bag ── */
+  const count = () => cart.reduce((n, l) => n + l.qty, 0);
+  const drawCart = () => {
+    $('cartn').textContent = count();
+    const rows = cart.map(l => ({ l, f: findVariant(l.variantId) })).filter(r => r.f);
+    $('lines').innerHTML = rows.length ? rows.map(({ l, f }) => `<div class="line" data-v="${l.variantId}">
+        <div class="t">${(f.v.img || f.p.img) ? `<img src="${esc(sized(f.v.img || f.p.img, 160))}" alt="" width="64" height="64">` : ''}</div>
+        <div><b>${esc(f.p.title)}</b><small>${variantLabel(f.v) ? esc(variantLabel(f.v)) + ' · ' : ''}${money(f.v.price)}</small>
+          <div class="qty"><button data-d="-1" aria-label="One less">−</button><span>${l.qty}</span><button data-d="1" aria-label="One more">+</button></div><br>
+          <button class="rm">Remove</button></div>
+        <div class="r">${money(f.v.price * l.qty)}</div></div>`).join('')
+      : '<div class="empty">Your bag is empty.</div>';
+    $('subtotal').textContent = money(rows.reduce((s, { l, f }) => s + f.v.price * l.qty, 0));
+    $('checkout').disabled = !rows.length;
+    if (!rows.length) $('testbox').classList.remove('on');
+  };
+  const setCart = () => { save(); drawCart(); };
+  const open = on => {
+    document.body.classList.toggle('cart-open', on);
+    $('drawer').setAttribute('aria-hidden', String(!on));
+    (on ? $('closecart') : $('cartbtn')).focus();
+  };
+
+  /* ── events ── */
+  $('tools').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    filter = b.dataset.f; drawTools(); drawGrid();
+  });
+  $('grid').addEventListener('click', e => {
+    const card = e.target.closest('.card'); if (!card) return;
+    const p = products.find(p => p.id === +card.dataset.p);
+    const sz = e.target.closest('.size');
+    if (sz) {
+      const pos = +sz.dataset.o, val = sz.dataset.val;
+      sel[p.id][pos] === val ? delete sel[p.id][pos] : (sel[p.id][pos] = val);
+      // a pick that rules out an earlier pick (e.g. a size not made in that colour) clears that earlier pick
+      p.opts.forEach(o => { const cur = sel[p.id][o.pos]; if (cur !== undefined && !p.variants.some(v => v.opt[o.pos - 1] === cur && matches(v, sel[p.id]))) delete sel[p.id][o.pos]; });
+      card.outerHTML = cardHTML(p);
+      const again = $('grid').querySelector(`.card[data-p="${p.id}"] .size[data-o="${pos}"][data-val="${CSS.escape(val)}"]`);
+      if (again) again.focus();
+      return;
+    }
+    if (e.target.closest('.add')) {
+      const msg = card.querySelector('[data-msg]');
+      const v = current(p);
+      if (!v) { const miss = p.opts.find(o => sel[p.id][o.pos] === undefined); msg.textContent = `Pick a ${miss ? miss.name.toLowerCase() : 'choice'} first.`; return; }
+      const l = cart.find(l => l.variantId === v.id);
+      l ? l.qty++ : cart.push({ variantId: v.id, qty: 1 });
+      setCart();
+      msg.textContent = 'Added to your bag.';
+      setTimeout(() => { msg.textContent = ''; }, 2200);
+    }
+  });
+  $('cartbtn').addEventListener('click', () => open(true));
+  $('closecart').addEventListener('click', () => open(false));
+  $('scrim').addEventListener('click', () => open(false));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('cart-open')) open(false); });
+  $('lines').addEventListener('click', e => {
+    const row = e.target.closest('.line'); if (!row) return;
+    const vid = +row.dataset.v, l = cart.find(l => l.variantId === vid); if (!l) return;
+    const d = e.target.closest('[data-d]');
+    if (d) { l.qty += +d.dataset.d; if (l.qty < 1) cart = cart.filter(x => x !== l); setCart(); }
+    else if (e.target.closest('.rm')) { cart = cart.filter(x => x !== l); setCart(); }
+  });
+
+  /* Checkout. Shopify takes a plain list of "variant id : quantity" in the
+     address, so no secret keys are needed anywhere on this page. */
+  $('checkout').addEventListener('click', () => {
+    const url = `https://${SHOP_DOMAIN}/cart/` + cart.map(l => `${l.variantId}:${l.qty}`).join(',');
+    if (TEST_MODE) {
+      const t = $('testbox');
+      t.innerHTML = '<b>Test mode.</b> On the live site this button would open:<br>' + esc(url);
+      t.classList.add('on');
+    } else {
+      location.href = url;
+    }
+  });
+
+  /* ── start ── */
+  if (!TEST_MODE) $('testbar').remove();
+  const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; };
+  tick(); setInterval(tick, 15000);
+  $('yr').textContent = gebTime().year;
+  $('grid').innerHTML = '<div class="state">Loading the shop…</div>';
+  loadProducts().then(list => {
+    products = list; products.forEach(initSel);
+    drawTools(); drawGrid();
+    cart = cart.filter(l => findVariant(l.variantId)); save(); drawCart();
+  }).catch(() => {
+    $('grid').innerHTML = '<div class="state">The shop could not load. Please try again in a moment.</div>';
+  });
+})();
+</script>
+</body>
+</html>
