@@ -36,7 +36,7 @@ a{color:inherit;text-decoration:none}
   background:var(--t-bar);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar::after{content:'';position:absolute;left:0;bottom:-1px;height:2px;width:var(--progress,0%);background:var(--neon)}
 .mark{font-family:var(--display);font-size:20px;letter-spacing:.02em;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--ink)}
-.mark-glyph{width:14px;height:14px;background:var(--ink);display:inline-block;clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,50% 50%,0 50%)}
+.mark-glyph{width:21px;height:28px;background:currentColor;display:inline-block;flex:none;-webkit-mask:url(img/land-of-geb-mark.svg) center/contain no-repeat;mask:url(img/land-of-geb-mark.svg) center/contain no-repeat}
 .clock{font-size:12px;line-height:1.4;color:var(--soft);text-align:right;white-space:nowrap}
 .clock b{color:var(--ink);font-weight:500}
 
@@ -289,6 +289,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <div class="rv"><div class="n neon-text">5</div><b>Sign the record</b><span>Every step is signed, and a closed record cannot be quietly edited afterward.</span></div>
     </div>
     <p class="rv" style="margin-top:26px;font-size:14px">Bixxville also runs a studio, where collaborations become projects, workshops, galleries, food and education. <a href="https://www.bixxville.xyz" target="_blank" rel="noopener" style="text-decoration:underline">Meet the studio &rarr;</a></p>
+    <p class="rv" style="margin-top:10px;font-size:14px"><a href="os.html" style="text-decoration:underline">About the OS: the model, contracting and the network, in full &rarr;</a></p>
   </section>
 
   <!-- ── The record ── -->
@@ -338,7 +339,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       <p>The Team page lists those credentials, and our public wallet, so anyone can check us.</p>
       <a class="btn solid" href="team.html">Meet the team <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
       <p style="margin-top:28px"><strong>Do you do the work?</strong> We take on people who are 18 or older and who deliver. Tell us what you do and where you are, and we will write back.</p>
-      <a class="btn" href="request.html?service=join-network&amp;src=about-work">Work with us <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
+      <a class="btn" href="request.html?service=network&amp;src=about-work">Work with us <svg class="arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 10 10 2M4 2h6v6"/></svg></a>
     </div>
   </section>
 
@@ -411,6 +412,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="team.html">Team</a>
+    <a href="os.html">About the OS</a>
     <a href="shop.html">Shop</a>
   </div>
   <div class="f-col">
