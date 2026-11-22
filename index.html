@@ -102,6 +102,15 @@ section{position:relative;scroll-margin-top:56px}
 
 /* guide */
 .guide{border:1px solid var(--t-band-ink);position:relative;max-width:980px}
+.seven{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:34px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.seven li{border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.seven a{display:block;height:100%;padding:22px 20px 24px;transition:background .2s}
+.seven a:hover{background:rgba(0,0,0,.035)}
+.seven .n{display:block;font-family:var(--display);font-size:46px;line-height:1;margin-bottom:10px;background:var(--neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.seven b{display:block;font-size:14.5px;font-weight:600;margin-bottom:6px}
+.seven small{display:block;color:var(--grey);font-size:12.5px;line-height:1.5}
+.seven-note{margin-top:18px;font-size:12.5px;color:var(--grey)}
+.seven-note a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .guide::before{content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--neon)}
 .g-top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line-dark);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--t-band-muted)}
 .g-prog{display:flex;gap:6px;flex:1;max-width:220px}
@@ -288,10 +297,28 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     </div>
   </section>
 
-  <!-- ── 2 · Three questions, one recommendation ── -->
+  <!-- ── 2 · One job, seven parts ── -->
+  <section class="step" id="seven">
+    <div class="step-head">
+      <div><div class="idx rv">/02 — What we do</div><h2 class="rv">One job.<br><span class="neon-text">Seven parts.</span></h2></div>
+      <p class="rv">Land of Geb does one job: it keeps an operation from breaking when too much lands on it at once. We do that job in seven parts, and the seven parts are our services. Start with the first. Every other part builds on it.</p>
+    </div>
+    <ol class="seven rv">
+      <li><a href="services.html#readiness-decomposition"><span class="n">01</span><b>Readiness Decomposition</b><small>Where will we break first?</small></a></li>
+      <li><a href="services.html#market-and-supply-readiness"><span class="n">02</span><b>Market and Supply Readiness</b><small>What do we need on hand, and when do we reorder?</small></a></li>
+      <li><a href="services.html#project-mapping"><span class="n">03</span><b>Project Mapping</b><small>What happens in what order, and what can slip?</small></a></li>
+      <li><a href="services.html#continuity-and-communications"><span class="n">04</span><b>Continuity and Communications Plans</b><small>Who do we call, how, when, and what if they don't answer?</small></a></li>
+      <li><a href="services.html#talent-management"><span class="n">05</span><b>Talent Management</b><small>Who is qualified, available and covered?</small></a></li>
+      <li><a href="services.html#brand-and-voice"><span class="n">06</span><b>Brand and Voice</b><small>Can people understand us in one read?</small></a></li>
+      <li><a href="services.html#teaching-and-training"><span class="n">07</span><b>Teaching and Training</b><small>Can my team read this on its own?</small></a></li>
+    </ol>
+    <p class="seven-note rv">Planning, analysis and administrative services. <a href="services.html">See each part in full →</a></p>
+  </section>
+
+  <!-- ── 3 · Three questions, one recommendation ── -->
   <section class="step dark" id="guide">
     <div class="step-head">
-      <div><div class="idx rv">/02 — Your next step</div><h2 class="rv">Three questions.<br><span class="neon-text">One answer.</span></h2></div>
+      <div><div class="idx rv">/03 — Your next step</div><h2 class="rv">Three questions.<br><span class="neon-text">One answer.</span></h2></div>
       <p class="rv">Tell us what is going wrong. We show you the right first step, and fill in your request for you. You can change anything before you send it.</p>
     </div>
     <div class="guide rv" id="guideBox">
@@ -303,7 +330,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   <!-- ── 3 · What you get ── -->
   <section class="step" id="get">
     <div class="step-head">
-      <div><div class="idx rv">/03 — What you get</div><h2 class="rv">One report.<br><span class="neon-text">In order.</span></h2></div>
+      <div><div class="idx rv">/04 — What you get</div><h2 class="rv">One report.<br><span class="neon-text">In order.</span></h2></div>
       <p class="rv">Not a pitch and not a pile of advice. A written report you can read once, with every weak point ranked and the fixes in the order to do them.</p>
     </div>
     <div class="report rv">
@@ -319,7 +346,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   <!-- ── 4 · How it goes ── -->
   <section class="step" id="how">
     <div class="step-head">
-      <div><div class="idx rv">/04 — How it goes</div><h2 class="rv">Three steps.<br><span class="neon-text">Five days.</span></h2></div>
+      <div><div class="idx rv">/05 — How it goes</div><h2 class="rv">Three steps.<br><span class="neon-text">Five days.</span></h2></div>
       <p class="rv">You do very little. We do the mapping.</p>
     </div>
     <div class="path rv">
@@ -332,7 +359,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   <!-- ── 5 · Price ── -->
   <section class="step dark" id="pricing">
     <div class="step-head">
-      <div><div class="idx rv">/05 — Price</div><h2 class="rv">Small on<br><span class="neon-text">purpose.</span></h2></div>
+      <div><div class="idx rv">/06 — Price</div><h2 class="rv">Small on<br><span class="neon-text">purpose.</span></h2></div>
       <p class="rv">The first step is priced so that trying us is an easy decision.</p>
     </div>
     <div class="price-grid">
@@ -348,7 +375,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   <!-- ── 6 · Who it is for, and who it is not ── -->
   <section class="step" id="fit">
     <div class="step-head">
-      <div><div class="idx rv">/06 — Honest fit</div><h2 class="rv">Right for you,<br><span class="neon-text">or not.</span></h2></div>
+      <div><div class="idx rv">/07 — Honest fit</div><h2 class="rv">Right for you,<br><span class="neon-text">or not.</span></h2></div>
       <p class="rv">Better you know now than after you pay.</p>
     </div>
     <div class="fit rv">
@@ -366,7 +393,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
   <!-- ── 7 · The questions people ask before they decide ── -->
   <section class="step" id="questions">
     <div class="step-head">
-      <div><div class="idx rv">/07 — Before you decide</div><h2 class="rv">Fair<br><span class="neon-text">questions.</span></h2></div>
+      <div><div class="idx rv">/08 — Before you decide</div><h2 class="rv">Fair<br><span class="neon-text">questions.</span></h2></div>
       <p class="rv"></p>
     </div>
     <div class="faq rv">
@@ -406,7 +433,6 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="team.html">Team</a>
-    <a href="owav.html">OWAV</a>
     <a href="#pricing">Price</a>
     <a href="shop.html">Shop</a>
   </div>
@@ -448,7 +474,7 @@ footer{padding:44px var(--gutter) 28px;display:grid;grid-template-columns:minmax
       { v: 'busy',   t: 'We cannot keep up when it gets busy', s: 'Overload, backlog, one person holding it all', next: 'Talent Management' },
       { v: 'order',  t: 'Nobody is sure of the order or the dates', s: 'Projects without a clear sequence', next: 'Project Mapping' },
       { v: 'people', t: 'We need the right people and paperwork', s: 'Roles, qualifications, coverage', next: 'Talent Management' },
-      { v: 'new',    t: 'I am starting something new', s: 'A business, a service, a team', next: 'Full Business Build' },
+      { v: 'new',    t: 'I am starting something new', s: 'A business, a service, a team', next: 'Readiness Decomposition' },
       { v: 'teach',  t: 'My team needs to learn to run it', s: 'Teaching people a process', direct: 'teaching-and-training', directName: 'Teaching and Training' },
     ] },
     { key: 'when', q: 'When do you need it?', opts: [

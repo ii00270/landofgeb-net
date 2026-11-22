@@ -266,7 +266,6 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="team.html">Team</a>
-    <a href="owav.html">OWAV</a>
     <a href="index.html#pricing">Pricing</a>
     <a href="shop.html">Shop</a>
   </div>
@@ -293,7 +292,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
   const tick = () => { const t = gebTime(); $('clock').textContent = `${t.date}, ${t.time}`; $('sysdate').textContent = t.full; $('yr').textContent = t.year; };
   tick(); setInterval(tick, 15000);
 
-  // ── The eight services, in the order of the dial on the services page ──
+  // ── The seven services, in the order of the dial on the services page ──
   const SERVICES = [
     { id: 'readiness-decomposition', name: 'Readiness Decomposition', group: 'Assess', q: 'Where will we break first?',
       lead: 'We show you where your operation will overload first, and what to fix in what order.', ask: 'Ask for a Readiness Decomposition' },
@@ -307,9 +306,7 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
       lead: 'We make sure every critical role has a qualified person, a backup, and a covered shift.', ask: 'Ask about staffing' },
     { id: 'brand-and-voice', name: 'Brand and Voice', group: 'Staff and present', q: 'Can people understand us in one read?',
       lead: 'We give you a name, a voice and documents that read clearly the first time, under pressure.', ask: 'Ask about brand and voice' },
-    { id: 'full-build', name: 'Full Business Build', group: 'Build and teach', q: 'What would it take to build all of this around me?',
-      lead: 'We build the whole business and its structure around you: every service, and a custom website.', ask: 'Ask about a full build' },
-    { id: 'teaching-and-training', name: 'Teaching and Training', group: 'Build and teach', q: 'Can my team read this on its own?',
+    { id: 'teaching-and-training', name: 'Teaching and Training', group: 'Teach', q: 'Can my team read this on its own?',
       lead: 'We teach your team, or work beside it, so it can read markets, maps and numbers without us.', ask: 'Ask about teaching' },
   ];
   const N = SERVICES.length;
@@ -337,9 +334,6 @@ footer{padding:40px var(--gutter) 26px;display:grid;grid-template-columns:minmax
     'brand-and-voice': { look: ['Names', 'Notices', 'Forms', 'Signs'],
       get: ['Voice and visual system', 'Brand sheet', 'Your templates, rebuilt'],
       tip: 'How much of the notice does a reader in a hurry take in?', fig: figBV },
-    'full-build': { look: ['Who you are and what you offer', 'Your roles and hand-offs', 'The work, in order', 'What you have today'],
-      get: ['The business structure and roles', 'Operating documents', 'The six services applied to you', 'A custom website', 'Everything handed over'],
-      tip: 'Pick what you want built. Anything it depends on is pulled in, in build order.', fig: figFB },
     'teaching-and-training': { look: ['Your team and what it knows', 'The work it does', 'Your own numbers', 'Teach it, or sit beside it'],
       get: ['Lessons for your team', 'Worked examples on your numbers', 'Exercises', 'A coaching plan, if you want one'],
       tip: 'Change the odds and the payoff. Does the average trade pay, and how often is a short run still down?', fig: figTT },
